@@ -1,0 +1,14 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+
+.footerContainer {
+  @include flex(center, center, column);
+  width: 100%;
+  gap: .7rem;
+  height: 13vh;
+  h5 {
+    font-weight: 500;
+    font-size: .7rem;
+    color: $black-1; 
+  }
+}

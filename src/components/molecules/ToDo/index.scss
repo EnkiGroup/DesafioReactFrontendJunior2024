@@ -1,0 +1,96 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+
+.toDoListContainer {
+  @include flex(center, center, column);
+  width: 100%;
+  &__toDoBox1st {
+    @include flex(flex-start, center, row);
+    gap: 1rem;
+    padding: 1rem .8rem;
+    width: 100%;
+    position: relative;
+    border-bottom: .063rem solid $divisor;
+    &--input {
+      width: 70%;
+      height: 2rem;
+      all: unset;
+      font-size: 1.5rem;
+    }
+    &--inputDiv {
+      @include flex(flex-start, center, row);
+      width: 70%;
+      height: 2rem;
+      font-size: 1.5rem;
+    }
+    &--inputDiv.checked {
+      text-decoration: line-through;
+      color: $grey;
+    }
+    &--imgCross {
+      position: absolute;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      cursor: pointer;
+      display: none;
+    }
+  }
+  &__toDoBox1st.editing {
+    box-shadow: 0px 0px 4px 1px $box-shadow;
+  }
+  &__toDoBox2nd {
+    width: 100%;
+    @include flex(space-between, center, row);
+    padding: .6rem .8rem;
+    display: none;
+    &--count {
+      font-weight: 400;
+      font-size: 1rem;
+      cursor: default;
+    }
+    &--nav {
+      ul {
+        @include flex(center, center, row);
+        gap: 1rem;
+        li {
+          border: .063rem solid $red-2;
+          padding: .3rem .5rem;
+          border-radius: .2rem;
+          cursor: pointer;
+          list-style: none;
+          font-weight: 400;
+          font-size: 1rem;
+        }
+        li:hover {
+          transition: 300ms ease-in-out;
+          border: .063rem solid $hover-nav;
+        }
+      }
+    }
+    &--clearLink {
+      all: unset;
+      cursor: pointer;
+    }
+    &--clearLink:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.divCircle {
+  width: 2rem;
+  height: 2rem;
+  @include flex(center, center, row);
+  &__imgCircle {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+  }
+}
+
+.divisor {
+  background-color: $divisor;
+  height: .125rem;
+  width: 100%;
+}
