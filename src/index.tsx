@@ -1,11 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./app";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { RecoilRoot } from 'recoil'
+
 import reportWebVitals from "./reportWebVitals";
+import TodoAPP from "./app";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <RecoilRoot>
+          <Routes>
+            <Route path="/" element={<TodoAPP />} />
+            <Route path="/active" element={<TodoAPP />} />
+            <Route path="/completed" element={<TodoAPP />} />
+            <Route path="*" element={"ERROR 404"} />
+          </Routes>
+        </RecoilRoot>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
