@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./app";
+import { RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
+import { router } from "./routes";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>,
   document.getElementById("root")
 );
