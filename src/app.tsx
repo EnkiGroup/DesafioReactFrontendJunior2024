@@ -1,9 +1,9 @@
-import React from "react";
+import "./index.css";
 
 export default function App() {
   return (
     <section>
-      <h1>Todos</h1>
+      <h1 className="text-3xl font-bold underline">Tailwind worked!</h1>
     </section>
   );
 }
