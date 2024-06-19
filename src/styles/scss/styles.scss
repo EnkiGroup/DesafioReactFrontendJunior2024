@@ -1,0 +1,21 @@
+// Variables
+$main-title-color: #b83f45;
+
+:root{
+    font-size: 62.5%;
+}
+
+body{
+    font-family: Helvetica, sans-serif;
+}
+
+.main_container_app{
+    text-align: center;
+}
+
+#main_title{
+    color: $main-title-color;
+    font-size: 6rem;
+}
+
+
