@@ -1,0 +1,46 @@
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 15px;
+  position: relative;
+  font-size: 15px;
+  &:after {
+    bottom: 0;
+    box-shadow: 0 1px 1px rgba(0,0,0,.2), 0 8px 0 -3px #f6f6f6, 0 9px 1px -3px rgba(0,0,0,.2), 0 16px 0 -6px #f6f6f6, 0 17px 2px -6px rgba(0,0,0,.2);
+    content: "";
+    height: 17px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    z-index: -1;
+  }
+  .filters {
+    display: flex;
+    li {
+      a {
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        color: inherit;
+        margin: 3px;
+        padding: 3px 7px;
+        text-decoration: none;
+        &:hover {
+          border-color: #db7676;
+        }
+        &.selected {
+          border-color: #db7676;
+        }
+      }
+    }
+  }
+
+  button {
+    cursor: pointer;
+    text-decoration: none;
+  &:hover {
+      text-decoration: underline !important;
+    }
+  }
+}
