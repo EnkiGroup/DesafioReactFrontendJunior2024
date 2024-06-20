@@ -45,15 +45,11 @@ export default function App() {
   };
 
   const handleDestroy = (id: number) => {
-    const todoToDelete = todos.find(todo => todo.id === id);
-    if (!todoToDelete) return;
-
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
   const handleClearCompleted = () => {
-    const updatedTodos = todos.filter(todo => !todo.completed);
-    setTodos(updatedTodos);
+    setTodos(todos.filter(todo => !todo.completed));
   };
 
   const handleToggleAll = () => {
@@ -127,7 +123,6 @@ export default function App() {
                   <label
                     data-testid={`todo-item-label-${todo.id}`}
                     style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-                    onClick={() => handleToggle(todo.id)}
                   >
                     {todo.text}
                   </label>
