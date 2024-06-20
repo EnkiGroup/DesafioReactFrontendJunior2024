@@ -104,7 +104,7 @@ export default function App() {
               className="new-todo"
               type="text"
               data-testid="text-input"
-              placeholder="Quais são as tarefas a serem feitas??"
+              placeholder="Quais são as tarefas a serem feitas?"
               value={todoText}
               onChange={handleInputChange}
               onKeyDown={handleKeyPress}
