@@ -5,17 +5,65 @@ $main-title-color: #b83f45;
     font-size: 62.5%;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body{
     font-family: Helvetica, sans-serif;
+    padding-top: 5rem;
 }
 
 .main_container_app{
     text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 #main_title{
     color: $main-title-color;
     font-size: 6rem;
+    font-weight: 500;
 }
 
+#main_container_table{
+    margin-bottom: 2rem;
+}
 
+#table_header{
+    display: flex;
+    justify-content: center;
+
+    #input_task_container{
+
+        #input_task{
+            font-size: 2.1rem;
+        }
+    }
+}
+
+ul#list_container{
+
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+
+    li.item_container{
+        display: flex;
+        font-size: 2rem;
+
+        .item_title{
+            overflow-wrap: break-word;
+            text-align: start;
+            width: 100%;
+        }
+
+    }
+
+}
+
+#settings_container{
+    display: flex;
+    justify-content: space-between;
+}
