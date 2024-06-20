@@ -4,6 +4,7 @@ import './index.css';
 import Footer from "./components/footer";
 
 interface Todo {
+  id: number;
   text: string;
   completed: boolean;
 }
@@ -13,12 +14,15 @@ export default function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [numberChange, setNumberChange] = useState<number>(0);
-  const [selectAll, setSelectAll] = useState<boolean>(false);
-  const [originalTodos, setOriginalTodos] = useState<Todo[]>([]); // Estado para salvar os todos originais
 
   useEffect(() => {
-    setOriginalTodos(todos); // Atualiza os todos originais quando a lista de todos muda
+    updateNumberChange();
   }, [todos]);
+
+  const updateNumberChange = () => {
+    const activeTodos = todos.filter(todo => !todo.completed);
+    setNumberChange(activeTodos.length);
+  };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTodoText(event.target.value);
@@ -26,9 +30,14 @@ export default function App() {
 
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && todoText.trim() !== '') {
-      setTodos([...todos, { text: todoText, completed: false }]);
+      const newTodo: Todo = {
+        id: todos.length + 1,
+        text: todoText,
+        completed: false
+      };
+      setTodos([...todos, newTodo]);
       setTodoText("");
-      setNumberChange(numberChange + 1);
+      updateNumberChange();
     }
   };
 
@@ -36,48 +45,40 @@ export default function App() {
     setActiveFilter(filter);
   };
 
-  const handleToggle = (index: number) => {
-    const newTodos = todos.map((todo, i) => {
-      if (i === index) {
+  const handleToggle = (id: number) => {
+    const updatedTodos = todos.map(todo => {
+      if (todo.id === id) {
         return { ...todo, completed: !todo.completed };
       }
       return todo;
     });
-    setTodos(newTodos);
+    setTodos(updatedTodos);
+    updateNumberChange();
+  };
 
-    // Atualiza numberChange com base no estado do todo
-    if (newTodos[index].completed) {
-      setNumberChange(numberChange - 1); // Decrementa se marcado
-    } else {
-      setNumberChange(numberChange + 1); // Incrementa se desmarcado
-    }
+  const handleDestroy = (id: number) => {
+    const todoToDelete = todos.find(todo => todo.id === id);
+    if (!todoToDelete) return;
+
+    setTodos(todos.filter(todo => todo.id !== id));
+    updateNumberChange();
+  };
+
+  const handleClearCompleted = () => {
+    const updatedTodos = todos.filter(todo => !todo.completed);
+    setTodos(updatedTodos);
+    updateNumberChange();
   };
 
   const handleToggleAll = () => {
-    if (!selectAll) {
-      setOriginalTodos(todos); // Salva os todos atuais como os originais
-      setNumberChange(0);
-      setSelectAll(true);
-      const updatedTodos = todos.map(todo => ({
-        ...todo,
-        completed: true
-      }));
-      setTodos(updatedTodos);
-    } else {
-      setNumberChange(originalTodos.length); // Restaura o numberChange para o tamanho dos todos originais
-      setSelectAll(false);
-      const updatedTodos = originalTodos.map(todo => ({
-        ...todo,
-        completed: false
-      }));
-      setTodos(updatedTodos);
-    }
-  };
+    const allCompleted = todos.every(todo => todo.completed);
 
-  const handleDestroy = (index: number) => {
-    const newTodos = todos.filter((_, i) => i !== index);
-    setTodos(newTodos);
-    setNumberChange(numberChange - 1);
+    const updatedTodos = todos.map(todo => ({
+      ...todo,
+      completed: !allCompleted
+    }));
+    setTodos(updatedTodos);
+    updateNumberChange();
   };
 
   const filteredTodos = todos.filter(todo => {
@@ -116,7 +117,7 @@ export default function App() {
                 className="toggle-all"
                 type="checkbox"
                 data-testid="toggle-all"
-                checked={selectAll}
+                checked={todos.length > 0 && todos.every(todo => todo.completed)}
                 onChange={handleToggleAll}
               />
               <label className="toggle-all-label" htmlFor="toggle-all">
@@ -125,24 +126,24 @@ export default function App() {
             </div>
           )}
           <ul className="todo-list" data-testid="todo-list">
-            {filteredTodos.map((todo, index) => (
-              <li key={index} className={todo.completed ? "completed" : ""} data-testid="todo-item">
+            {filteredTodos.map(todo => (
+              <li key={todo.id} className={todo.completed ? "completed" : ""} data-testid="todo-item">
                 <div className="view">
                   <input
                     className="toggle"
                     type="checkbox"
-                    data-testid="todo-item-toggle"
+                    data-testid={`todo-item-toggle-${todo.id}`}
                     checked={todo.completed}
-                    onChange={() => handleToggle(index)}
+                    onChange={() => handleToggle(todo.id)}
                   />
                   <label
-                    data-testid="todo-item-label"
+                    data-testid={`todo-item-label-${todo.id}`}
                     style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-                    onClick={() => handleToggle(index)}
+                    onClick={() => handleToggle(todo.id)}
                   >
                     {todo.text}
                   </label>
-                  <button className="destroy" data-testid="todo-item-button" onClick={() => handleDestroy(index)}></button>
+                  <button className="destroy" data-testid={`todo-item-button-${todo.id}`} onClick={() => handleDestroy(todo.id)}></button>
                 </div>
               </li>
             ))}
@@ -180,11 +181,7 @@ export default function App() {
                 </a>
               </li>
             </ul>
-            <button className="clear-completed" onClick={() => {
-              setTodos(todos.filter(todo => !todo.completed));
-              setNumberChange(0);
-              setSelectAll(false);
-            }}>
+            <button className="clear-completed" onClick={handleClearCompleted}>
               Clear completed
             </button>
           </footer>
@@ -194,9 +191,6 @@ export default function App() {
     </div>
   );
 }
-
-
-
 
 
 
