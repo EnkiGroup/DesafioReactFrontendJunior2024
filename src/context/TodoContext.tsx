@@ -8,11 +8,11 @@ import {
   UPDATE_TODO,
 } from "../utils/constants"
 
-interface TodoState {
+export interface TodoState {
   todos: Todo[]
 }
 
-interface TodoAction {
+export interface TodoAction {
   type:
     | "ADD_TODO"
     | "REMOVE_TODO"
@@ -33,7 +33,10 @@ const TodoContext = createContext<
  * @param {TodoAction} action - The action to be performed on the state.
  * @return {TodoState} The updated state of the TodoContext.
  */
-const todoReducer = (state: TodoState, action: TodoAction): TodoState => {
+export const todoReducer = (
+  state: TodoState,
+  action: TodoAction
+): TodoState => {
   const { type, payload } = action
   switch (type) {
     case ADD_TODO:
