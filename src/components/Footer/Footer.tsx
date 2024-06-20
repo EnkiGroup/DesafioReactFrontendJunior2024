@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from "react"
-import { useTodoContext } from "../context/TodoContext"
-import { REMOVE_COMPLETED_TODOS } from "../utils/constants"
 import { useLocation } from "react-router-dom"
-
+import { useTodoContext } from "../../context/TodoContext"
+import { REMOVE_COMPLETED_TODOS } from "../../utils/constants"
+import "./style.scss"
 /**
  * Renders the footer component with active todos count and filter links.
  *

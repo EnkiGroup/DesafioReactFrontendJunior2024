@@ -1,6 +1,6 @@
 import { useCallback } from "react"
-import { hasValidMin, sanitize } from "../utils/handleStrings"
-
+import { hasValidMin, sanitize } from "../../utils/handleStrings"
+import "./style.scss"
 /**
  *
  * @param {Object} props - The properties for the Input component.
@@ -43,7 +43,7 @@ export function Input({
   )
 
   return (
-    <div className='input-container'>
+    <>
       <input
         className='new-todo'
         id='todo-input'
@@ -58,6 +58,6 @@ export function Input({
       <label className='visually-hidden' htmlFor='todo-input'>
         {label}
       </label>
-    </div>
+    </>
   )
 }
