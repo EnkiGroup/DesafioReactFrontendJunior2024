@@ -1,7 +1,12 @@
 import React from 'react'
+import TodoItem from '../item/item'
 
 export default function TodoList() {
   return (
-    <div>List</div>
+    <div>
+      <TodoItem />
+      <TodoItem />
+      <TodoItem />
+    </div>
   )
 }
