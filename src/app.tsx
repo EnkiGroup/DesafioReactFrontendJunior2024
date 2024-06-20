@@ -1,18 +1,37 @@
-import React, { useState, ChangeEvent, KeyboardEvent } from "react";
+import React, { useState, useEffect, ChangeEvent, KeyboardEvent } from "react";
+import axios from "axios";
 import './app.css';
 import './index.css';
 import Footer from "./components/footer";
+import { v4 as uuidv4 } from 'uuid';
 
 interface Todo {
-  id: number;
-  text: string;
-  completed: boolean;
+  id: string;
+  title: string;
+  isDone: boolean;
 }
+
+const FILTER_ALL = 'all';
+const FILTER_ACTIVE = 'active';
+const FILTER_COMPLETED = 'completed';
 
 export default function App() {
   const [todoText, setTodoText] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [activeFilter, setActiveFilter] = useState<string>("all");
+  const [activeFilter, setActiveFilter] = useState<string>(FILTER_ALL);
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const response = await axios.get<Todo[]>('https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos');
+        setTodos(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar tarefas:", error);
+      }
+    };
+
+    fetchTodos();
+  }, []);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTodoText(event.target.value);
@@ -21,9 +40,9 @@ export default function App() {
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && todoText.trim() !== '') {
       const newTodo: Todo = {
-        id: todos.length + 1,
-        text: todoText,
-        completed: false
+        id: uuidv4(),
+        title: todoText,
+        isDone: false
       };
       setTodos([...todos, newTodo]);
       setTodoText("");
@@ -34,43 +53,43 @@ export default function App() {
     setActiveFilter(filter);
   };
 
-  const handleToggle = (id: number) => {
+  const handleToggle = (id: string) => {
     const updatedTodos = todos.map(todo => {
       if (todo.id === id) {
-        return { ...todo, completed: !todo.completed };
+        return { ...todo, isDone: !todo.isDone };
       }
       return todo;
     });
     setTodos(updatedTodos);
   };
 
-  const handleDestroy = (id: number) => {
+  const handleDestroy = (id: string) => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
   const handleClearCompleted = () => {
-    setTodos(todos.filter(todo => !todo.completed));
+    setTodos(todos.filter(todo => !todo.isDone));
   };
 
   const handleToggleAll = () => {
-    const allCompleted = todos.every(todo => todo.completed);
+    const allCompleted = todos.every(todo => todo.isDone);
     const updatedTodos = todos.map(todo => ({
       ...todo,
-      completed: !allCompleted
+      isDone: !allCompleted
     }));
     setTodos(updatedTodos);
   };
 
   const filteredTodos = todos.filter(todo => {
-    if (activeFilter === "active") {
-      return !todo.completed;
-    } else if (activeFilter === "completed") {
-      return todo.completed;
+    if (activeFilter === FILTER_ACTIVE) {
+      return !todo.isDone;
+    } else if (activeFilter === FILTER_COMPLETED) {
+      return todo.isDone;
     }
     return true;
   });
 
-  const numberChange = todos.filter(todo => !todo.completed).length;
+  const numberChange = todos.filter(todo => !todo.isDone).length;
 
   const showToggleAll = todos.length > 0;
 
@@ -101,7 +120,7 @@ export default function App() {
                 className="toggle-all"
                 type="checkbox"
                 data-testid="toggle-all"
-                checked={todos.length > 0 && todos.every(todo => todo.completed)}
+                checked={todos.length > 0 && todos.every(todo => todo.isDone)}
                 onChange={handleToggleAll}
               />
               <label className="toggle-all-label" htmlFor="toggle-all">
@@ -111,20 +130,20 @@ export default function App() {
           )}
           <ul className="todo-list" data-testid="todo-list">
             {filteredTodos.map(todo => (
-              <li key={todo.id} className={todo.completed ? "completed" : ""} data-testid={`todo-item-${todo.id}`}>
+              <li key={todo.id} className={todo.isDone ? "completed" : ""} data-testid={`todo-item-${todo.id}`}>
                 <div className="view">
                   <input
                     className="toggle"
                     type="checkbox"
                     data-testid={`todo-item-toggle-${todo.id}`}
-                    checked={todo.completed}
+                    checked={todo.isDone}
                     onChange={() => handleToggle(todo.id)}
                   />
                   <label
                     data-testid={`todo-item-label-${todo.id}`}
-                    style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+                    style={{ textDecoration: todo.isDone ? 'line-through' : 'none' }}
                   >
-                    {todo.text}
+                    {todo.title}
                   </label>
                   <button className="destroy" data-testid={`todo-item-button-${todo.id}`} onClick={() => handleDestroy(todo.id)}></button>
                 </div>
@@ -138,27 +157,27 @@ export default function App() {
             <ul className="filters" data-testid="footer-navigation">
               <li>
                 <a
-                  className={activeFilter === "all" ? "selected" : ""}
+                  className={activeFilter === FILTER_ALL ? "selected" : ""}
                   href="#/"
-                  onClick={() => handleFilterClick("all")}
+                  onClick={() => handleFilterClick(FILTER_ALL)}
                 >
                   Todos
                 </a>
               </li>
               <li>
                 <a
-                  className={activeFilter === "active" ? "selected" : ""}
+                  className={activeFilter === FILTER_ACTIVE ? "selected" : ""}
                   href="#active"
-                  onClick={() => handleFilterClick("active")}
+                  onClick={() => handleFilterClick(FILTER_ACTIVE)}
                 >
                   Ativos
                 </a>
               </li>
               <li>
                 <a
-                  className={activeFilter === "completed" ? "selected" : ""}
+                  className={activeFilter === FILTER_COMPLETED ? "selected" : ""}
                   href="#completed"
-                  onClick={() => handleFilterClick("completed")}
+                  onClick={() => handleFilterClick(FILTER_COMPLETED)}
                 >
                   Completos
                 </a>
