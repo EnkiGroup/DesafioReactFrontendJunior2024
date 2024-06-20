@@ -1,7 +1,9 @@
 import { useCallback } from "react"
 import { hasValidMin, sanitize } from "../../utils/handleStrings"
 import "./style.scss"
+
 /**
+ * Renders an input component with optional default value and onBlur callback.
  *
  * @param {Object} props - The properties for the Input component.
  * @param {Function} props.onSubmit - The function to call when the input is submitted.
@@ -11,27 +13,27 @@ import "./style.scss"
  * @param {Function} [props.onBlur] - The function to call when the input loses focus.
  * @returns {JSX.Element} The rendered Input component.
  */
-export function Input({
+const Input = ({
   onSubmit,
   placeholder,
   label,
-  defaultValue,
-  onBlur,
+  defaultValue = "",
+  onBlur = () => {},
 }: {
   onSubmit: (value: string) => void
   placeholder: string
   label: string
   defaultValue?: string
   onBlur?: () => void
-}): JSX.Element {
+}): JSX.Element => {
   const handleBlur = useCallback(() => {
-    if (onBlur) onBlur()
+    onBlur()
   }, [onBlur])
 
   const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
+    (e: React.KeyboardEvent<HTMLInputElement>): void => {
       if (e.key === "Enter") {
-        const value = e.currentTarget.value.trim()
+        const value: string = e.currentTarget.value.trim()
 
         if (!hasValidMin(value, 2)) return
 
@@ -61,3 +63,5 @@ export function Input({
     </>
   )
 }
+
+export default Input

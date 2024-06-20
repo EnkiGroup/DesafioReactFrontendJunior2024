@@ -1,11 +1,11 @@
 import { StrictMode } from "react"
-import ReactDOM from "react-dom"
+import { render } from "react-dom"
 import "./styles/main.scss"
 import { HashRouter, Route, Routes } from "react-router-dom"
 import { TodoProvider } from "./context/TodoContext"
 import App from "./view/app"
 
-ReactDOM.render(
+render(
   <StrictMode>
     <TodoProvider>
       <HashRouter>

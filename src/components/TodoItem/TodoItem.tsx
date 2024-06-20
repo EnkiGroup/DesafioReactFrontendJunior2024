@@ -20,21 +20,17 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
   const [editTitle, setEditTitle] = useState(todo.title)
 
   const toggleTodo = async () => {
-    console.log("toggleTodo", todo.id)
     const updatedTodo = { ...todo, isDone: !todo.isDone }
     await todoService.updateTodo(updatedTodo)
     dispatch({ type: "TOGGLE_TODO", payload: updatedTodo })
   }
 
   const removeTodo = async () => {
-    console.log("removeTodo", todo.id)
     await todoService.deleteTodo(todo.id)
     dispatch({ type: "REMOVE_TODO", payload: todo })
   }
 
-  const handleEdit = () => {
-    setIsEditing(true)
-  }
+  const handleEdit = () => setIsEditing(true)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditTitle(e.target.value)
@@ -57,8 +53,6 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
       setEditTitle(todo.title)
     }
   }
-
-  console.log(todo)
 
   return (
     <li className='todo-item'>

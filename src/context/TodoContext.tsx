@@ -33,19 +33,19 @@ const TodoContext = createContext<
  * @param {TodoAction} action - The action to be performed on the state.
  * @return {TodoState} The updated state of the TodoContext.
  */
-
 const todoReducer = (state: TodoState, action: TodoAction): TodoState => {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case ADD_TODO:
-      return { todos: [...state.todos, action.payload!] }
+      return { todos: [...state.todos, payload as Todo] }
     case REMOVE_TODO:
       return {
-        todos: state.todos.filter((todo) => todo.id !== action.payload!.id),
+        todos: state.todos.filter((todo) => todo.id !== (payload as Todo).id),
       }
     case TOGGLE_TODO:
       return {
         todos: state.todos.map((todo) =>
-          todo.id === action.payload!.id
+          todo.id === (payload as Todo).id
             ? { ...todo, isDone: !todo.isDone }
             : todo
         ),
@@ -57,7 +57,7 @@ const todoReducer = (state: TodoState, action: TodoAction): TodoState => {
     case UPDATE_TODO:
       return {
         todos: state.todos.map((todo) =>
-          todo.id === action.payload!.id ? action.payload! : todo
+          todo.id === (payload as Todo).id ? (payload as Todo) : todo
         ),
       }
     default:

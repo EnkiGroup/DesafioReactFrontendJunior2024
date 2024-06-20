@@ -3,7 +3,7 @@ import { useTodoContext } from "../context/TodoContext"
 import { ADD_TODO, API_URL } from "../utils/constants"
 import axios from "axios"
 import * as todoService from "../services/todoService"
-import { Input } from "../components/Input/Input"
+import Input from "../components/Input/Input"
 import TodoList from "../components/TodoList/TodoList"
 import Footer from "../components/Footer/Footer"
 
