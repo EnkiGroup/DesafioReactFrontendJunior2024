@@ -5,6 +5,7 @@ import {
   REMOVE_COMPLETED_TODOS,
   REMOVE_TODO,
   TOGGLE_TODO,
+  UPDATE_TODO,
 } from "../utils/constants"
 
 interface TodoState {
@@ -12,7 +13,12 @@ interface TodoState {
 }
 
 interface TodoAction {
-  type: "ADD_TODO" | "REMOVE_TODO" | "TOGGLE_TODO" | "REMOVE_COMPLETED_TODOS"
+  type:
+    | "ADD_TODO"
+    | "REMOVE_TODO"
+    | "TOGGLE_TODO"
+    | "REMOVE_COMPLETED_TODOS"
+    | "UPDATE_TODO"
   payload?: Todo
 }
 
@@ -47,6 +53,12 @@ const todoReducer = (state: TodoState, action: TodoAction): TodoState => {
     case REMOVE_COMPLETED_TODOS:
       return {
         todos: state.todos.filter((todo) => !todo.isDone),
+      }
+    case UPDATE_TODO:
+      return {
+        todos: state.todos.map((todo) =>
+          todo.id === action.payload!.id ? action.payload! : todo
+        ),
       }
     default:
       return state
