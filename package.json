@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.8",
     "nock": "^13.1.1"
   }
 }
