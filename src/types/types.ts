@@ -1,9 +1,5 @@
 export type Task = {
+    id: string;
     title: string;
-    status: TaskStatus;
+    isDone: boolean;
 };
-
-export enum TaskStatus {
-    Active = "Ativo",
-    Completed = "Completado"
-}

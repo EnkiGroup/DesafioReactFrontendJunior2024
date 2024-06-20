@@ -1,4 +1,4 @@
-import { Task, TaskStatus } from "../../types/types";
+import { Task } from "../../types/types";
 
 type TaskItemProps = {
     task: Task;
@@ -14,7 +14,7 @@ export default function taskItem({ task, index, handleTaskStatus, removeTask }: 
             type="checkbox"
             name="item_status"
             className=""
-            checked={task.status === TaskStatus.Completed}
+            checked={task.isDone}
             onChange={() => handleTaskStatus(index)}
             />
         <div className="item_title">{task.title}</div>

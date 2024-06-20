@@ -2,14 +2,17 @@ import { Link } from "react-router-dom";
 
 type TaskStatusFilterProps = {
     taskCount: number;
+    setFilter: (filter: "all" | "active" | "completed") => void;
 };
 
-export default function taskStatusFilter({ taskCount }: TaskStatusFilterProps){
+export default function taskStatusFilter({ taskCount, setFilter }: TaskStatusFilterProps){
     return (
         <div id="settings_container">
             <span>{taskCount === 1 ? '1 item restante!' : `${taskCount} itens restantes!`}</span>
             <div>
-                <Link to="/">Todas</Link> | <Link to="/active">Ativas</Link> | <Link to="/completed">Completadas</Link>
+                <Link to="/" onClick={() => setFilter("all")}>Todas</Link> | 
+                <Link to="/active" onClick={() => setFilter("active")}>Ativas</Link> | 
+                <Link to="/completed" onClick={() => setFilter("completed")}>Completadas</Link>
             </div>
             <div>Limpar completas</div>
         </div>
