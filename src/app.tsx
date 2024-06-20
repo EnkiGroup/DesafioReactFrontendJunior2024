@@ -21,7 +21,7 @@ export default function App() {
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && todoText.trim() !== '') {
       const newTodo: Todo = {
-        id: todos.length > 0 ? todos[todos.length - 1].id + 1 : 1, // Gera um novo ID único
+        id: todos.length + 1,
         text: todoText,
         completed: false
       };
@@ -45,6 +45,9 @@ export default function App() {
   };
 
   const handleDestroy = (id: number) => {
+    const todoToDelete = todos.find(todo => todo.id === id);
+    if (!todoToDelete) return;
+
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
@@ -86,7 +89,7 @@ export default function App() {
               className="new-todo"
               type="text"
               data-testid="text-input"
-              placeholder="What needs to be done?"
+              placeholder="Quais são as tarefas a serem feitas?"
               value={todoText}
               onChange={handleInputChange}
               onKeyDown={handleKeyPress}
@@ -144,7 +147,7 @@ export default function App() {
                   href="#/"
                   onClick={() => handleFilterClick("all")}
                 >
-                  All
+                  Todos
                 </a>
               </li>
               <li>
@@ -153,7 +156,7 @@ export default function App() {
                   href="#active"
                   onClick={() => handleFilterClick("active")}
                 >
-                  Active
+                  Ativos
                 </a>
               </li>
               <li>
@@ -162,12 +165,12 @@ export default function App() {
                   href="#completed"
                   onClick={() => handleFilterClick("completed")}
                 >
-                  Completed
+                  Completos
                 </a>
               </li>
             </ul>
             <button className="clear-completed" onClick={handleClearCompleted}>
-              Clear completed
+              Remover
             </button>
           </footer>
         )}
