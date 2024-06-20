@@ -3,7 +3,7 @@ import axios from "axios";
 import './app.css';
 import './index.css';
 import Footer from "./components/footer";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 interface Todo {
   id: string;
