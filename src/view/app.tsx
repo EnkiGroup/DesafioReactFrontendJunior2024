@@ -6,6 +6,7 @@ import TodoItem from "../components/TodoItem"
 import axios from "axios"
 import Footer from "../components/Footer"
 import { useLocation } from "react-router-dom"
+import * as todoService from "../services/todoService"
 
 const App: React.FC = () => {
   const { state, dispatch } = useTodoContext()
@@ -14,24 +15,25 @@ const App: React.FC = () => {
   const visibleTodos = useMemo(
     () =>
       state.todos.filter((todo) => {
-        if (pathname === "/active") return !todo.completed
-        if (pathname === "/completed") return todo.completed
+        if (pathname === "/active") return !todo.isDone
+        if (pathname === "/completed") return todo.isDone
         return todo
       }),
     [state.todos, pathname]
   )
 
   const addItem = useCallback(
-    (title) => {
+    async (title) => {
+      const newTodo = {
+        title,
+        id: Date.now().toString(),
+        isDone: false,
+      }
+      const addedTodo = await todoService.addTodo(newTodo)
       dispatch({
         type: ADD_TODO,
-        payload: {
-          title,
-          id: Date.now().toString(),
-          completed: false,
-        },
+        payload: addedTodo,
       })
-      console.log("entrando")
     },
     [dispatch]
   )
@@ -43,11 +45,6 @@ const App: React.FC = () => {
       })
     })
   }, [dispatch])
-
-  useEffect(() => {
-    console.log("pathname", pathname)
-  }, [pathname])
-
   return (
     <>
       <header>

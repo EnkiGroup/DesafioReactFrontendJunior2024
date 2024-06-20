@@ -20,6 +20,14 @@ const TodoContext = createContext<
   { state: TodoState; dispatch: React.Dispatch<TodoAction> } | undefined
 >(undefined)
 
+/**
+ * Reduces the state of the TodoContext based on the given action.
+ *
+ * @param {TodoState} state - The current state of the TodoContext.
+ * @param {TodoAction} action - The action to be performed on the state.
+ * @return {TodoState} The updated state of the TodoContext.
+ */
+
 const todoReducer = (state: TodoState, action: TodoAction): TodoState => {
   switch (action.type) {
     case ADD_TODO:
@@ -32,13 +40,13 @@ const todoReducer = (state: TodoState, action: TodoAction): TodoState => {
       return {
         todos: state.todos.map((todo) =>
           todo.id === action.payload!.id
-            ? { ...todo, completed: !todo.completed }
+            ? { ...todo, isDone: !todo.isDone }
             : todo
         ),
       }
     case REMOVE_COMPLETED_TODOS:
       return {
-        todos: state.todos.filter((todo) => !todo.completed),
+        todos: state.todos.filter((todo) => !todo.isDone),
       }
     default:
       return state

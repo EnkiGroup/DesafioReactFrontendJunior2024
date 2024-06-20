@@ -3,12 +3,18 @@ import { useTodoContext } from "../context/TodoContext"
 import { REMOVE_COMPLETED_TODOS } from "../utils/constants"
 import { useLocation } from "react-router-dom"
 
+/**
+ * Renders the footer component with active todos count and filter links.
+ *
+ * @return {JSX.Element} The JSX element representing the footer component.
+ */
+
 const Footer: React.FC = () => {
   const { state, dispatch } = useTodoContext()
   const { pathname } = useLocation()
 
   const activeTodos = useMemo(
-    () => state.todos.filter((todo) => !todo.completed),
+    () => state.todos.filter((todo) => !todo.isDone),
     [state.todos]
   )
 
