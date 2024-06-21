@@ -1,10 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-
-interface Task {
-  id: string;
-  title: string;
-  isDone: boolean;
-}
+import { Task } from '../types';
 
 interface TasksContextType {
   tasks: Task[]
