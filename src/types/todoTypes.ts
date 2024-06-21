@@ -7,6 +7,7 @@ export  interface ITodo {
 export interface ITodoContext {
   todos: ITodo[];
   setTodos: (todos: ITodo[]) => void;
+  pending: number;
 }
 
 

@@ -23,6 +23,7 @@ export const TodoContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [todos, setTodos] = useState<ITodo[]>([]);
+  const [pending, setPending] = useState<number>(0);
 
   const fetchTodos = useCallback(async () => {
     try {
@@ -42,6 +43,7 @@ export const TodoContextProvider = ({
       value={{
         todos,
         setTodos,
+        pending,
       }}
     >
       {children}
