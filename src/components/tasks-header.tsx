@@ -1,14 +1,17 @@
-import { ChevronDown, TriangleAlert } from "lucide-react"
-import { useInputValidation } from "../hooks/use-input-validation"
 import { useTasksContext } from "../contexts/tasks-context"
+
+import { useInputValidation } from "../hooks/use-input-validation"
+
+import { CheckAllButton } from "./check-all-button"
+import { TriangleAlert } from "lucide-react"
 
 export function TasksInput() {
 
-  const { addTask, toggleAllTasksCheck } = useTasksContext()
-  
+  const { addTask } = useTasksContext()
+
   const { register, handleSubmit, reset, errors } = useInputValidation()
 
-  const onSubmit = ({ title }: { title: string}) => {
+  const onSubmit = ({ title }: { title: string }) => {
     addTask(title);
 
     reset();
@@ -16,13 +19,7 @@ export function TasksInput() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="relative flex bg-[#FEFEFE]">
-      <button
-        type="button"
-        className="w-14 flex items-center justify-center pr-1"
-        onClick={toggleAllTasksCheck}
-      >
-        <ChevronDown color="#777" size={28} />
-      </button>
+      <CheckAllButton />
       <input
         type="text"
         placeholder="What needs to be done?"
