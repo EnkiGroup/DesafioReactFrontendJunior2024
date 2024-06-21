@@ -5,14 +5,13 @@ import TaskList from "./TaskList/taskList";
 import TaskInput from "./TaskInput/taskInput";
 import useTodoList from "../hooks/useTodoList";
 import logoenContact from "../assets/images/logoenContact.jpg";
-
+import arrowDown from "../assets/images/arrow-down.png"
 
 export default function TodoApp(){
 
-    const { todoFetch, error } = useFetchTodos()
-    const { newTask, todoList, setTodoList, handleKeyDown, handleChange, removeTask, handleTaskStatus } = useTodoList(todoFetch);
+    const { todoFetch, error, isLoading } = useFetchTodos()
+    const { newTask, todoList, setTodoList, handleKeyDown, handleChange, removeTask, handleTaskStatus, handleClearAllCompletedTasks, handleSetAllTasksCompleted } = useTodoList(todoFetch);
     const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
-
 
     useEffect(() => {
         if (todoFetch) {
@@ -39,23 +38,25 @@ export default function TodoApp(){
             <h1 id="main_title">Todos</h1>
             <main id="main_container_table">
                 <div id="table_header">
-                <div>
-                    <span>Seta</span>
+                    <button className="arrow_down_container" onClick={handleSetAllTasksCompleted}>
+                        <img src={arrowDown} alt="Set All Tasks Completed" width="15px" /> 
+                    </button>
+                    <TaskInput
+                        newTask={newTask}
+                        handleKeyDown={handleKeyDown}
+                        handleChange={handleChange}
+                    />
                 </div>
-                <TaskInput
-                    newTask={newTask}
-                    handleKeyDown={handleKeyDown}
-                    handleChange={handleChange}
-                />
-                </div>
-                <TaskList todoList={filteredTodoList} handleTaskStatus={handleTaskStatus} removeTask={removeTask} />
-                {todoList.length > 0 && <TaskStatusFilter taskCount={todoList.length}  setFilter={setFilter} /> } 
+                {isLoading? <div id="loading_warning">Carregando...</div> : <TaskList todoList={filteredTodoList} handleTaskStatus={handleTaskStatus} removeTask={removeTask} />} 
+                {todoList.length > 0 && <TaskStatusFilter taskCount={todoList.length}  setFilter={setFilter} clearAllCompletedTasks={handleClearAllCompletedTasks}  /> } 
             </main>
             <div id="project_details">
                 <span>Clique duas vezes para editar uma tarefa</span>
                 <span>Henrique Santiago Pires</span>
                 <span>Desafio front-end júnior - enContact </span>
-                <img src={logoenContact} alt="Logo enContact" width={"150px"} />
+                <div id="logo_container">
+                    <img src={logoenContact} alt="Logo enContact" width={"150px"} />
+                </div>
             </div>
         </section>
     )

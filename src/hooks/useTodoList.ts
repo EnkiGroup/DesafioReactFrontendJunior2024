@@ -38,6 +38,22 @@ export default function useTodoList(initialTodos: Task[]){
         setTodoList(updatedTasks);
     }
 
+    const handleClearAllCompletedTasks = () => {
+        const updatedListWithoutCompletedTasks = todoList.filter((todo) => !todo.isDone)
+        setTodoList(updatedListWithoutCompletedTasks)
+    }
+
+    const handleSetAllTasksCompleted = () => {
+        
+        const allAreDone = todoList.every(todo => todo.isDone);
+
+        const updatedTodoList = todoList.map(todo => ({
+            ...todo,
+            isDone: !allAreDone  
+        }));
+
+        setTodoList(updatedTodoList);
+    }
 
     return{
         newTask,
@@ -47,7 +63,9 @@ export default function useTodoList(initialTodos: Task[]){
         handleKeyDown,
         handleChange,
         removeTask,
-        handleTaskStatus
+        handleTaskStatus,
+        handleClearAllCompletedTasks,
+        handleSetAllTasksCompleted
     }
 
 }

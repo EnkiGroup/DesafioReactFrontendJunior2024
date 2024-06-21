@@ -8,6 +8,8 @@ $main-title-color: #b83f45;
 * {
     margin: 0;
     padding: 0;
+    outline: 0;
+    box-sizing: border-box;
 }
 
 body{
@@ -17,8 +19,9 @@ body{
 
 .main_container_app{
     text-align: center;
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
+    padding: 0 2%;
 }
 
 #main_title{
@@ -28,17 +31,31 @@ body{
 }
 
 #main_container_table{
+    border: 1px solid black;
     margin-bottom: 2rem;
 }
 
 #table_header{
+
     display: flex;
-    justify-content: center;
+
+    .arrow_down_container{
+        align-items: center;
+        display: flex;
+        width: 3rem;
+
+        img{
+            margin: 0 auto;
+        }
+    }
 
     #input_task_container{
 
+        width: 100%;
+
         #input_task{
             font-size: 2.1rem;
+            width: 100%;
         }
     }
 }
@@ -50,8 +67,17 @@ ul#list_container{
     flex-direction: column;
 
     li.item_container{
+
+        background-color: #ff8b2c;
+        border: 1px solid black;
         display: flex;
         font-size: 2rem;
+        gap: 1rem;
+        padding: 1rem 0.7rem;
+
+        &:hover{
+            background-color: yellow;
+        }
 
         .item_title{
             overflow-wrap: break-word;
@@ -66,9 +92,14 @@ ul#list_container{
 #settings_container{
     display: flex;
     justify-content: space-between;
+    font-size: 1.4rem;
 }
 
 #project_details{
     display: flex;
     flex-direction: column;
+}
+
+#loading_warning{
+    font-size: 1.8rem;
 }

@@ -4,8 +4,6 @@ import TodoApp from "./components/todoApp";
 
 export default function App() {
 
-
-
   return (
     <Router>
       <TodoApp />
@@ -16,7 +14,5 @@ export default function App() {
       </Routes>
     </Router>
 
-    
-    
   );
 }
