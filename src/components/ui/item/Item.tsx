@@ -1,5 +1,6 @@
 import { Check, X } from "lucide-react";
-import { useState } from "react";
+import { KeyboardEvent, useEffect, useState } from "react";
+import useTodoContext from "../../../contexts/TodoContext";
 import { ITodo } from "../../../types/todoTypes";
 import Input from "../input/Input";
 
@@ -10,8 +11,33 @@ interface ItemProps {
 const Item = ({ todo }: ItemProps) => {
   const [isWritable, setIsWritable] = useState<boolean>(false);
   const [mouseEvent, setMouseEvent] = useState<boolean>(false);
+  const [editTodo, setEditTodo] = useState<string>(todo.title);
 
-  const handleDoubleClick = (): void => setIsWritable(true);
+  const { completeTodos, updateTodo, deleteTodo } = useTodoContext();
+
+  const handleDoubleClick = (): void => {
+    setIsWritable(true);
+  };
+
+  const handleOnBlur = () => {
+    if (editTodo.trim() !== "") {
+      updateTodo(editTodo, todo.id);
+    }
+    setIsWritable(false);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === "Enter" && editTodo.trim() !== "") {
+      updateTodo(todo.id, editTodo);
+      setIsWritable(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isWritable) {
+      setEditTodo(todo.title);
+    }
+  }, [isWritable, todo.title]);
 
   return (
     <li
@@ -19,13 +45,19 @@ const Item = ({ todo }: ItemProps) => {
         "relative text-xl " +
         (isWritable ? "shadow-focus p-default" : "border-b p-default")
       }
-      onDoubleClick={handleDoubleClick}
       onMouseEnter={() => setMouseEvent(true)}
       onMouseLeave={() => setMouseEvent(false)}
+      onDoubleClick={handleDoubleClick}
     >
       <div className="flex justify-between">
         {isWritable ? (
-          <Input autoFocus />
+          <Input
+            autoFocus
+            value={editTodo}
+            onBlur={handleOnBlur}
+            onChange={(e) => setEditTodo(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
         ) : (
           <>
             <div>
@@ -45,6 +77,7 @@ const Item = ({ todo }: ItemProps) => {
                   className="appearance-none"
                   type="checkbox"
                   checked={todo.isDone}
+                  onChange={() => completeTodos(todo.id)}
                 />
               </label>
               <label
@@ -53,12 +86,13 @@ const Item = ({ todo }: ItemProps) => {
                     ? "transition duration-500 line-through text-gray-400"
                     : ""
                 }
+                onDoubleClick={handleDoubleClick}
               >
                 {todo.title}
               </label>
             </div>
             {mouseEvent && (
-              <button>
+              <button onClick={() => deleteTodo(todo.id)}>
                 <X className="text-gray-400 hover:text-red-300" size={20} />
               </button>
             )}
