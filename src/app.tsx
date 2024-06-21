@@ -7,9 +7,11 @@ import "./index.css";
 export default function App() {
   return (
     <Container>
-      <Header />
-      <Main />
-      <Footer />
+      <section className="w-[35%]">
+        <Header />
+        <Main />
+        <Footer />
+      </section>
     </Container>
   );
 }
