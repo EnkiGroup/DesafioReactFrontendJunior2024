@@ -4,14 +4,17 @@ import Header from "./components/header/header";
 import Inputbar from "./components/inputbar/inputbar";
 import TodoList from "./components/list/list";
 import Filterbar from "./components/filterbar/filterbar";
+import { TodoProvider } from "./context/TodoContext";
 
 export default function App() {
   return (
-    <Wrapper>
-      <Header />
-      <Inputbar />
-      <TodoList />
-      <Filterbar />
-    </Wrapper>
+    <TodoProvider>
+      <Wrapper>
+        <Header />
+        <Inputbar />
+        <TodoList />
+        <Filterbar />
+      </Wrapper>
+    </TodoProvider>
   );
 }

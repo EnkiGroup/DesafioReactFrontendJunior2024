@@ -1,5 +1,5 @@
 export type Todo = {
-    id: number; //A confirmar
+    id: string;
     content: string;
     isSelected: boolean;
 }

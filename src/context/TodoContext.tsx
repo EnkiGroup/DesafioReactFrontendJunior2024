@@ -3,14 +3,20 @@ import { Todo } from "../types/Todo";
 
 export const TodoContext = createContext({
     todos: [] as Todo[],
-    setTodos: (todos: Todo[]) => { }
+    setTodos: (todos: Todo[]) => { },
+    addTodo: (todo: Todo) => { }
     });
 
 export const TodoProvider = ({ children }: any) => {
     const [todos, setTodos] = useState<Todo[]>([]);
 
+    const addTodo = (todo: Todo) => {
+        setTodos([...todos, todo]);
+        console.log(todos);
+    }
+
     return (
-        <TodoContext.Provider value={{ todos, setTodos }}>
+        <TodoContext.Provider value={{ todos, setTodos, addTodo}}>
             {children}
         </TodoContext.Provider>
     )
