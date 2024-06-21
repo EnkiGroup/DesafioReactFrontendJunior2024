@@ -23,7 +23,7 @@ export function TaskItem({ task }: TaskItemProps) {
     >
       {isEditable
         ?
-        (<EditableTaskItem task={task} backToReadable={handleBackToReadable} />)
+        (<EditableTaskItem task={task} onEditCompletion={handleBackToReadable} />)
         :
         (<ReadableTaskItem task={task} />)
       }

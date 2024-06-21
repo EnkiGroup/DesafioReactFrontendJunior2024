@@ -3,12 +3,12 @@ import { useInputValidation } from "../hooks/use-input-validation"
 
 import { Task } from "../types"
 
-interface ReadableTaskItemProps {
+interface EditableTaskItemProps {
   task: Task
-  backToReadable: () => void
+  onEditCompletion: () => void
 }
 
-export function EditableTaskItem({ task: { id, title }, backToReadable }: ReadableTaskItemProps) {
+export function EditableTaskItem({ task: { id, title }, onEditCompletion }: EditableTaskItemProps) {
 
   const { updateTaskTitle } = useTasksContext()
 
@@ -17,7 +17,7 @@ export function EditableTaskItem({ task: { id, title }, backToReadable }: Readab
   function onSubmit({title}: {title: string}) {
     updateTaskTitle({id, title})
 
-    backToReadable()
+    onEditCompletion()
   }
 
   return (
