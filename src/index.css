@@ -5,6 +5,7 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
   border: 0px solid black;
+  outline: 0;
 }
 
 /* Gerar o efeito de camadas no rodapé da lista de tarefas */
