@@ -4,15 +4,21 @@ import { useTasksContext } from "../contexts/tasks-context"
 
 export function TasksInput() {
 
-  const { register, handleSubmit } = useInputValidation()
+  const { addTask, completeAllTasks } = useTasksContext()
+  
+  const { register, handleSubmit, reset } = useInputValidation()
 
-  const { completeAllTasks } = useTasksContext()
+  const onSubmit = ({ title }: { title: string}) => {
+    addTask(title);
+
+    reset();
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="flex bg-[#FEFEFE]">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex  bg-[#FEFEFE]">
       <button
         type="button"
-        className="px-2"
+        className="w-14 flex items-center justify-center pr-1"
         onClick={completeAllTasks}
       >
         <ChevronDown color="#777" size={28} />
