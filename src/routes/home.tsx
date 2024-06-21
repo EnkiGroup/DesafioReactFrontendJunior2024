@@ -1,4 +1,4 @@
-import { Outlet as TaskList } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 
 import { TasksInput } from "../components/tasks-header"
 import { TasksFooter } from "../components/tasks-footer"
@@ -12,7 +12,7 @@ export function Home() {
       <main className="h-full flex justify-center ">
         <section className="w-[550px] h-min bg-white custom-shadow">
           <TasksInput />
-          <TaskList />
+          <Outlet />
           <TasksFooter />
         </section>
       </main>
