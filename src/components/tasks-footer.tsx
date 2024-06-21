@@ -3,11 +3,11 @@ import { useTasksContext } from "../contexts/tasks-context"
 
 export function TasksFooter() {
 
-  const { tasksLeft, clearCompletedTasks } = useTasksContext()
+  const { isTasksListEmpty, tasksLeft, clearCompletedTasks } = useTasksContext()
 
   return (
     <>
-      {Boolean(tasksLeft) && (
+      {!isTasksListEmpty && (
         <header className="flex justify-between px-4 py-2 border-t border-gray-200 sheets-effect">
           <span>{tasksLeft} itens left!</span>
           <div className="flex gap-4">
@@ -41,5 +41,3 @@ export function TasksFooter() {
     </>
   )
 }
-
-//TODO: ALTERAR A LOGICA, PRA APARECER COM 0 ITENS, POREM ESCONDER QUANDO O "ARRAY" TIVER VAZIO

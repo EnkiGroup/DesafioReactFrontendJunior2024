@@ -10,6 +10,7 @@ interface TasksContextType {
   toggleTaskCheck: (id: string) => void;
   completeAllTasks: () => void;
   clearCompletedTasks: () => void;
+  isTasksListEmpty: boolean
 }
 
 export const TasksContext = createContext<TasksContextType | undefined>(undefined);
@@ -79,7 +80,8 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
       removeTask,
       toggleTaskCheck,
       completeAllTasks,
-      clearCompletedTasks
+      clearCompletedTasks,
+      isTasksListEmpty: tasks.length === 0,
     }}>
       {children}
     </TasksContext.Provider>
