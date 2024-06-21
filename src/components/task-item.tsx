@@ -55,7 +55,7 @@ export function CheckButton({ isDone, onCheck }: { isDone: boolean, onCheck: () 
         onChange={onCheck}
         className="sr-only peer"
       />
-      <span className="w-8 h-8 border rounded-full flex items-center justify-center peer-checked:border-green-600">
+      <span className="w-8 h-8 border rounded-full flex items-center justify-center peer-checked:border-green-600 transition-all ease-in-out duration-500">
         {isDone && <Check color="rgb(22 163 74)" />}
       </span>
     </label>
