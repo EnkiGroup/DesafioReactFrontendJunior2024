@@ -1,15 +1,20 @@
 import { ChevronDown } from "lucide-react"
 import { useInputValidation } from "../hooks/use-input-validation"
+import { useTasksContext } from "../contexts/tasks-context"
 
 export function TasksInput() {
 
   const { register, handleSubmit } = useInputValidation()
 
-  
+  const { completeAllTasks } = useTasksContext()
 
   return (
     <form onSubmit={handleSubmit} className="flex bg-[#FEFEFE]">
-      <button className="px-2">
+      <button
+        type="button"
+        className="px-2"
+        onClick={completeAllTasks}
+      >
         <ChevronDown color="#777" size={28} />
       </button>
       <input
