@@ -1,5 +1,5 @@
 import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useTodoContext from "../../contexts/TodoContext";
 import { ITodo } from "../../types/todoTypes";
@@ -7,8 +7,13 @@ import Item from "../ui/item/Item";
 
 const Main = () => {
   const { pathname: location } = useLocation();
-  const { todos } = useTodoContext();
+  const { todos, completeAllTodos, allTodosCompleted, setAllTodosCompleted } =
+    useTodoContext();
   const [renderizedTodo, setRenderizedTodo] = useState<ITodo[]>([]);
+
+  const handleOnBlur = useCallback(() => {
+    setAllTodosCompleted(false);
+  }, [setAllTodosCompleted]);
 
   useEffect(() => {
     const filteredTodos = todos.filter((todo) => {
@@ -24,7 +29,11 @@ const Main = () => {
       {renderizedTodo.length > 0 && (
         <div className="absolute top-[-57px] left-0 w-[45px] h-[55px]">
           <button
-            className={"w-full h-full flex justify-center items-center"}
+            onBlur={handleOnBlur}
+            className={`w-full h-full flex justify-center items-center ${
+              allTodosCompleted ? "shadow-focus" : "text-gray-400"
+            }`}
+            onClick={completeAllTodos}
             name="toggle all"
           >
             <ChevronDown size={28} />
