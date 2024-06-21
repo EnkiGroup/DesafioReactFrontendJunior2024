@@ -1,8 +1,8 @@
-import { TriangleAlert } from "lucide-react"
 import { useTasksContext } from "../contexts/tasks-context"
 import { useInputValidation } from "../hooks/use-input-validation"
 
 import { Task } from "../types"
+import { Input } from "./input"
 
 interface EditableTaskItemProps {
   task: Task
@@ -22,15 +22,12 @@ export function EditableTaskItem({ task: { id, title }, onEditCompletion }: Edit
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex">
-      <input
-        type="text"
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex pl-14">
+      <Input
+        placeholder="What needs to be done?"
         {...register("title")}
-        className=" w-full px-2 py-4 pl-14 text-2xl placeholder:italic placeholder:text-2xl placeholder:font-normal"
+        error={errors.title}
       />
-      {errors.title && (
-        <TriangleAlert className="absolute top-1/2 right-4 -translate-y-1/2 text-red-800" />
-      )}
     </form>
   )
 }

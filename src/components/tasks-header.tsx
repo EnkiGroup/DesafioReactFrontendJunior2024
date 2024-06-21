@@ -26,7 +26,7 @@ export function TasksInput() {
       <Input
         placeholder="What needs to be done?"
         {...register("title")}
-        errors={errors}
+        error={errors.title}
       />
     </form>
   )
