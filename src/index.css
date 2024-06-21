@@ -1,0 +1,10 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  border: 0px solid black;
+}
+
+
