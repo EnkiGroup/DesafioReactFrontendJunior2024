@@ -5,3 +5,9 @@
 body {
   background-color: #f7fafc;
 }
+
+.custom-checkbox:checked:before {
+  content: '✓';
+  color: rgb(34 197 94);
+  margin-left: 5px;
+}
