@@ -18,7 +18,10 @@ export function TasksInput() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex bg-[#FEFEFE]">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex bg-[#FEFEFE]"
+    >
       <CheckAllButton />
       <Input
         placeholder="What needs to be done?"
