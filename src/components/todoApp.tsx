@@ -6,12 +6,19 @@ import TaskInput from "./TaskInput/taskInput";
 import useTodoList from "../hooks/useTodoList";
 import logoenContact from "../assets/images/logoenContact.jpg";
 import arrowDown from "../assets/images/arrow-down.png"
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function TodoApp(){
 
     const { todoFetch, error, isLoading } = useFetchTodos()
     const { newTask, todoList, setTodoList, handleKeyDown, handleChange, removeTask, handleTaskStatus, handleClearAllCompletedTasks, handleSetAllTasksCompleted } = useTodoList(todoFetch);
-    const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [filter, setFilter] = useState<"all" | "active" | "completed">(() => {
+        if (location.pathname.includes("active")) return "active";
+        if (location.pathname.includes("completed")) return "completed";
+        return "all";
+    });
 
     useEffect(() => {
         if (todoFetch) {
@@ -36,6 +43,9 @@ export default function TodoApp(){
         setTodoList(updatedTasks);
     };
     
+    useEffect(() => {
+        navigate(`/${filter}`);
+    }, [filter, navigate]);
 
     if (error) {
         console.error('Error fetching todos:', error);
