@@ -24,7 +24,7 @@ export function ReadableTaskItem({ task }: ReadableTaskItemProps) {
   return (
     <>
       <CheckButton isDone={task.isDone} onCheck={handleCheck} />
-      <span className={`w-full px-2 py-4 text-2xl ${task.isDone ? "text-gray-400 line-through" : ""}`}>
+      <span className={`w-full px-2 py-4 text-2xl ${task.isDone ? "text-gray-400 line-through" : "text-[#484848]"}`}>
         {task.title}
       </span>
       <X className="remove-icon" onClick={handleRemove} />
