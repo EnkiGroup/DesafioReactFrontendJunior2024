@@ -1,7 +1,7 @@
-import { useTasksContext } from "../contexts/tasks-context";
+import { useState } from "react";
 
-import { CheckButton } from "./check-button";
-import { X } from "lucide-react";
+import { ReadableTaskItem } from "./readable-task-item";
+import { EditableTaskItem } from "./editable-task-item";
 
 import { Task } from "../types";
 
@@ -10,24 +10,23 @@ interface TaskItemProps {
 }
 
 export function TaskItem({ task }: TaskItemProps) {
+  const [isEditable, setIsEditable] = useState<boolean>(false)
 
-  const { toggleTaskCheck, removeTask } = useTasksContext()
-
-  function handleCheck() {
-    toggleTaskCheck(task.id)
-  }
-
-  function handleRemove() {
-    removeTask(task.id)
+  function handleBackToReadable() {
+    setIsEditable(false)
   }
 
   return (
-    <li className="relative flex items-center gap-4 px-2 py-4 border-t border-gray-200 peer">
-      <CheckButton isDone={task.isDone} onCheck={handleCheck} />
-      <span className={`text-2xl ${task.isDone ? "text-gray-400 line-through" : ""}`}>
-        {task.title}
-      </span>
-      <X className="remove-icon" onClick={handleRemove} />
+    <li
+      onDoubleClick={() => setIsEditable(!isEditable)}
+      className="relative flex items-center border-t border-gray-200 peer"
+    >
+      {isEditable
+        ?
+        (<EditableTaskItem task={task} backToReadable={handleBackToReadable} />)
+        :
+        (<ReadableTaskItem task={task} />)
+      }
     </li>
   )
 }
