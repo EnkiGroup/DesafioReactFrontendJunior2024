@@ -12,7 +12,7 @@
     "@types/react-dom": "^17.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
@@ -41,6 +41,9 @@
     ]
   },
   "devDependencies": {
-    "nock": "^13.1.1"
+    "autoprefixer": "^10.4.19",
+    "nock": "^13.1.1",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4"
   }
 }
