@@ -7,6 +7,7 @@
   border: 0px solid black;
 }
 
+/* Gerar o efeito de camadas no rodapé da lista de tarefas */
 .sheets-effect {
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -36,6 +37,7 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+/* Mostrar o icone de remoção ao passar o mouse em um item da lista */
 .remove-icon {
   display: none;
   position: absolute;

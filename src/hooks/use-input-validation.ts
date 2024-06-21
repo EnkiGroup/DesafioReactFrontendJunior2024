@@ -22,7 +22,5 @@ export function useInputValidation() {
     reset();
   };
 
-
-
   return { register, handleSubmit: handleSubmit(onSubmit) };
 }
