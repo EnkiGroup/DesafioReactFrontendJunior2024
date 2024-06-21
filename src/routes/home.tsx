@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 
-import { TasksInput } from "../components/tasks-header"
+import { TasksInput } from "../components/tasks-input"
 import { TasksFooter } from "../components/tasks-footer"
 
 export function Home() {
