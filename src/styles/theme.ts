@@ -4,11 +4,13 @@ export const theme = {
     red: "#b83f45",
     white: "#fff",
     borderColor: "#e3e3e3",
-    TaskCompleted: "#949494"
+    TaskCompleted: "#69C5B5",
+    gray_1: "#e2e2e2",
+    gray_2: "#E5E5E5",
   },
   fontSize: {
     large: "5rem",
     medium: "1.5rem",
-    small: "0.9rem"
-  }
+    small: "0.9rem",
+  },
 };
