@@ -10,7 +10,7 @@ const taskSchema = z.object({
 type TaskSchema = z.infer<typeof taskSchema>;
 
 export function useInputValidation(defaultValue = "") {
-  const { register, handleSubmit, reset, setFocus } = useForm<TaskSchema>({
+  const { register, handleSubmit, reset, setFocus, formState: { errors } } = useForm<TaskSchema>({
     resolver: zodResolver(taskSchema),
     defaultValues: { title: defaultValue },
   });
@@ -19,5 +19,5 @@ export function useInputValidation(defaultValue = "") {
     setFocus("title");
   }, [setFocus]);
 
-  return { register, handleSubmit, reset };
+  return { register, handleSubmit, reset, errors };
 }

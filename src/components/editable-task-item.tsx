@@ -1,3 +1,4 @@
+import { TriangleAlert } from "lucide-react"
 import { useTasksContext } from "../contexts/tasks-context"
 import { useInputValidation } from "../hooks/use-input-validation"
 
@@ -12,10 +13,10 @@ export function EditableTaskItem({ task: { id, title }, onEditCompletion }: Edit
 
   const { updateTaskTitle } = useTasksContext()
 
-  const { register, handleSubmit } = useInputValidation(title)
+  const { register, handleSubmit, errors } = useInputValidation(title)
 
-  function onSubmit({title}: {title: string}) {
-    updateTaskTitle({id, title})
+  function onSubmit({ title }: { title: string }) {
+    updateTaskTitle({ id, title })
 
     onEditCompletion()
   }
@@ -27,6 +28,9 @@ export function EditableTaskItem({ task: { id, title }, onEditCompletion }: Edit
         {...register("title")}
         className=" w-full px-2 py-4 pl-14 text-2xl placeholder:italic placeholder:text-2xl placeholder:font-normal"
       />
+      {errors.title && (
+        <TriangleAlert className="absolute top-1/2 right-4 -translate-y-1/2 text-red-800" />
+      )}
     </form>
   )
 }
