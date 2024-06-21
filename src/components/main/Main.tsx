@@ -27,14 +27,15 @@ const Main = () => {
   return (
     <main className="relative border border-gray-200">
       {renderizedTodo.length > 0 && (
-        <div className="absolute top-[-57px] left-0 w-[45px] h-[55px]">
+        <div
+          className="absolute top-[-65px] left-0 w-[45px] h-[65px]"
+          onClick={completeAllTodos}
+        >
           <button
             onBlur={handleOnBlur}
             className={`w-full h-full flex justify-center items-center ${
               allTodosCompleted ? "shadow-focus" : "text-gray-400"
             }`}
-            onClick={completeAllTodos}
-            name="toggle all"
           >
             <ChevronDown size={28} />
           </button>
