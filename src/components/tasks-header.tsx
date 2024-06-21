@@ -3,7 +3,7 @@ import { useTasksContext } from "../contexts/tasks-context"
 import { useInputValidation } from "../hooks/use-input-validation"
 
 import { CheckAllButton } from "./check-all-button"
-import { TriangleAlert } from "lucide-react"
+import { Input } from "./input"
 
 export function TasksInput() {
 
@@ -18,17 +18,13 @@ export function TasksInput() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="relative flex bg-[#FEFEFE]">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex bg-[#FEFEFE]">
       <CheckAllButton />
-      <input
-        type="text"
+      <Input
         placeholder="What needs to be done?"
         {...register("title")}
-        className="w-full px-2 py-4 text-2xl placeholder:italic placeholder:font-normal"
+        errors={errors}
       />
-      {errors.title && (
-        <TriangleAlert className="absolute top-1/2 right-4 -translate-y-1/2 text-red-800" />
-      )}
     </form>
   )
 }
