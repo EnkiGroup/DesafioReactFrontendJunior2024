@@ -40,15 +40,16 @@
 
 /* Mostrar o icone de remoção ao passar o mouse em um item da lista */
 .remove-icon {
-  display: none;
+  opacity: 0;
   position: absolute;
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
-  cursor: pointer;
   color: lightcoral;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
 }
 
 .peer:hover .remove-icon {
-  display: block;
+  opacity: 1;
 }
