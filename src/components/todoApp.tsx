@@ -46,13 +46,13 @@ export default function TodoApp(){
     return(
         <section className="main_container_app">
             <header>
-                <h1 id="main_title">Todos</h1>
+                <h1 id="main_title">todos</h1>
             </header>
             <main id="main_container_table">
                 <div id="table_header">
                     {todoList.length > 0 && (
                         <button className="arrow_down_container" onClick={handleSetAllTasksCompleted}>
-                            <img src={arrowDown} alt="Set All Tasks Completed" width="15px" />
+                            <img src={arrowDown} alt="Set All Tasks Completed" />
                         </button>
                     )}
                     <TaskInput
@@ -65,12 +65,13 @@ export default function TodoApp(){
                     <div id="loading_warning">Carregando...</div> : 
                     <TaskList todoList={filteredTodoList} handleTaskStatus={handleTaskStatus} removeTask={removeTask} updateTaskTitle={updateTaskTitle} />
                 } 
-                {todoList.length > 0 && <TaskStatusFilter taskCount={activeTasks.length}  setFilter={setFilter} clearAllCompletedTasks={handleClearAllCompletedTasks}  /> } 
+                {todoList.length > 0 && <TaskStatusFilter taskCount={activeTasks.length} filter={filter}  setFilter={setFilter} clearAllCompletedTasks={handleClearAllCompletedTasks}  /> } 
             </main>
             <footer id="project_details">
                 <span>Clique duas vezes para editar uma tarefa</span>
+                <span>Pressione <i><strong>Enter</strong></i> para confirmar alteração de título</span>
                 <span>Clique fora do campo da tarefa para sair do modo de edição</span>
-                <span>Projeto desenvolvido por Henrique Santiago Pires</span>
+                <span>Projeto desenvolvido por Henrique Santiago Pires baseado no TodoMVC da <a href="https://todomvc.com" target="_blank" rel="noopener noreferrer">TodoMVC Team</a></span>
                 <span>Desafio front-end júnior - enContact </span>
                 <div id="logo_container">
                     <img src={logoenContact} alt="Logo enContact" width={"150px"} />
