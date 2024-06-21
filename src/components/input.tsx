@@ -1,6 +1,7 @@
-import { TriangleAlert } from "lucide-react";
 import { forwardRef, InputHTMLAttributes } from "react";
 import { FieldError } from "react-hook-form";
+
+import { TriangleAlert } from "lucide-react";
 
 interface Props {
   error: FieldError | undefined
