@@ -12,7 +12,10 @@ export default function useFetchTodos(){
                 throw new Error('Erro ao buscar os todos');
             }
             return response.json();
-        }
+        },
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        retry: 3
     });
     
     return{

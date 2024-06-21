@@ -8,6 +8,7 @@ type TaskInputProps = {
 };
 
 export default function TaskInput({ newTask, handleKeyDown, handleChange }: TaskInputProps) {
+
     return (
         <div id="input_task_container">
         <input

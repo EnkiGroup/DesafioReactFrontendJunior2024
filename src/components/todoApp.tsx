@@ -29,35 +29,53 @@ export default function TodoApp(){
         return true; 
     });
 
+    const updateTaskTitle = (id: string, newTitle: string) => {
+        const updatedTasks = todoList.map(task =>
+            task.id === id ? { ...task, title: newTitle } : task
+        );
+        setTodoList(updatedTasks);
+    };
+    
+
     if (error) {
         console.error('Error fetching todos:', error);
     }
 
+    const activeTasks = todoList.filter((todo) => !todo.isDone);
+
     return(
         <section className="main_container_app">
-            <h1 id="main_title">Todos</h1>
+            <header>
+                <h1 id="main_title">Todos</h1>
+            </header>
             <main id="main_container_table">
                 <div id="table_header">
-                    <button className="arrow_down_container" onClick={handleSetAllTasksCompleted}>
-                        <img src={arrowDown} alt="Set All Tasks Completed" width="15px" /> 
-                    </button>
+                    {todoList.length > 0 && (
+                        <button className="arrow_down_container" onClick={handleSetAllTasksCompleted}>
+                            <img src={arrowDown} alt="Set All Tasks Completed" width="15px" />
+                        </button>
+                    )}
                     <TaskInput
                         newTask={newTask}
                         handleKeyDown={handleKeyDown}
                         handleChange={handleChange}
                     />
                 </div>
-                {isLoading? <div id="loading_warning">Carregando...</div> : <TaskList todoList={filteredTodoList} handleTaskStatus={handleTaskStatus} removeTask={removeTask} />} 
-                {todoList.length > 0 && <TaskStatusFilter taskCount={todoList.length}  setFilter={setFilter} clearAllCompletedTasks={handleClearAllCompletedTasks}  /> } 
+                {isLoading? 
+                    <div id="loading_warning">Carregando...</div> : 
+                    <TaskList todoList={filteredTodoList} handleTaskStatus={handleTaskStatus} removeTask={removeTask} updateTaskTitle={updateTaskTitle} />
+                } 
+                {todoList.length > 0 && <TaskStatusFilter taskCount={activeTasks.length}  setFilter={setFilter} clearAllCompletedTasks={handleClearAllCompletedTasks}  /> } 
             </main>
-            <div id="project_details">
+            <footer id="project_details">
                 <span>Clique duas vezes para editar uma tarefa</span>
-                <span>Henrique Santiago Pires</span>
+                <span>Clique fora do campo da tarefa para sair do modo de edição</span>
+                <span>Projeto desenvolvido por Henrique Santiago Pires</span>
                 <span>Desafio front-end júnior - enContact </span>
                 <div id="logo_container">
                     <img src={logoenContact} alt="Logo enContact" width={"150px"} />
                 </div>
-            </div>
+            </footer>
         </section>
     )
 
