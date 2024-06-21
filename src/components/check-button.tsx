@@ -7,7 +7,7 @@ interface CheckButtonProps {
 
 export function CheckButton({ isDone, onCheck }: CheckButtonProps) {
   return (
-    <label className="relative w-8 h-8 flex items-center justify-center">
+    <label className="relative w-14 flex items-center justify-center">
       <input
         type="checkbox"
         checked={isDone}
