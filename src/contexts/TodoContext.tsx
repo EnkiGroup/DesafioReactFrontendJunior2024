@@ -41,6 +41,24 @@ export const TodoContextProvider = ({
     );
   }, [todos]);
 
+  const completeTodos = useCallback((id: string) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+      )
+    );
+  }, []);
+
+  const updateTodo = useCallback((id: string, title: string) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => (todo.id === id ? { ...todo, title } : todo))
+    );
+  }, []);
+
+  const deleteTodo = useCallback((id: string) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  }, []);
+
   const fetchTodos = useCallback(async () => {
     try {
       const res = await api.get("/todos");
@@ -70,6 +88,9 @@ export const TodoContextProvider = ({
         allTodosCompleted,
         setAllTodosCompleted,
         completeAllTodos,
+        completeTodos,
+        deleteTodo,
+        updateTodo,
       }}
     >
       {children}
