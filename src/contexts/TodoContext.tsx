@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import { ITodo, ITodoContext } from "../types/todoTypes";
+import { v4 as uuid } from "uuid";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -24,6 +25,13 @@ export const TodoContextProvider = ({
 }) => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [pending, setPending] = useState<number>(0);
+
+  const createTodo = useCallback((title: string) => {
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      { id: uuid(), title, isDone: false },
+    ]);
+  }, []);
 
   const fetchTodos = useCallback(async () => {
     try {
@@ -44,6 +52,7 @@ export const TodoContextProvider = ({
         todos,
         setTodos,
         pending,
+        createTodo,
       }}
     >
       {children}
