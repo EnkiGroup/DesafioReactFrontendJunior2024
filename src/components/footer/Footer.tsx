@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import useTodoContext from "../../contexts/TodoContext";
 
 const Footer = () => {
-  const { pending, todos } = useTodoContext();
+  const { pending, todos,clearTodos } = useTodoContext();
   const { pathname: location } = useLocation();
 
   return (
@@ -51,7 +51,7 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
-            <button className="hover:underline">
+            <button className="hover:underline" onClick={clearTodos}>
               Clear completed
             </button>
           </div>
