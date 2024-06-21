@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTasksContext } from "../contexts/tasks-context";
+import { useEffect } from "react";
 
 const taskSchema = z.object({
   title: z.string().min(2),
@@ -9,18 +9,15 @@ const taskSchema = z.object({
 
 type TaskSchema = z.infer<typeof taskSchema>;
 
-export function useInputValidation() {
-  const { register, handleSubmit, reset } = useForm<TaskSchema>({
+export function useInputValidation(defaultValue = "") {
+  const { register, handleSubmit, reset, setFocus } = useForm<TaskSchema>({
     resolver: zodResolver(taskSchema),
+    defaultValues: { title: defaultValue },
   });
-  
-  const { addTask } = useTasksContext()
-  
-  const onSubmit = ({title}: TaskSchema) => {
-    addTask(title)
 
-    reset();
-  };
+  useEffect(() => {
+    setFocus("title");
+  }, [setFocus]);
 
-  return { register, handleSubmit: handleSubmit(onSubmit) };
+  return { register, handleSubmit, reset };
 }
