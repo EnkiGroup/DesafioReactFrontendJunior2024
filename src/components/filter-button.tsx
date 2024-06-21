@@ -7,7 +7,6 @@ interface FilterButtonProps {
 
 export function FilterButton({ route, filterName }: FilterButtonProps) {
 
-
   const { pathname } = useLocation();
 
   const isChecked = pathname === route;
