@@ -59,6 +59,10 @@ export const TodoContextProvider = ({
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   }, []);
 
+  const clearTodos = useCallback(() => {
+    setTodos([]);
+  }, []);
+
   const fetchTodos = useCallback(async () => {
     try {
       const res = await api.get("/todos");
@@ -91,6 +95,7 @@ export const TodoContextProvider = ({
         completeTodos,
         deleteTodo,
         updateTodo,
+        clearTodos,
       }}
     >
       {children}
