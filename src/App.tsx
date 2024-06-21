@@ -1,19 +1,28 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import { Home } from "./pages/home";
+import { Home } from "./routes/home";
+import { AllTasks } from "./routes/all-tasks";
+import { ActiveTasks } from "./routes/active-tasks";
+import { CompletedTasks } from "./routes/completed-tasks";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />
-  },
-  {
-    path: "active",
-    element: <Home />
-  },
-  {
-    path: "completed",
-    element: <Home />
+    element: <Home />,
+    children: [
+      {
+        path: "/",
+        element: <AllTasks />
+      },
+      {
+        path: "/active",
+        element: <ActiveTasks />
+      },
+      {
+        path: "/completed",
+        element: <CompletedTasks />
+      }
+    ]
   },
 ])
 
