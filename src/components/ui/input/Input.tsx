@@ -1,11 +1,24 @@
-const Input = () => {
-  return (
-    <input
-      className="w-full shadow-md border-none focus:shadow-input-shadow-focus outline-none  p-default placeholder:italic placeholder:text-2xl placeholder:font-light"
-      type="text"
-      placeholder="What needs to be done?"
-    />
-  );
+import { InputHTMLAttributes, forwardRef } from "react";
+import { twMerge } from "tailwind-merge";
+
+type InputProps = InputHTMLAttributes<HTMLInputElement> & {
+  input_cn?: string;
+  box_cn?: string;
 };
+
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ type = "text", input_cn, box_cn, ...rest }, ref) => {
+    return (
+      <section className={twMerge("flex flex-col gap-2 w-full", box_cn)}>
+        <input
+          className={twMerge("w-full outline-none", input_cn)}
+          type={type}
+          ref={ref}
+          {...rest}
+        />
+      </section>
+    );
+  }
+);
 
 export default Input;
