@@ -9,7 +9,7 @@ export function Home() {
         <h1 className="text-7xl text-red-700">todos</h1>
       </header>
       <main className="h-full flex justify-center ">
-        <section className="w-[550px] h-min bg-white shadow-xl">
+        <section className="w-[550px] h-min bg-white custom-shadow">
           <TasksInput />
           <TasksList />
           <TasksFooter />
