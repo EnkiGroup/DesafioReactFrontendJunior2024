@@ -3,7 +3,7 @@ import { useTasksContext } from "../contexts/tasks-context"
 
 export function TasksFooter() {
 
-  const { tasksLeft } = useTasksContext()
+  const { tasksLeft, clearCompletedTasks } = useTasksContext()
 
   return (
     <>
@@ -30,12 +30,16 @@ export function TasksFooter() {
               Completed
             </Link>
           </div>
-          <a className="hover:underline cursor-pointer">
+          <button
+            onClick={clearCompletedTasks}
+            className="hover:underline cursor-pointer"
+          >
             Clear completed
-          </a>
+          </button>
         </header>
       )}
     </>
   )
 }
 
+//TODO: ALTERAR A LOGICA, PRA APARECER COM 0 ITENS, POREM ESCONDER QUANDO O "ARRAY" TIVER VAZIO

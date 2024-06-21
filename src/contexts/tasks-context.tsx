@@ -9,6 +9,7 @@ interface TasksContextType {
   removeTask: (id: string) => void;
   toggleTaskCheck: (id: string) => void;
   completeAllTasks: () => void;
+  clearCompletedTasks: () => void;
 }
 
 export const TasksContext = createContext<TasksContextType | undefined>(undefined);
@@ -59,6 +60,12 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     setTasks(newTasks)
   }
 
+  function clearCompletedTasks() {
+    const newTasks = tasks.filter(task => task.isDone === false)
+
+    setTasks(newTasks)
+  }
+
   useEffect(() => {
     setTasksLeft(tasks.filter(task => task.isDone === false).length)
   }, [tasks])
@@ -71,7 +78,8 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
       updateTaskTitle,
       removeTask,
       toggleTaskCheck,
-      completeAllTasks
+      completeAllTasks,
+      clearCompletedTasks
     }}>
       {children}
     </TasksContext.Provider>
