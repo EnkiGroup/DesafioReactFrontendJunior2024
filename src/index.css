@@ -8,6 +8,10 @@
   outline: 0;
 }
 
+strong {
+  font-weight: 400;
+}
+
 /* Gerar o efeito de camadas no rodapé da lista de tarefas */
 .sheets-effect {
   position: relative;
