@@ -12,7 +12,7 @@ interface TaskItemProps {
 export function TaskItem({ task }: TaskItemProps) {
   const [isEditable, setIsEditable] = useState<boolean>(false)
 
-  function handleBackToReadable() {
+  function handleExitEditableMode() {
     setIsEditable(false)
   }
 
@@ -23,7 +23,7 @@ export function TaskItem({ task }: TaskItemProps) {
     >
       {isEditable
         ?
-        (<EditableTaskItem task={task} onEditCompletion={handleBackToReadable} />)
+        (<EditableTaskItem task={task} exitEditableMode={handleExitEditableMode} />)
         :
         (<ReadableTaskItem task={task} />)
       }

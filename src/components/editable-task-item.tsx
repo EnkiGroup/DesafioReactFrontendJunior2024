@@ -6,10 +6,10 @@ import { Input } from "./input"
 
 interface EditableTaskItemProps {
   task: Task
-  onEditCompletion: () => void
+  exitEditableMode: () => void
 }
 
-export function EditableTaskItem({ task: { id, title }, onEditCompletion }: EditableTaskItemProps) {
+export function EditableTaskItem({ task: { id, title }, exitEditableMode }: EditableTaskItemProps) {
 
   const { updateTaskTitle } = useTasksContext()
 
@@ -18,7 +18,7 @@ export function EditableTaskItem({ task: { id, title }, onEditCompletion }: Edit
   function onSubmit({ title }: { title: string }) {
     updateTaskTitle({ id, title })
 
-    onEditCompletion()
+    exitEditableMode()
   }
 
   return (
@@ -27,6 +27,7 @@ export function EditableTaskItem({ task: { id, title }, onEditCompletion }: Edit
         placeholder="What needs to be done?"
         {...register("title")}
         error={errors.title}
+        onBlur={exitEditableMode}
       />
     </form>
   )
