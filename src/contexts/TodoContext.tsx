@@ -25,6 +25,7 @@ export const TodoContextProvider = ({
 }) => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [pending, setPending] = useState<number>(0);
+  const [allTodosCompleted, setAllTodosCompleted] = useState<boolean>(false);
 
   const createTodo = useCallback((title: string) => {
     setTodos((prevTodos) => [
@@ -32,6 +33,13 @@ export const TodoContextProvider = ({
       { id: uuid(), title, isDone: false },
     ]);
   }, []);
+
+  const completeAllTodos = useCallback(() => {
+    const allCompleted = todos.every((todo) => todo.isDone);
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => ({ ...todo, isDone: !allCompleted }))
+    );
+  }, [todos]);
 
   const fetchTodos = useCallback(async () => {
     try {
@@ -46,6 +54,12 @@ export const TodoContextProvider = ({
     fetchTodos();
   }, [fetchTodos]);
 
+  useEffect(() => {
+    const pendingTodoCount = todos.filter((todo: ITodo) => !todo.isDone).length;
+    setPending(pendingTodoCount);
+    setAllTodosCompleted(pendingTodoCount === 0 && todos.length > 0);
+  }, [todos]);
+
   return (
     <TodoContext.Provider
       value={{
@@ -53,6 +67,9 @@ export const TodoContextProvider = ({
         setTodos,
         pending,
         createTodo,
+        allTodosCompleted,
+        setAllTodosCompleted,
+        completeAllTodos,
       }}
     >
       {children}
