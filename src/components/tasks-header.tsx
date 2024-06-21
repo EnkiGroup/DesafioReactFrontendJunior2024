@@ -4,7 +4,7 @@ import { useTasksContext } from "../contexts/tasks-context"
 
 export function TasksInput() {
 
-  const { addTask, completeAllTasks } = useTasksContext()
+  const { addTask, toggleAllTasksCheck } = useTasksContext()
   
   const { register, handleSubmit, reset, errors } = useInputValidation()
 
@@ -19,7 +19,7 @@ export function TasksInput() {
       <button
         type="button"
         className="w-14 flex items-center justify-center pr-1"
-        onClick={completeAllTasks}
+        onClick={toggleAllTasksCheck}
       >
         <ChevronDown color="#777" size={28} />
       </button>

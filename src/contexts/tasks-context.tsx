@@ -8,7 +8,7 @@ interface TasksContextType {
   updateTaskTitle: (newTask: { id: string, title: string }) => void;
   removeTask: (id: string) => void;
   toggleTaskCheck: (id: string) => void;
-  completeAllTasks: () => void;
+  toggleAllTasksCheck: () => void;
   clearCompletedTasks: () => void;
   isTasksListEmpty: boolean
 }
@@ -53,9 +53,9 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     setTasks(newTasks)
   }
 
-  function completeAllTasks() {
+  function toggleAllTasksCheck() {
     const newTasks = tasks.map(task => {
-      return { ...task, isDone: true }
+      return tasksLeft != 0 ? { ...task, isDone: true } : { ...task, isDone: false }
     })
 
     setTasks(newTasks)
@@ -79,7 +79,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
       updateTaskTitle,
       removeTask,
       toggleTaskCheck,
-      completeAllTasks,
+      toggleAllTasksCheck,
       clearCompletedTasks,
       isTasksListEmpty: tasks.length === 0,
     }}>
