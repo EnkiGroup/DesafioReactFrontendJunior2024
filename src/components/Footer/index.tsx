@@ -1,21 +1,26 @@
 /** @jsxImportSource @emotion/react */
-import { useContext, useMemo } from "react";
-import { Task } from "../../types";
+import { useCallback, useContext, useMemo } from "react";
 import {clearCompletedFooter, countTasksFooter, filtersFooter,listFootter} from "./styles";
 import { TaskContext } from "../../TaskContext";
+import { useLocation } from "react-router-dom";
+import classnames from "classnames";
 
 export default function Footer (){
-    const {tasks} = useContext(TaskContext);
-    const activeTodos = useMemo(() => tasks.filter((task:Task) => !task.isDone), [tasks]);
-    return (
-        <footer css={listFootter}>
-        <span css={countTasksFooter}>{`${activeTodos.length} ${activeTodos.length>1?"itens ativos!":"item ativo!"}`} </span>
-        <ul css={filtersFooter}>
-          <li>Todos</li>
-          <li>Ativos</li>
-          <li>Realizados</li>
-        </ul>
-        <button css={clearCompletedFooter}>Remover realizados</button>
-      </footer>
-    )
+  const { pathname: route } = useLocation();
+  const {tasks,setTasks} = useContext(TaskContext);
+  const activeTasks = useMemo(() => tasks.filter((task) => !task.isDone), [tasks]);
+  const removeCompleted = useCallback(()=>{
+    setTasks(activeTasks)
+  },[activeTasks,setTasks])
+  return (
+      <footer css={listFootter}>
+      <span css={countTasksFooter}>{`${activeTasks.length} ${activeTasks.length>1?"itens ativos!":"item ativo!"}`} </span>
+      <ul css={filtersFooter}>
+        <li> <a className={classnames({ selected: route === "/" })} href="#/">Todos</a> </li>
+        <li> <a className={classnames({ selected: route === "/ativos" })} href="#/ativos">Ativos</a></li>
+        <li> <a className={classnames({ selected: route === "/realizados" })} href="#/realizados">Realizados</a></li>
+      </ul>
+      <button css={clearCompletedFooter} onClick={removeCompleted}>Remover realizados</button>
+    </footer>
+  )
 }

@@ -28,19 +28,20 @@ export const filtersFooter = css({
     left: '0',
     "& li":{
         display:'inline',
-
+    },
+    "& li a":{
         color: 'inherit',
         margin: '3px',
         padding: '3px 7px',
         textDecoration: 'none',
-        fontFamily:'"Helvetica Neue", Helvetica, Arial, sans-serif',
         border: '1px solid transparent',
-        borderRadius: '3px'
+        borderRadius: '3px',
+        fontFamily:'"Helvetica Neue", Helvetica, Arial, sans-serif',
     },
-    "& li:hover":{
+    "& li a:hover ,& li a.selected":{
         borderColor:"#DB7676"
     },
-    "& li:focus":{
+    "& li a:focus":{
         boxShadow: '0 0 2px 2px #CF7D7D',
         outline: '0'
     }

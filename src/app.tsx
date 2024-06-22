@@ -9,7 +9,7 @@ import Header from "./components/Header";
 import { TaskContext } from "./TaskContext";
 
 export default function App() {
-  const {setTasks} = useContext(TaskContext);
+  const {tasks,setTasks} = useContext(TaskContext);
 
   const fetchData = useCallback(async()=>{
     fetch(API_URL)
@@ -33,8 +33,13 @@ export default function App() {
       }}>
       <section css={todoapp}>
         <Header />
-        <Tasks/>
-        <Footer/>
+        {
+          tasks.length>0 &&
+          <>
+            <Tasks/>
+            <Footer/>
+          </>
+        }
       </section>
     </div>
   );
