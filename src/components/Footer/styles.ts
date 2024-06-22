@@ -7,14 +7,14 @@ export const listFootter = css({
     fontSize: '15px',
     borderTop: '1px solid #e6e6e6',
     "&::before":{
-    content: '\'\'',
-    position: 'absolute',
-    right: '0',
-    bottom: '0',
-    left: '0',
-    height: '50px',
-    overflow: 'hidden',
-    boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2),0 8px 0 -3px #f6f6f6,0 9px 1px -3px rgba(0, 0, 0, 0.2),0 16px 0 -6px #f6f6f6,0 17px 2px -6px rgba(0, 0, 0, 0.2)'
+        content: '\'\'',
+        position: 'absolute',
+        right: '0',
+        bottom: '0',
+        left: '0',
+        height: '50px',
+        overflow: 'hidden',
+        boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2),0 8px 0 -3px #f6f6f6,0 9px 1px -3px rgba(0, 0, 0, 0.2),0 16px 0 -6px #f6f6f6,0 17px 2px -6px rgba(0, 0, 0, 0.2)'
     }
 
 })
@@ -39,10 +39,10 @@ export const filtersFooter = css({
         fontFamily:'"Helvetica Neue", Helvetica, Arial, sans-serif',
     },
     "& li a:hover ,& li a.selected":{
-        borderColor:"#DB7676"
+        borderColor:"var(--selected-red)"
     },
     "& li a:focus":{
-        boxShadow: '0 0 2px 2px #CF7D7D',
+        boxShadow: '0 0 2px 2px var(--focus-red)',
         outline: '0'
     }
 })

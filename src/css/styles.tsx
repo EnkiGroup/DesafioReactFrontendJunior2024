@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 
 
 export const todoapp  = css({
-    background: "#fff",
+    background: "var(--main-white)",
     margin: "130px 0 40px 0",
     position: "relative",
     boxShadow:" 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1)",
@@ -13,7 +13,7 @@ export const todoapp  = css({
         fontSize: "80px",
         fontWeight: 200,
         textAlign: "center",
-        color: "#b83f45",
+        color: "var(--title-red)",
         textRendering:"optimizeLegibility",
         fontFamily:"inherit"
     }

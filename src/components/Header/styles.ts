@@ -22,7 +22,7 @@ export const inputapp = css({
     boxSizing:"border-box",
 
     "&:focus":{
-        boxShadow: '0 0 2px 2px #CF7D7D',
+        boxShadow: '0 0 2px 2px var(--focus-red)',
         outline: '0'
     }
 })
@@ -40,7 +40,7 @@ export const toogle = (active:boolean) => css({
     position:"relative",
     zIndex:1,
     "&:focus , &:focus + label ":{
-        boxShadow: '0 0 2px 2px #CF7D7D',
+        boxShadow: '0 0 2px 2px var(--focus-red)',
         outline: '0'
     },
     "& + label":{
@@ -53,7 +53,7 @@ export const toogle = (active:boolean) => css({
         position: "absolute",
         top: 0,
         left: 5,
-        color: active?"black":"#949494",
+        color: active?"var(--main-gray)":"var(--light-gray)",
     },
     "& + label::before":{
         content: '"❯"',
