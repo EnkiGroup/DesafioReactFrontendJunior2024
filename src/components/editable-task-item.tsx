@@ -22,9 +22,8 @@ export function EditableTaskItem({ task: { id, title }, exitEditableMode }: Edit
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex pl-14">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex pl-12">
       <Input
-        placeholder="What needs to be done?"
         {...register("title")}
         error={errors.title}
         onBlur={exitEditableMode}
