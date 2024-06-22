@@ -9,8 +9,8 @@ export default function Inputbar() {
   const handleAddTodo = () => {
     addTodo({
       id: createRandomString(5),
-      content: currentValue,
-      isSelected: false
+      isDone: false,
+      title: currentValue,
     })
     setCurrentValue("");
   }
