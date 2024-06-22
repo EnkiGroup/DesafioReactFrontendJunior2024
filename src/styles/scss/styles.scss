@@ -220,6 +220,7 @@ ul#list_container{
 }
 
 #settings_container{
+    align-items: center;
     display: flex;
     justify-content: space-between;
     font-size: 1.5rem;
@@ -241,6 +242,7 @@ ul#list_container{
         background: transparent;
         border: 0;
         cursor: pointer;
+        font-size: 1.5rem;
 
         &:hover{
             text-decoration: underline;
