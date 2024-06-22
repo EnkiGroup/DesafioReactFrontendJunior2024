@@ -14,6 +14,7 @@ const ChevronDownSolid = ({ handleChange }: ChevronDownSolidProps) => {
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
+      className="chevronDownSolid"
       onClick={handleChange}
     >
       <path d="M6 9l6 6 6-6" />
