@@ -58,7 +58,7 @@ export default function Header(){
 
     return (
         <header>
-            <h1>todos teste</h1>
+            <h1>todos</h1>
             <div css={inputbox}>
                 <input placeholder="O que precisa ser feito?" css={inputapp} onKeyDown={handleKeyDown}/>
                 <div css={tooglebox}>
