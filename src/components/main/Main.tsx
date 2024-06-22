@@ -7,13 +7,17 @@ import Item from "../ui/item/Item";
 
 const Main = () => {
   const { pathname: location } = useLocation();
-  const { todos, completeAllTodos, allTodosCompleted, setAllTodosCompleted } =
-    useTodoContext();
+  const { todos, completeAllTodos, allTodosCompleted } = useTodoContext();
   const [renderizedTodo, setRenderizedTodo] = useState<ITodo[]>([]);
+  const [onBlur, setOnBlur] = useState<boolean>(false);
 
   const handleOnBlur = useCallback(() => {
-    setAllTodosCompleted(false);
-  }, [setAllTodosCompleted]);
+    setOnBlur(false);
+  }, []);
+
+  const handleOnFocus = useCallback(() => {
+    setOnBlur(true);
+  }, []);
 
   useEffect(() => {
     const filteredTodos = todos.filter((todo) => {
@@ -33,9 +37,10 @@ const Main = () => {
         >
           <button
             onBlur={handleOnBlur}
+            onFocus={handleOnFocus}
             className={`w-full h-full flex justify-center items-center ${
-              allTodosCompleted ? "shadow-focus" : "text-gray-400"
-            }`}
+              allTodosCompleted ? "" : "text-gray-400"
+            } ${onBlur ? "shadow-focus" : ""}`}
           >
             <ChevronDown size={28} />
           </button>
