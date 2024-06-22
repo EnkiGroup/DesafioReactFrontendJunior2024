@@ -1,9 +1,13 @@
-import React from "react";
+import Main from './components/Main'
+import { StyleGlobal } from './stylesGlobal/styleGlobal'
 
 export default function App() {
   return (
-    <section>
-      <h1>Todos</h1>
-    </section>
-  );
+    <>
+      <StyleGlobal />
+      <div className="container">
+        <Main />
+      </div>
+    </>
+  )
 }
