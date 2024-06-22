@@ -42,6 +42,35 @@ export const listTasksItem = (isDone:boolean) => css({
         :'url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23949494%22%20stroke-width%3D%223%22/%3E%3C/svg%3E")',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center left'
+    },
+    "&:hover button":{
+        display:"block"
+    },
+    "& button":{
+        display: 'none',
+        position: 'absolute',
+        top: '0',
+        right: '10px',
+        bottom: '0',
+        width: '40px',
+        height: '40px',
+        margin: 'auto 0',
+        fontSize: '30px',
+        color: 'var(--light-gray)',
+        transition: 'color 0.2s ease-out',
+        background: 'none',
+        padding: '0',
+        border: '0',
+        cursor:"pointer"
+    },
+    "& button:hover":{
+        color:'var(--light-red)'
+    },
+    "& button::after":{
+        content: '\'×\'',
+        display: 'block',
+        height: '100%',
+        lineHeight: '1.1'
     }
 
 

@@ -14,11 +14,14 @@ function Item ({task}:Props) {
     const toggleItem = useCallback((checked:boolean) => {
         setTasks(tasks.map(item=> item.id === task.id? {...task,isDone:checked}: item))
     }, [tasks,setTasks,task]);
-
+    const removeItem = useCallback(() => {
+        setTasks(tasks.filter(item=> item.id !== task.id))
+    }, [tasks,setTasks,task]);
     return (
         <li key={task.id} css={listTasksItem(task.isDone)}>
             <input type="checkbox" onChange={e=>toggleItem(e.target.checked)}/>
             <label>{task.title}</label>
+            <button onClick={removeItem}></button>
         </li>
     )
 }
