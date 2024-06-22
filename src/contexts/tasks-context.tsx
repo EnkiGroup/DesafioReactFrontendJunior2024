@@ -1,4 +1,8 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
+import { getInitialTasks } from '../services/get-initial-tasks';
+
 import { Task } from '../types';
 
 interface TasksContextType {
@@ -66,6 +70,20 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
 
     setTasks(newTasks)
   }
+
+  function setInitialTasks(data: Task[]) {
+    setTasks(data)
+  }
+
+  useQuery({
+    queryKey: ["initialTasks"],
+    queryFn: () => getInitialTasks(setInitialTasks),
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
+  })
 
   useEffect(() => {
     setTasksLeft(tasks.filter(task => task.isDone === false).length)
