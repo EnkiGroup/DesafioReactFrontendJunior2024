@@ -12,7 +12,8 @@ export const TodoContext = createContext({
     setTodos: (todos: Todo[]) => { },
     addTodo: (todo: Todo) => { },
     toggleTodo: (id: string) => { },
-    updateTodo: (todo: Todo) => { }
+    updateTodo: (todo: Todo) => { },
+    toggleAllTodos: () => { },
     });
 
 export const TodoProvider = ({ children }: any) => {
@@ -49,6 +50,20 @@ export const TodoProvider = ({ children }: any) => {
        );
      };
      
+  const toggleAllTodos = () => {
+  // Verifica se todos os todos estão marcados como feitos
+  const areAllMarkedDone = todos.every(todo => todo.isDone);
+
+  // Atualiza todos os todos para o novo estado baseado na verificação anterior
+  setTodos(
+    todos.map(todo => ({
+      ...todo,
+      isDone: !areAllMarkedDone,
+    }))
+  );
+};
+
+  //
   
   //Atualiza um todo no array de todos
   const updateTodo = (todo: Todo) => {
@@ -63,7 +78,7 @@ export const TodoProvider = ({ children }: any) => {
   }
 
     return (
-        <TodoContext.Provider value={{ todos, setTodos, addTodo, updateTodo, toggleTodo}}>
+        <TodoContext.Provider value={{ todos, setTodos, addTodo, updateTodo, toggleTodo, toggleAllTodos}}>
             {children}
         </TodoContext.Provider>
     )
