@@ -36,7 +36,7 @@ const sanitize = (string:string) => {
 export default function Header(){
     const {tasks,setTasks} = useContext(TaskContext);
     const addItem = useCallback((title:string) => {
-        setTasks(tasks.concat({id:nanoid(),title,isDone:false}))
+        setTasks([{id:nanoid(),title,isDone:false}].concat(tasks))
       },[tasks,setTasks]);
     const toggleAll = useCallback((e)=>{
         setTasks(tasks.map((task:Task)=>(task.isDone !== e.target.checked ? { ...task, isDone: e.target.checked } : task)))
