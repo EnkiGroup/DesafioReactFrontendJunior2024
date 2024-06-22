@@ -1,0 +1,73 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    padding: 30px;
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+.input-toggle-container {
+    height: 65px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 16px 16px 16px 60px; /* Espaçamento interno */
+    background-color: white; /* Cor de fundo do container */
+}
+
+.input-field {
+    flex: 1;
+    height: 100%; /* Ocupa toda a altura do container */
+    font-size: 18px;
+    font-style: italic;
+    border: none; /* Remove a borda do input */
+    outline: none; /* Remove a borda de foco */
+}
+
+.toggle {
+    height: 65px;
+    width: 40px;
+    border: none;
+    color: black;
+    cursor: pointer;
+}
+
+.addbutton {
+    height: 45px;
+    width: 60px;
+    margin-left: 5px;
+    border: none;
+    background-color: #28a745; /* Cor de fundo do botão Adicionar */
+    color: white;
+    cursor: pointer;
+    border-radius: 4px; /* Borda arredondada */
+}
+
+.lista {
+    width: 100%;
+    margin-top: 10px;
+    padding: 0;
+    list-style: none;
+}
+
+.item {
+    background-color: #e8e3e3;
+    margin: 5px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px; /* Borda arredondada */
+}
+
+.excluir {
+    height: 25px;
+    width: 30px;
+    border: none;
+    background-color: #dc3545; /* Cor de fundo do botão Excluir */
+    color: white;
+    cursor: pointer;
+    border-radius: 4px; /* Borda arredondada */
+}
