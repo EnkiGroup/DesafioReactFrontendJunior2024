@@ -1,3 +1,5 @@
+import Filter from "../../components/Filter";
+import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import InputForm from "../../components/Input";
 import TodoList from "../../components/TodoList";
@@ -12,6 +14,8 @@ const Home = () => {
     valueInput,
     enableAllTasks,
     tasksEnable,
+    remainingTasks,
+    clearEnableTasks,
   } = useHomePage();
 
   return (
@@ -28,7 +32,12 @@ const Home = () => {
         <div>
           <TodoList ItemList={tasks} />
         </div>
+        <Filter
+          itensList={`${remainingTasks?.length} items left!`}
+          handleCompletedClick={clearEnableTasks}
+        />
       </FormContainer>
+      <Footer />
     </ContainerHomePage>
   );
 };

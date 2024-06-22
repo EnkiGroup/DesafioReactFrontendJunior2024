@@ -23,4 +23,5 @@ export type GlobalContextProps = {
     value: string,
     setIsEditing: React.Dispatch<React.SetStateAction<EditingTaskProps>>,
   ) => void;
+  clearEnableTasks: () => void;
 };

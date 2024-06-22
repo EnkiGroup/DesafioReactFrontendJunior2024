@@ -1,5 +1,7 @@
-import { createContext, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 import { EditingTaskProps, GlobalContextProps, TaskProps } from "../types";
+import { useLocation } from "react-router-dom";
+
 import { v4 as uuidv4 } from "uuid";
 
 export const GlobalContext = createContext({} as GlobalContextProps);
@@ -7,6 +9,18 @@ export const GlobalContext = createContext({} as GlobalContextProps);
 const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [valueInput, setValueInput] = useState("");
+  const { pathname } = useLocation();
+
+  const renderContent = useMemo(() => {
+    switch (pathname) {
+      case "/active":
+        return tasks?.filter(({ isDone }) => !isDone);
+      case "/completed":
+        return tasks?.filter(({ isDone }) => isDone);
+      default:
+        return tasks;
+    }
+  }, [pathname, tasks]);
 
   const incrementTasks = (value: string) => {
     if (!value) return;
@@ -57,10 +71,16 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
+  const clearEnableTasks = () => {
+    if (tasks.length === 0) return;
+    const tasksEnable = tasks.filter(({ isDone }) => !isDone);
+    setTasks(tasksEnable);
+  };
+
   return (
     <GlobalContext.Provider
       value={{
-        tasks,
+        tasks: renderContent,
         setTasks,
         valueInput,
         setValueInput,
@@ -69,6 +89,7 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
         finishTask,
         enableAllTasks,
         editingTask,
+        clearEnableTasks,
       }}
     >
       {children}
