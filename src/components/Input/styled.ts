@@ -25,7 +25,7 @@ export const InputForm = styled.input<InputContainerProps>`
   }
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.form`
   position: relative;
   svg {
     position: absolute;

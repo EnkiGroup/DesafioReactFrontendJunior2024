@@ -1,30 +1,36 @@
+import React from "react";
 import ChevronDownSolid from "../../assets/icons/ChevronDownSolid";
 import { InputForm, InputContainer } from "./styled";
 
 type InputProps = {
-  id: string;
+  id?: string;
   placeholder: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
   handleClickIcon?: () => void;
   enabledIcon?: boolean;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  handleSubmit: React.FormEventHandler<HTMLFormElement>;
 };
 
 const Input = ({
   id,
-  setValue,
   placeholder,
+  handleSubmit,
   handleClickIcon,
+  value,
+  setValue,
   enabledIcon = true,
   ...props
 }: InputProps) => {
   return (
-    <InputContainer>
+    <InputContainer onSubmit={handleSubmit}>
       {enabledIcon && <ChevronDownSolid handleChange={handleClickIcon} />}
       <InputForm
         id={id}
+        value={value}
         placeholder={placeholder}
-        onChange={({ target }) => setValue(target.value)}
         enabledIcon={enabledIcon}
+        onChange={({ target }) => setValue(target.value)}
         {...props}
       />
     </InputContainer>
