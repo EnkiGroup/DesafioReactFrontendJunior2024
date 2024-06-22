@@ -39,6 +39,3 @@ export function Home() {
     </div>
   )
 }
-
-//TODO: CRIAR OS CIRCULAS ATRÁS DA SECTION
-//TODO: FAZER ANIMAÇÃO COM O SHEETS EFFECT
