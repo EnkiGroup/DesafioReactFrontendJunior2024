@@ -20,8 +20,7 @@ export default function TodoItem({ title, isDone, onToggle }: TodoItemProps) {
   const handleChangeContent = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const newTodo = {
-      id:
-        todos.find((todo) => todo.title === title)?.id || createRandomString(5),
+      id: todos.find((todo) => todo.title === title)?.id || createRandomString(5),
       title: value,
       isDone: isDone,
     };
