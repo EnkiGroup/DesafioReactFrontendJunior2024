@@ -7,6 +7,7 @@ export const theme = {
     TaskCompleted: "#69C5B5",
     gray_1: "#e2e2e2",
     gray_2: "#E5E5E5",
+    gray_3: "#555555",
   },
   fontSize: {
     large: "5rem",
