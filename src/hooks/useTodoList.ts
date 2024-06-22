@@ -1,72 +1,28 @@
-import { ChangeEvent, useState, KeyboardEvent } from "react";
-import { Task } from "../types/types";
-import { nanoid } from "nanoid";
+import { ChangeEvent, KeyboardEvent, useState } from "react";
+import { useTodoContext } from "../context/todoContext";
 
-export default function useTodoList(initialTodos: Task[]){
+export default function useTodoList(){
 
-    const [newTask, setNewTask] = useState<Task>({
-        id: "",
-        title: "",
-        isDone: false
-    })
+    const { addTask } = useTodoContext();
 
-    const [todoList, setTodoList] = useState<Task[]>(initialTodos || [])
+    const [newTask, setNewTask] = useState<string>("")
 
     const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Enter' && newTask.title.trim() !== "") {
-            addTask()
-            setNewTask({ ...newTask, title: "" });
+        if (e.key === 'Enter' && newTask.trim() !== "") {
+            addTask(newTask.trim());
+            setNewTask("");  
         }
     }
     
-    const addTask = () => {
-        setTodoList(prevTodoList => [
-            ...prevTodoList,
-            { ...newTask, id: nanoid(5) }
-        ]);
-    };
-    
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewTask({ ...newTask, title: e.target.value });
-    }
-
-    const removeTask = (id: string) => {
-        setTodoList(prevTodoList => prevTodoList.filter(task => task.id !== id));
-    }
-
-    const handleTaskStatus = (id: string) => {
-        setTodoList(prevTodoList => 
-            prevTodoList.map(task => 
-                task.id === id ? { ...task, isDone: !task.isDone } : task
-            )
-        );
-    };
-
-    const handleClearAllCompletedTasks = () => {
-        setTodoList(prevTodoList => prevTodoList.filter(todo => !todo.isDone));
-    }
-
-    const handleSetAllTasksCompleted = () => {
-        setTodoList(prevTodoList => {
-            const allAreDone = prevTodoList.every(todo => todo.isDone);
-            return prevTodoList.map(todo => ({
-                ...todo,
-                isDone: !allAreDone
-            }));
-        });
+        setNewTask(e.target.value);
     }
 
     return{
         newTask,
         setNewTask,
-        todoList, 
-        setTodoList,
         handleKeyDown,
-        handleChange,
-        removeTask,
-        handleTaskStatus,
-        handleClearAllCompletedTasks,
-        handleSetAllTasksCompleted
+        handleChange
     }
 
 }

@@ -1,13 +1,8 @@
-import { ChangeEvent, KeyboardEvent } from "react";
-import { Task } from "../../types/types";
+import useTodoList from "../../hooks/useTodoList";
 
-type TaskInputProps = {
-    newTask: Task;
-    handleKeyDown: (e: KeyboardEvent) => void;
-    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-};
+export default function TaskInput() {
 
-export default function TaskInput({ newTask, handleKeyDown, handleChange }: TaskInputProps) {
+    const { newTask, handleKeyDown, handleChange } = useTodoList()
 
     return (
         <div id="input_task_container">
@@ -15,11 +10,13 @@ export default function TaskInput({ newTask, handleKeyDown, handleChange }: Task
             type="text"
             name="input_task"
             id="input_task"
-            value={newTask.title}
+            value={newTask}
             placeholder="Insira uma nova tarefa"
             onChange={handleChange}
             onKeyDown={handleKeyDown}
+            aria-label="Insira uma nova tarefa"
         />
+        
         </div>
     );
 }
