@@ -22,7 +22,7 @@ export function FilterButton({ route, filterName }: FilterButtonProps) {
       />
       <label
         htmlFor={route}
-        className="px-2 border border-transparent hover:border-neutral-300 hover:shadow-md rounded-[3px] cursor-pointer peer-checked:border-neutral-300 peer-checked:shadow-md transition-all duration-500"
+        className="px-2 border border-transparent hover:border-red-200 hover:shadow-md rounded-[3px] cursor-pointer peer-checked:border-red-200 peer-checked:shadow-md transition-all duration-500"
       >
         {filterName}
       </label>
