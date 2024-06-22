@@ -3,11 +3,12 @@ import CheckIcon from "../../assets/icons/CheckIcon";
 
 type CheckboxProps = {
   checked: boolean;
+  handleClick?: () => void;
 };
 
-const Checkbox = ({ checked = false }: CheckboxProps) => {
+const Checkbox = ({ checked = false, handleClick }: CheckboxProps) => {
   return (
-    <CheckboxContainer checked={checked}>
+    <CheckboxContainer checked={checked} onClick={handleClick}>
       {checked && <CheckIcon />}
     </CheckboxContainer>
   );
