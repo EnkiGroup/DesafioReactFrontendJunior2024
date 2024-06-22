@@ -2,10 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app";
 import reportWebVitals from "./reportWebVitals";
+import { TaskProvider } from "./TaskContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TaskProvider>
+      <App />
+    </TaskProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
