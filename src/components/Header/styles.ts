@@ -22,7 +22,7 @@ export const inputapp = css({
     boxSizing:"border-box",
 
     "&:focus":{
-        boxShadow: '0 0 2px 2px var(--focus-red)',
+        boxShadow: '0 0 2px 2px var(--focus)',
         outline: '0'
     }
 })
@@ -40,7 +40,7 @@ export const toogle = (active:boolean) => css({
     position:"relative",
     zIndex:1,
     "&:focus , &:focus + label ":{
-        boxShadow: '0 0 2px 2px var(--focus-red)',
+        boxShadow: '0 0 2px 2px var(--focus)',
         outline: '0'
     },
     "& + label":{

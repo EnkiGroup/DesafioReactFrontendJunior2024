@@ -14,7 +14,7 @@ export const listFootter = css({
         left: '0',
         height: '50px',
         overflow: 'hidden',
-        boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2),0 8px 0 -3px #f6f6f6,0 9px 1px -3px rgba(0, 0, 0, 0.2),0 16px 0 -6px #f6f6f6,0 17px 2px -6px rgba(0, 0, 0, 0.2)'
+        boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2),0 8px 0 -3px var(--shadow-gray),0 9px 1px -3px rgba(0, 0, 0, 0.2),0 16px 0 -6px var(--shadow-gray),0 17px 2px -6px rgba(0, 0, 0, 0.2)'
     }
 
 })
@@ -42,7 +42,7 @@ export const filtersFooter = css({
         borderColor:"var(--selected-red)"
     },
     "& li a:focus":{
-        boxShadow: '0 0 2px 2px var(--focus-red)',
+        boxShadow: '0 0 2px 2px var(--focus)',
         outline: '0'
     }
 })
