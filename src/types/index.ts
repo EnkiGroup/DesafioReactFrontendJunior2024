@@ -1,3 +1,5 @@
+import { Toast } from "react-hot-toast";
+
 export type TaskProps = {
   id: string;
   title: string;
@@ -27,4 +29,7 @@ export type GlobalContextProps = {
   initialData: () => Promise<TaskProps[]>;
   isLoading: boolean;
   pathname: string;
+  savePreference: (t: Toast, value: string) => void;
+  userPrefersSaving: string | null;
+  setUserPrefersSaving: React.Dispatch<React.SetStateAction<string | null>>;
 };

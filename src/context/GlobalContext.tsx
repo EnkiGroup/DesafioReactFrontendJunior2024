@@ -1,6 +1,6 @@
 import { createContext, useMemo, useState } from "react";
 import { EditingTaskProps, GlobalContextProps, TaskProps } from "../types";
-import toast from "react-hot-toast";
+import toast, { Toast } from "react-hot-toast";
 import { useLocation } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
@@ -12,6 +12,9 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [valueInput, setValueInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [userPrefersSaving, setUserPrefersSaving] = useState<string | null>(
+    null,
+  );
   const { pathname } = useLocation();
 
   const renderContent = useMemo(() => {
@@ -32,22 +35,39 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
       title: value,
       isDone: false,
     };
-    setTasks((prevTasks) => [...prevTasks, taskObj]);
+    setTasks((prevTasks) => {
+      const newTasks = [...prevTasks, taskObj];
+      if (userPrefersSaving === "sim") {
+        localStorage.setItem("tasks", JSON.stringify(newTasks));
+      }
+      return newTasks;
+    });
+
     setValueInput("");
   };
 
   const removeTask = (task: TaskProps) => {
     if (!task) return;
-    setTasks((prevTasks) => prevTasks.filter(({ id }) => id !== task.id));
+    setTasks((prevTasks) => {
+      const newTasks = prevTasks.filter(({ id }) => id !== task.id);
+      if (userPrefersSaving === "sim") {
+        localStorage.setItem("tasks", JSON.stringify(newTasks));
+      }
+      return newTasks;
+    });
   };
 
   const finishTask = (task: TaskProps) => {
     if (!task) return;
-    setTasks((prevTasks) =>
-      prevTasks.map((item) =>
+    setTasks((prevTasks) => {
+      const newTasks = prevTasks.map((item) =>
         item.id === task.id ? { ...item, isDone: !item.isDone } : item,
-      ),
-    );
+      );
+      if (userPrefersSaving === "sim") {
+        localStorage.setItem("tasks", JSON.stringify(newTasks));
+      }
+      return newTasks;
+    });
   };
 
   const editingTask = (
@@ -59,26 +79,43 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     if (value?.length === 0 || value?.length === 1) {
       return toast.error("A tarefa deve conter no mínimo 2 caracteres.");
     }
-    setTasks((prevTasks) =>
-      prevTasks.map((item) =>
+    setTasks((prevTasks) => {
+      const newTasks = prevTasks.map((item) =>
         item.id === task.id ? { ...item, title: value } : item,
-      ),
-    );
+      );
+      if (userPrefersSaving === "sim") {
+        localStorage.setItem("tasks", JSON.stringify(newTasks));
+      }
+      return newTasks;
+    });
     setIsEditing((prev) => ({ ...prev, enabledEditing: false }));
   };
 
   const enableAllTasks = () => {
     if (tasks.length === 0) return;
     const tasksEnable = tasks.every((task) => task.isDone);
-    setTasks((prevTasks) =>
-      prevTasks.map((task) => ({ ...task, isDone: !tasksEnable })),
-    );
+    setTasks((prevTasks) => {
+      const newTasks = prevTasks.map((task) => ({
+        ...task,
+        isDone: !tasksEnable,
+      }));
+      if (userPrefersSaving === "sim") {
+        localStorage.setItem("tasks", JSON.stringify(newTasks));
+      }
+      return newTasks;
+    });
   };
 
   const clearEnableTasks = () => {
     if (tasks.length === 0) return;
-    const tasksEnable = tasks.filter(({ isDone }) => !isDone);
-    setTasks(tasksEnable);
+
+    setTasks((prevTasks) => {
+      const tasksEnable = prevTasks.filter(({ isDone }) => !isDone);
+      if (userPrefersSaving === "sim") {
+        localStorage.setItem("tasks", JSON.stringify(tasksEnable));
+      }
+      return tasksEnable;
+    });
   };
 
   const initialData = async (): Promise<TaskProps[]> => {
@@ -97,6 +134,12 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const savePreference = (t: Toast, value: string) => {
+    localStorage.setItem("userPrefersSaving", value);
+    setUserPrefersSaving(value);
+    toast.dismiss(t.id);
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -112,7 +155,10 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
         clearEnableTasks,
         initialData,
         isLoading,
-        pathname
+        pathname,
+        savePreference,
+        userPrefersSaving,
+        setUserPrefersSaving,
       }}
     >
       {children}
