@@ -12,6 +12,7 @@ export default function TodoItem({ todo, handleDeleteTodo, handleToggleActive, h
     const [isEditing, setIsEditing] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
+
     const handleDoubleClick = () => {
         setIsEditing(true);
         inputRef.current?.focus();

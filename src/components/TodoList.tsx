@@ -7,7 +7,8 @@ type TodoListProps = {
     handleDeleteTodo: (id: number) => void;
     handleToggleActive: (id: number) => void;
     handleClearCompleted: () => void;
-    handleUpdateDescription: (id: number, newDescription: string) => void
+    handleUpdateDescription: (id: number, newDescription: string) => void;
+
 }
 
 export default function TodoList({ todos, handleDeleteTodo, handleToggleActive, handleClearCompleted, handleUpdateDescription }: TodoListProps) {
@@ -38,13 +39,17 @@ export default function TodoList({ todos, handleDeleteTodo, handleToggleActive, 
                 ))}
             </ul>
 
-            <div className="px-4 flex justify-between items-center w-full bg-white border h-7 text-xs">
-                <p>{activeTodosCount} Items left</p>
-                <button onClick={() => setFilter("All")}>All</button>
-                <button onClick={() => setFilter("Active")}>Active</button>
-                <button onClick={() => setFilter("Completed")}>Completed</button>
-                <button onClick={() => handleClearCompleted()}>Clear Completed</button>
-            </div>
+
+            {todos.length !== 0 &&
+                <div className="px-4 flex justify-between items-center w-full bg-white border h-7 text-xs">
+                    <p>{activeTodosCount} Items left</p>
+                    <button onClick={() => setFilter("All")}>All</button>
+                    <button onClick={() => setFilter("Active")}>Active</button>
+                    <button onClick={() => setFilter("Completed")}>Completed</button>
+                    <button onClick={() => handleClearCompleted()}>Clear Completed</button>
+                </div>
+            }
+
         </div>
 
     )

@@ -2,9 +2,10 @@ import { FormEvent, useRef, useState } from "react";
 
 type InputProps = {
     handleAddTodo: (description: string) => void;
+    handleSetAllCompleted: () => void
 }
 
-export default function Input({handleAddTodo}: InputProps) {
+export default function Input({ handleAddTodo, handleSetAllCompleted }: InputProps) {
     const [isFocused, setIsFocused] = useState(false);
     const description = useRef<HTMLInputElement>(null);
 
@@ -38,7 +39,11 @@ export default function Input({handleAddTodo}: InputProps) {
             className={`flex bg-white h-11 w-full shadow-md ${isFocused ? 'ring-1 ring-red-700 ring-opacity-50 z-10 relative' : ''}`}
             onKeyDown={handleKeyDown}
         >
-            <div id="arrow-down" className="flex justify-center items-center h-full w-11">
+            <div 
+                id="arrow-down" 
+                className="flex justify-center items-center h-full w-11"
+                onClick={() => handleSetAllCompleted()}
+                >
                 <div className=" border-zinc-500 border-b-2 border-r-2 h-2 w-2 rotate-45 transform"></div>
             </div>
 

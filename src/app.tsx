@@ -27,10 +27,7 @@ export default function App() {
     setTodos(prevTodos => prevTodos.filter((todo) => todo.isCompleted === false));
   }
 
-
-
   function handleToggleActive(id: number) {
-    console.log(id)
     setTodos(prevTodos =>
       prevTodos.map((todo) =>
         todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
@@ -46,6 +43,20 @@ export default function App() {
     );
   }
 
+  function handleSetAllCompleted() {
+    todos.map((todo) => {
+      !todo.isCompleted ? 
+        setTodos((prevTodos) =>
+        prevTodos.map((todo) => ({ ...todo, isCompleted: true }))
+        ) :
+        setTodos((prevTodos) =>
+          prevTodos.map((todo) => ({ ...todo, isCompleted: false }))
+          ) 
+    })
+    
+  }
+
+
 
   return (
 
@@ -56,13 +67,17 @@ export default function App() {
 
         <div className="max-w-[360px] w-5/6">
 
-          <Input handleAddTodo={handleAddTodo} />
+          <Input 
+            handleAddTodo={handleAddTodo}
+            handleSetAllCompleted={handleSetAllCompleted}
+            />
           <TodoList 
             handleDeleteTodo={handleDeleteTodo} 
             todos={todos} 
             handleToggleActive={handleToggleActive}
             handleClearCompleted={handleClearCompleted}
             handleUpdateDescription={handleUpdateDescription}
+
             />
 
 
