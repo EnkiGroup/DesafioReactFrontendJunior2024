@@ -29,7 +29,7 @@ export function ReadableTaskItem({ task }: ReadableTaskItemProps) {
       >
         {task.title}
       </p>
-      <X className="remove-icon" onClick={handleRemove} />
+      <X className="remove-icon" onClick={handleRemove} data-testid="remove-icon" />
     </>
   )
 }

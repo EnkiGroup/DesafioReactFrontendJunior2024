@@ -4,7 +4,6 @@ import '@testing-library/jest-dom';
 import { TasksProvider, useTasksContext } from '../../contexts/tasks-context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-// Componente consumidor para testes
 const TestComponent = () => {
   const { tasks, addTask, toggleTaskCheck, tasksLeft, toggleAllTasksCheck } = useTasksContext();
 
@@ -24,7 +23,6 @@ const TestComponent = () => {
     </div>
   );
 };
-
 
 const queryClient = new QueryClient()
 
