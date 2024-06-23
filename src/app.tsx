@@ -52,7 +52,26 @@ const App = () => {
     }
   };
 
+  const handleToggle = (id: string) => {
+    const updatedTodos = todos.map(todo => {
+      if (todo.id === id) {
+        return { ...todo, isDone: !todo.isDone };
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  };
 
+  const handleToggleAll = () => {
+    const allCompleted = todos.every(todo => todo.isDone);
+    const updatedTodos = todos.map(todo => ({
+      ...todo,
+      isDone: !allCompleted
+    }));
+    setTodos(updatedTodos);
+  };
+
+  const showToggleAll = todos.length > 0;
 
   return (
     <div>
@@ -78,8 +97,15 @@ const App = () => {
             {todos.map(todo => (
               <li key={todo.id} className={todo.isDone ? "completed" : ""}>
                 <div className="view">
+                  <input
+                    className="toggle"
+                    type="checkbox"
+                    data-testid={`todo-item-toggle-${todo.id}`}
+                    checked={todo.isDone}
+                    onChange={() => handleToggle(todo.id)}
+                  />
                   <label>
-                    {todo.title} - {todo.isDone ? 'Completed' : 'Not Completed'}
+                    {todo.title}
                   </label>
                 </div>
               </li>
