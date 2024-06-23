@@ -41,10 +41,10 @@ export default function TodoItem({ title, isDone, onToggle }: TodoItemProps) {
 
   // Classes tailwind para o input type text
   const inputbox =
-    "block w-1/3 p-4 focus:ring-0 mx-auto bg-white drop-shadow-md text-2xl focus:border-red-700 active:border-red-700 border-gray-300 border-solid border-2 align-bottom";
+    "block lg:w-1/3 md:w-3/4 p-4 focus:ring-0 mx-auto bg-white drop-shadow-md text-2xl focus:border-red-700 active:border-red-700 border-gray-300 border-solid border-2 align-bottom";
 
   return (
-    <div>
+    <div className="w-full">
       {isEditing ? (
         <div className="relative">
           <input
