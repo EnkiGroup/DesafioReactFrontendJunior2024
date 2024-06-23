@@ -6,8 +6,8 @@ const FooterConteiner = styled.footer`
   align-items: center;
   text-align: center;
   gap: 5px;
-  margin-top: 1rem;
-  font-size: ${({ theme }) => theme.fontSize.small};
+  margin-top: 2.5rem;
+  font-size: 13px;
   color: ${({ theme }) => theme.colors.gray_3};
 
   a {

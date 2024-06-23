@@ -9,9 +9,9 @@ const TodoList = ({ ItemList }: TodoListProps) => {
   return (
     <>
       {ItemList?.map((item) => (
-        <div key={item?.id}>
+        <li key={item?.id}>
           <TodoItem task={item} />
-        </div>
+        </li>
       ))}
     </>
   );

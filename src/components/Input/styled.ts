@@ -15,7 +15,6 @@ export const InputForm = styled.input<InputContainerProps>`
   outline: none;
   font-style: italic;
   transition: 0.3s;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   &::placeholder {
     color: rgba(0, 0, 0, 0.4);
   }
