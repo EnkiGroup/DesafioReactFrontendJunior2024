@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../../src/styles/todo-footer.scss","../../src/styles/utils.scss"],"names":[],"mappings":"AAEA;EACE,OCKW;EDJX;EACD;EACA;EACA;EACC;EACA;EACD;EACA;;AAEC;EACE;;AAGF;EACE;EACA;;AAGF;EACE","file":"todo-footer.css"}
+{"version":3,"sourceRoot":"","sources":["../../src/styles/todo-footer.scss","../../src/styles/utils.scss"],"names":[],"mappings":"AAEA;EACE,OCMW;EDLX;EACD;EACA;EACA;EACC;EACA;EACD;EACA;;AAEC;EACE;;AAGF;EACE;EACA;;AAGF;EACE","file":"todo-footer.css"}

@@ -7,6 +7,7 @@ interface Todo {
   id: string;
   title: string;
   isDone: boolean;
+  editing: boolean;
 }
 
 const App = () => {
@@ -45,7 +46,8 @@ const App = () => {
       const newTodo: Todo = {
         id: uuidv4(),  // Gera um ID único para a nova tarefa
         title: todoNew,  // Define o título da tarefa com o texto do estado
-        isDone: false  // Define a nova tarefa como "não concluída"
+        isDone: false,  // Define a nova tarefa como "não concluída"
+        editing: false // Inicializando editing como false para a nova tarefa
       };
       setTodos([...todos, newTodo]); // Adiciona a nova tarefa no início da lista
       setTodoNew(""); // Limpa o campo de entrada
@@ -79,6 +81,26 @@ const App = () => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
+  const handleDoubleClick = (id: string) => {
+    const updatedTodos = todos.map(todo => {
+      if (todo.id === id) {
+        return { ...todo, editing: true }; // Ativando o modo de edição ao clicar duas vezes
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  };
+
+  const handleSaveEdit = (id: string, newTitle: string) => {
+    const updatedTodos = todos.map(todo => {
+      if (todo.id === id) {
+        return { ...todo, title: newTitle, editing: false }; // Salvando a edição e desativando o modo de edição
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  };
+
   return (
     <div>
       <section id="root" className="todoapp">
@@ -91,8 +113,8 @@ const App = () => {
               type="text"
               placeholder="What needs to be done?"
               value={todoNew}
-              onChange={handleInputChange}  // Atualiza o texto da nova tarefa
-              onKeyDown={handleKeyPress}  // Adiciona a nova tarefa ao pressionar Enter
+              onChange={handleInputChange}
+              onKeyDown={handleKeyPress}
             />
             <label className="visually-hidden" htmlFor="todo-input">
             </label>
@@ -100,13 +122,13 @@ const App = () => {
         </header>
 
         <main className="main">
-          {showToggleAll && (
+          {todos.length > 0 && (
             <div className="toggle-all-container">
               <input
                 className="toggle-all"
                 type="checkbox"
                 data-testid="toggle-all"
-                checked={todos.length > 0 && todos.every(todo => todo.isDone)}
+                checked={todos.every(todo => todo.isDone)}
                 onChange={handleToggleAll}
               />
               <label className="toggle-all-label" htmlFor="toggle-all">
@@ -116,7 +138,7 @@ const App = () => {
           )}
           <ul className="todo-list">
             {todos.map(todo => (
-              <li key={todo.id} className={todo.isDone ? "completed" : ""}>
+              <li key={todo.id} className={`${todo.isDone ? "completed" : ""} ${todo.editing ? "editing" : ""}`}>
                 <div className="view">
                   <input
                     className="toggle"
@@ -124,19 +146,32 @@ const App = () => {
                     checked={todo.isDone}
                     onChange={() => handleToggle(todo.id)}
                   />
-                  <label>
+                  <label onDoubleClick={() => handleDoubleClick(todo.id)}>
                     {todo.title}
                   </label>
-
                   <button className="delete" onClick={() => handleDelete(todo.id)}></button>
                 </div>
+                {todo.editing && (
+                  <input
+                    type="text"
+                    className="edit"
+                    value={todo.title}
+                    onChange={(e) => setTodos(todos.map(t => t.id === todo.id ? { ...t, title: e.target.value } : t))}
+                    onBlur={() => handleSaveEdit(todo.id, todo.title)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleSaveEdit(todo.id, todo.title);
+                      }
+                    }}
+                  />
+                )}
               </li>
             ))}
           </ul>
         </main>
-        
+
       </section>
-      
+
       <Footer />
     </div>
   );
