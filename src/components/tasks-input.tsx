@@ -7,7 +7,7 @@ import { Input } from "./input"
 
 export function TasksInput() {
 
-  const { addTask } = useTasksContext()
+  const { addTask, tasks, tasksLeft, toggleAllTasksCheck } = useTasksContext()
 
   const { register, handleSubmit, reset, errors } = useInputValidation()
 
@@ -22,7 +22,10 @@ export function TasksInput() {
       onSubmit={handleSubmit(onSubmit)}
       className="flex bg-[#FEFEFE]"
     >
-      <CheckAllButton />
+      <CheckAllButton
+        allComplete={Boolean(tasks.length == 0 || tasksLeft == 0)}
+        onClick={toggleAllTasksCheck}
+      />
       <Input
         placeholder="What needs to be done?"
         {...register("title")}

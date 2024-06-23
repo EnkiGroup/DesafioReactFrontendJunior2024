@@ -1,20 +1,21 @@
-import { useTasksContext } from "../contexts/tasks-context"
-
 import { ChevronDown } from "lucide-react"
 
-export function CheckAllButton() {
-
-  const { tasks, tasksLeft, toggleAllTasksCheck } = useTasksContext()
-
+interface CheckAllButtonProps {
+  allComplete: boolean
+  onClick: () => void
+}
+//TODO: Estava invertendo responsabilidade
+export function CheckAllButton({ allComplete, onClick }: CheckAllButtonProps) {
   return (
     <button
       type="button"
       className="w-14 flex items-center justify-center pr-1"
-      onClick={toggleAllTasksCheck}
+      onClick={onClick}
     >
       <ChevronDown
         size={28}
-        className={(tasks.length == 0 || tasksLeft) ? "text-[#aaa]" : "text-[#333]"}
+        className={allComplete ? "text-[#333]" : "text-[#AAA]"}
+        data-testid="chevron-icon"
       />
     </button>
   )
