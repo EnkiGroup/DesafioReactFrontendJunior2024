@@ -12,7 +12,7 @@ export default function App() {
       const newTodo: Todo = {
         id: Math.random(),
         description: description,
-        isActive: false
+        isCompleted: false
       };
       return [...prevTodos, newTodo]
     })
@@ -22,11 +22,15 @@ export default function App() {
     setTodos(prevTodos => prevTodos.filter((todo) => todo.id !== id));
   }
 
+  function handleClearCompleted() {
+    setTodos(prevTodos => prevTodos.filter((todo) => todo.isCompleted === false));
+  }
+
   function handleToggleActive(id: number) {
     console.log(id)
     setTodos(prevTodos =>
       prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, isActive: !todo.isActive } : todo
+        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
       )
     );
   }
@@ -46,6 +50,7 @@ export default function App() {
             handleDeleteTodo={handleDeleteTodo} 
             todos={todos} 
             handleToggleActive={handleToggleActive}
+            handleClearCompleted={handleClearCompleted}
             />
 
 
