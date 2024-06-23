@@ -1,11 +1,9 @@
-import { FormEvent, useRef, useState } from "react";
-
-type InputProps = {
-    handleAddTodo: (description: string) => void;
-    handleSetAllCompleted: () => void
-}
+import { FormEvent, useContext, useRef, useState } from "react";
+import { InputProps } from "../types/InputProps";
+import { useTodosContext } from "../store/todos-context";
 
 export default function Input({ handleAddTodo, handleSetAllCompleted }: InputProps) {
+    const todosCtx = useTodosContext();
     const [isFocused, setIsFocused] = useState(false);
     const description = useRef<HTMLInputElement>(null);
 

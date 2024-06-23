@@ -56,8 +56,7 @@ export default function App() {
     
   }
 
-
-
+  
   return (
 
     <div className="block bg-slate-200 min-h-screen h-full">
