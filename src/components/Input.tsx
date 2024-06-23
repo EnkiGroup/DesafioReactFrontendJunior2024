@@ -19,8 +19,10 @@ export default function Input({handleAddTodo}: InputProps) {
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         const enteredDescription = description.current!.value;
+        if (enteredDescription === "") {
+            return
+        }
         event.currentTarget.reset()
-        console.log(enteredDescription)
         handleAddTodo(enteredDescription);
     }
 

@@ -18,7 +18,18 @@ export default function App() {
     })
   }
 
-  
+  function handleDeleteTodo(id: number) {
+    setTodos(prevTodos => prevTodos.filter((todo) => todo.id !== id));
+  }
+
+  function handleToggleActive(id: number) {
+    console.log(id)
+    setTodos(prevTodos =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, isActive: !todo.isActive } : todo
+      )
+    );
+  }
 
 
   return (
@@ -31,7 +42,11 @@ export default function App() {
         <div className="max-w-[360px] w-5/6">
 
           <Input handleAddTodo={handleAddTodo} />
-          <TodoList todos={todos} />
+          <TodoList 
+            handleDeleteTodo={handleDeleteTodo} 
+            todos={todos} 
+            handleToggleActive={handleToggleActive}
+            />
 
 
         </div>
