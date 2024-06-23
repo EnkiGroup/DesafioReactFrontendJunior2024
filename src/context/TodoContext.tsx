@@ -13,7 +13,8 @@ export const TodoContext = createContext({
     addTodo: (todo: Todo) => { },
     toggleTodo: (id: string) => { },
     updateTodo: (todo: Todo) => { },
-    toggleAllTodos: () => { },
+  toggleAllTodos: () => { },
+    removeTodo: (id: string) => { },
     });
 
 export const TodoProvider = ({ children }: any) => {
@@ -49,6 +50,11 @@ export const TodoProvider = ({ children }: any) => {
          })
        );
      };
+  
+    //Remove um todo do array de todos
+  const removeTodo = (id: string) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  }
      
   const toggleAllTodos = () => {
   // Verifica se todos os todos estão marcados como feitos
@@ -72,13 +78,13 @@ export const TodoProvider = ({ children }: any) => {
         if (oldTodo.id === todo.id) {
           return todo;
         }
-        return todo;
+        return oldTodo;
       })
     );
   }
 
     return (
-        <TodoContext.Provider value={{ todos, setTodos, addTodo, updateTodo, toggleTodo, toggleAllTodos}}>
+        <TodoContext.Provider value={{ todos, setTodos, addTodo, updateTodo, toggleTodo, toggleAllTodos, removeTodo}}>
             {children}
         </TodoContext.Provider>
     )
