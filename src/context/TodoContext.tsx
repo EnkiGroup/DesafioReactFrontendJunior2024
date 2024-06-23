@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import { Todo } from "../types/Todo";
+import { useLocation } from "react-router-dom";
 
 /* 
 Como o nome sugere, o TodoContext é o contexto que irá armazenar os todos. Ele é criado com createContext e exportado para ser utilizado em outros componentes.
@@ -14,10 +15,15 @@ export const TodoContext = createContext({
     toggleTodo: (id: string) => { },
     updateTodo: (todo: Todo) => { },
   toggleAllTodos: () => { },
-    removeTodo: (id: string) => { },
+  removeTodo: (id: string) => { },
+  filterTodos: [] as Todo[],
+  removeDoneTodos: () => { },
+  getRemainingTodos: (): number => 0,
     });
 
 export const TodoProvider = ({ children }: any) => {
+  
+  const location = useLocation();
 
   //Puxa os todos da API, e os seta no estado, utilizando o useMemo para garantir que a função seja chamada apenas uma vez
   useMemo(() => {
@@ -56,6 +62,11 @@ export const TodoProvider = ({ children }: any) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   }
      
+  // Remove os todos marcados como feitos
+  const removeDoneTodos = () => {
+    setTodos(todos.filter(todo => !todo.isDone));
+  };
+
   const toggleAllTodos = () => {
   // Verifica se todos os todos estão marcados como feitos
   const areAllMarkedDone = todos.every(todo => todo.isDone);
@@ -69,8 +80,17 @@ export const TodoProvider = ({ children }: any) => {
   );
 };
 
-  //
-  
+  //Filtra os todos usando useLocation, do React Router DOM
+  const filterTodos = todos.filter((todo) => {
+    if (location.pathname === "/active") {
+      return !todo.isDone;
+    } else if (location.pathname === "/completed") {
+      return todo.isDone;
+    } else {
+      return todo;
+    }
+  })
+
   //Atualiza um todo no array de todos
   const updateTodo = (todo: Todo) => {
     setTodos(
@@ -83,8 +103,13 @@ export const TodoProvider = ({ children }: any) => {
     );
   }
 
+  //Retorna a quantidade de todos restantes
+  const getRemainingTodos = () => {
+    return todos.filter(todo => !todo.isDone).length;
+  }
+
     return (
-        <TodoContext.Provider value={{ todos, setTodos, addTodo, updateTodo, toggleTodo, toggleAllTodos, removeTodo}}>
+        <TodoContext.Provider value={{ todos, setTodos, getRemainingTodos, addTodo, updateTodo, toggleTodo, toggleAllTodos, removeTodo, removeDoneTodos, filterTodos}}>
             {children}
         </TodoContext.Provider>
     )
