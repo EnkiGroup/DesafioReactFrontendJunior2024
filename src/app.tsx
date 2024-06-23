@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import './styles/main.scss';
+import { useState, useEffect, ChangeEvent, KeyboardEvent } from "react";
+import "./styles/main.scss";
 import Footer from "./components/Footer";
+import { v4 as uuidv4 } from "uuid";
 
 interface Todo {
   id: string;
@@ -9,8 +10,13 @@ interface Todo {
 }
 
 const App = () => {
+  // Estado para manter a lista de tarefas
   const [todos, setTodos] = useState<Todo[]>([]);
 
+  // Estado para manter o texto da nova tarefa
+  const [todoNew, setTodoNew] = useState<string>("");
+
+  // Buscando as tarefas na inicialização do componente
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,7 +25,7 @@ const App = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        setTodos(data);
+        setTodos(data); // Define as tarefas no estado
       } catch (err) {
         console.error('Failed to fetch todos:', err);
       }
@@ -28,6 +34,26 @@ const App = () => {
     fetchData();
   }, []);
 
+  // Função para atualizar o texto da nova tarefa ao digitar
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setTodoNew(event.target.value);
+  };
+
+  // Função para adicionar uma nova tarefa ao pressionar Enter
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && todoNew.trim() !== '') {
+      const newTodo: Todo = {
+        id: uuidv4(),  // Gera um ID único para a nova tarefa
+        title: todoNew,  // Define o título da tarefa com o texto do estado
+        isDone: false  // Define a nova tarefa como "não concluída"
+      };
+      setTodos([...todos, newTodo]); // Adiciona a nova tarefa no início da lista
+      setTodoNew(""); // Limpa o campo de entrada
+    }
+  };
+
+
+
   return (
     <div>
       <section id="root" className="todoapp">
@@ -35,32 +61,30 @@ const App = () => {
           <h1>todos</h1>
           <div className="input-container">
             <input
+              id="todo-input"
               className="new-todo"
               type="text"
               placeholder="What needs to be done?"
+              value={todoNew}
+              onChange={handleInputChange}  // Atualiza o texto da nova tarefa
+              onKeyDown={handleKeyPress}  // Adiciona a nova tarefa ao pressionar Enter
             />
             <label className="visually-hidden" htmlFor="todo-input">
             </label>
           </div>
         </header>
         <main className="main">
-          <div className="toggle-all-container">
-            <input
-              className="toggle-all"
-              type="checkbox"
-            />
-            <label className="toggle-all-label" htmlFor="toggle-all">
-              Toggle all
-            </label>
-          </div>
-
-          {/* <ul>
+          <ul className="todo-list">
             {todos.map(todo => (
-              <li key={todo.id}>
-                {todo.title} - {todo.isDone ? 'Completed' : 'Not Completed'}
+              <li key={todo.id} className={todo.isDone ? "completed" : ""}>
+                <div className="view">
+                  <label>
+                    {todo.title} - {todo.isDone ? 'Completed' : 'Not Completed'}
+                  </label>
+                </div>
               </li>
             ))}
-          </ul> */}
+          </ul>
         </main>
       </section>
       <Footer />

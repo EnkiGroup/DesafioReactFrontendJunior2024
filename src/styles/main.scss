@@ -1,27 +1,30 @@
-@import 'utils';
-@import 'todo-footer';
+@import "utils";
+@import "todo-footer";
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 html {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
 }
 
 body {
-	line-height: 1.4em;
-	background: $color-background-dark;
-	color: $color-text;
-	min-width: 230px;
-	max-width: 550px;
-	margin: 0 auto;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	font-weight: 300;
+  line-height: 1.4em;
+  background: $color-background-dark;
+  color: $color-text;
+  min-width: 230px;
+  max-width: 550px;
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 300;
   font-size: 14px;
 }
+
+/* Estilos específicos do Header */
+/* Estilos específicos da Main section */
 
 .todoapp {
 	background: $color-background;
@@ -86,7 +89,7 @@ body {
 .main {
 	position: relative;
 	z-index: 2;
-	border-top: 1px solid $color-secondary;
+	border-top: 1px solid #e6e6e6;
 }
 
 .toggle-all {
@@ -109,4 +112,11 @@ body {
 	position: absolute;
 	top: -65px;
 	left: -0;
+}
+
+:focus,
+.toggle:focus + label,
+.toggle-all:focus + label {
+	box-shadow: 0 0 2px 2px #CF7D7D;
+	outline: 0;
 }

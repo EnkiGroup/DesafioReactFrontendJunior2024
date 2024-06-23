@@ -6,7 +6,8 @@ const Footer = () => {
       <p>Double-click to edit a todo</p>
       <p>Created by the TodoMVC Team</p>
       <p>
-        Part of 
+        Part of
+        <span> </span> 
         <a href="http://todomvc.com">TodoMVC</a>
       </p>
     </footer>
