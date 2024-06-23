@@ -8,7 +8,7 @@ export const todoapp  = css({
     boxShadow:" 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1)",
     '& h1':{
         position: "absolute",
-        top: "-140px",
+        top: "-180px",
         width: "100%",
         fontSize: "80px",
         fontWeight: 200,

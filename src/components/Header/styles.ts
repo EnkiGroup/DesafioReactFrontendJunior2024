@@ -1,7 +1,23 @@
 import { css } from '@emotion/react'
 
 export const inputbox = css({
-    position:"relative"
+    position:"relative",
+
+    "&::before":{
+        content: '\'\'',
+        position: 'absolute',
+        margin:"0 auto",
+        left:"2.5%",
+        bottom: '-13px',
+        zIndex:-10,
+        width:'95%',
+        backgroundColor:"var(--efect-dark-gray)",
+        overflow: 'hidden',
+        height: '55%',
+        borderRadius:50,
+        paddingBottom:20,
+        opacity:0.5
+    }
 })
 
 export const inputapp = css({
