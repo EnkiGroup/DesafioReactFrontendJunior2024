@@ -27,6 +27,7 @@ export function EditableTaskItem({ task: { id, title }, exitEditableMode }: Edit
         {...register("title")}
         error={errors.title}
         onBlur={exitEditableMode}
+        data-testid="editable-task-input"
       />
     </form>
   )
