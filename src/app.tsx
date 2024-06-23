@@ -1,9 +1,13 @@
-import React from "react";
+import React from 'react';
+import TodoApp from './components/TodoApp';
+import './assets/css/App.css';
 
-export default function App() {
+const App: React.FC = () => {
   return (
-    <section>
-      <h1>Todos</h1>
-    </section>
+    <div className="App">
+      <TodoApp />
+    </div>
   );
 }
+
+export default App;
