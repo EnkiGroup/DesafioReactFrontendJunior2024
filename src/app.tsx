@@ -52,6 +52,7 @@ const App = () => {
     }
   };
 
+  // Função para alternar o estado de conclusão de uma tarefa
   const handleToggle = (id: string) => {
     const updatedTodos = todos.map(todo => {
       if (todo.id === id) {
@@ -62,6 +63,7 @@ const App = () => {
     setTodos(updatedTodos);
   };
 
+  // Função para alternar o estado de conclusão de todas as tarefas
   const handleToggleAll = () => {
     const allCompleted = todos.every(todo => todo.isDone);
     const updatedTodos = todos.map(todo => ({
@@ -92,7 +94,22 @@ const App = () => {
             </label>
           </div>
         </header>
+
         <main className="main">
+          {showToggleAll && (
+            <div className="toggle-all-container">
+              <input
+                className="toggle-all"
+                type="checkbox"
+                data-testid="toggle-all"
+                checked={todos.length > 0 && todos.every(todo => todo.isDone)}
+                onChange={handleToggleAll}
+              />
+              <label className="toggle-all-label" htmlFor="toggle-all">
+                Toggle all
+              </label>
+            </div>
+          )}
           <ul className="todo-list">
             {todos.map(todo => (
               <li key={todo.id} className={todo.isDone ? "completed" : ""}>
@@ -100,7 +117,6 @@ const App = () => {
                   <input
                     className="toggle"
                     type="checkbox"
-                    data-testid={`todo-item-toggle-${todo.id}`}
                     checked={todo.isDone}
                     onChange={() => handleToggle(todo.id)}
                   />
@@ -112,7 +128,9 @@ const App = () => {
             ))}
           </ul>
         </main>
+        
       </section>
+      
       <Footer />
     </div>
   );
