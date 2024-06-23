@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
+import { v4 as uuid } from "uuid"
+
 import { getInitialTasks } from '../services/get-initial-tasks';
 
 import { Task } from '../types';
@@ -27,7 +29,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
 
   function addTask(title: string) {
     const newTask = {
-      id: crypto.randomUUID(),
+      id: uuid(),
       title,
       isDone: false,
     };
