@@ -9,10 +9,11 @@ export const StyleGlobal = createGlobalStyle`
 
   body {
     background-color: #f5f5f5;
+    z-index: 2;
   }
 
   .container {
-    max-width: 60%;
+    max-width: 550px;
     width: 100%;
     margin: 0 auto;
   }

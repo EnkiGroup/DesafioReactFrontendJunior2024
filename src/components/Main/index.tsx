@@ -2,13 +2,15 @@ import Footer from '../Footer'
 import Header from '../Header'
 import Todo from '../Todo'
 
+import { MainContain } from './style'
+
 const Main = () => {
   return (
-    <div>
+    <MainContain>
       <Header />
       <Todo />
       <Footer />
-    </div>
+    </MainContain>
   )
 }
 

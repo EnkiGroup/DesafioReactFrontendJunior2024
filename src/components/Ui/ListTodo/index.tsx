@@ -1,9 +1,22 @@
+import { ButtonDelete, ItemTodo, List } from './style'
+
 const ListTodo = () => {
   return (
-    <ul>
-      <li>Item 1</li>
-      <li>Item 2</li>
-    </ul>
+    <List>
+      <li>
+        <ItemTodo>
+          <input type="checkbox" name="todo_list" />
+          <label htmlFor="todo_list">sdad</label>
+          <ButtonDelete />
+        </ItemTodo>
+      </li>
+      <li>
+        <ItemTodo>
+          <input type="checkbox" name="todo_list" />
+          <label htmlFor="todo_list">Item 2</label>
+        </ItemTodo>
+      </li>
+    </List>
   )
 }
 

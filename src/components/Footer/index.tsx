@@ -1,10 +1,12 @@
+import { FooterContain } from './style'
+
 const Footer = () => {
   return (
-    <footer>
-      <h4>Double-click to edit a todo</h4>
-      <h4>Created by the TodoMVC Team</h4>
-      <h4>Part of TodoMVC</h4>
-    </footer>
+    <FooterContain>
+      <p>Double-click to edit a todo</p>
+      <p>Created by the TodoMVC Team</p>
+      <p>Part of TodoMVC</p>
+    </FooterContain>
   )
 }
 

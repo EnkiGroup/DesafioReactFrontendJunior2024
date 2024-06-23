@@ -1,14 +1,18 @@
-import FooterList from '../Ui/FooterList'
 import Input from '../Ui/Input'
+import ToggleButton from '../Ui/ToggleButton'
 import ListTodo from '../Ui/ListTodo'
+import FooterList from '../Ui/FooterList'
+
+import { TodoCotain } from './style'
 
 const Todo = () => {
   return (
-    <div>
+    <TodoCotain>
       <Input />
+      <ToggleButton />
       <ListTodo />
       <FooterList />
-    </div>
+    </TodoCotain>
   )
 }
 

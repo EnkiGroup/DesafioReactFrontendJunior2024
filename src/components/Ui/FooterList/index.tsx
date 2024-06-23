@@ -1,14 +1,22 @@
+import { ListFilters, ListFooter } from './style'
+
 const FooterList = () => {
   return (
-    <div>
-      <p>0 item left!</p>
-      <div>
-        <button>All</button>
-        <button>Active</button>
-        <button>Completed</button>
-      </div>
-      <p>Clear completed</p>
-    </div>
+    <ListFooter>
+      <span>2 item left!</span>
+      <ListFilters>
+        <li>
+          <a href="#">All</a>
+        </li>
+        <li>
+          <a href="#">Active</a>
+        </li>
+        <li>
+          <a href="#">Completed</a>
+        </li>
+      </ListFilters>
+      <a href="#">Clear completed</a>
+    </ListFooter>
   )
 }
 
