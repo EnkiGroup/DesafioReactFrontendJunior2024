@@ -43,13 +43,16 @@ const Tarefa: React.FC<TodosProps> = (props) => {
     }
   };
 
+  const handleUpdateTodo = (updatedTodo: TodoInterface) => {
+    setTodos(prevTodos =>
+      prevTodos.map(todo => (todo.id === updatedTodo.id ? updatedTodo : todo))
+    );
+  };
+
   const clearCompleted = async () => {
     try {
-     
       const completedTodos = todos.filter(todo => todo.isDone);
-     
       await Promise.all(completedTodos.map(todo => axios.delete(`http://localhost:5000/todos/${todo.id}`)));
-  
       setTodos(prevTodos => prevTodos.filter(todo => !todo.isDone));
     } catch (error) {
       console.error("Error clearing completed todos:", error);
@@ -66,15 +69,13 @@ const Tarefa: React.FC<TodosProps> = (props) => {
 
   const incompleteTodosCount = todos.filter((todo) => !todo.isDone).length;
 
-  if (isLoading)
-    return <div className="load">Loading...</div>;
-  if (isError)
-    return <div className="load">Error</div>;
+  if (isLoading) return <div className="load">Loading...</div>;
+  if (isError) return <div className="load">Error</div>;
 
   return (
     <div>
       {filteredTodos.map((todo) => (
-        <Item key={todo.id} todo={todo} onDelete={handleDeleteTodo} />
+        <Item key={todo.id} todo={todo} onDelete={handleDeleteTodo} onUpdate={handleUpdateTodo} />
       ))}
       {todos.length > 0 && <Footer contaItem={incompleteTodosCount} clearCompleted={clearCompleted} />}
     </div>

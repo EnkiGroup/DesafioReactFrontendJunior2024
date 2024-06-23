@@ -3,6 +3,7 @@ import "./app.css";
 import Header from "./Components/Header/Header";
 import Input from "./Components/Input/Input";
 import Tarefa from "./Components/Tarefa/Tarefa";
+import FooterInfo from "./Components/Footer/Footer-info";
 
 function App() {
   return (
@@ -18,11 +19,7 @@ function App() {
           </Routes>
         </div>
       </div>
-      <div className="rodape">
-     <p>Double-click to edit a todo</p>
-     <p>Created by the TodoMVC Team</p>
-     <p>Part of TodoMVC</p>
-      </div>
+      <FooterInfo/>
     </BrowserRouter>
   );
 }

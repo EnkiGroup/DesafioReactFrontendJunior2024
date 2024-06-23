@@ -23,7 +23,6 @@ const Input: React.FC = () => {
 
   const handleInput = async (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      event.preventDefault();
       if (inputItem.trim() === "") return;
 
       try {
