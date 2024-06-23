@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import './styles/main.scss';
+import Footer from "./components/Footer";
 
 interface Todo {
   id: string;
   title: string;
-  completed: boolean;
+  isDone: boolean;
 }
 
-const App: React.FC = () => {
+const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   useEffect(() => {
@@ -22,23 +24,48 @@ const App: React.FC = () => {
         console.error('Failed to fetch todos:', err);
       }
     };
-  
+
     fetchData();
   }, []);
 
   return (
-    <section>
-      <h1>Todos</h1>
+    <div>
+      <section id="root" className="todoapp">
+        <header className="header">
+          <h1>todos</h1>
+          <div className="input-container">
+            <input
+              className="new-todo"
+              type="text"
+              placeholder="What needs to be done?"
+            />
+            <label className="visually-hidden" htmlFor="todo-input">
+            </label>
+          </div>
+        </header>
+        <main className="main">
+          <div className="toggle-all-container">
+            <input
+              className="toggle-all"
+              type="checkbox"
+            />
+            <label className="toggle-all-label" htmlFor="toggle-all">
+              Toggle all
+            </label>
+          </div>
 
-      <ul>
-        {todos.map(todo => (
-          <li key={todo.id}>
-            {todo.title} - {todo.completed ? 'Completed' : 'Not Completed'}
-          </li>
-        ))}
-      </ul>
-    </section>
+          {/* <ul>
+            {todos.map(todo => (
+              <li key={todo.id}>
+                {todo.title} - {todo.isDone ? 'Completed' : 'Not Completed'}
+              </li>
+            ))}
+          </ul> */}
+        </main>
+      </section>
+      <Footer />
+    </div>
   );
-};
+}
 
 export default App;

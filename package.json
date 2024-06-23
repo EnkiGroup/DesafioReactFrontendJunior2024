@@ -22,7 +22,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-css": "sass src/styles:dist/styles",
+    "watch-css": "sass --watch src/styles:dist/styles"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +46,7 @@
   },
   "devDependencies": {
     "@types/uuid": "^9.0.8",
-    "nock": "^13.1.1"
+    "nock": "^13.1.1",
+    "sass": "^1.77.6"
   }
 }
