@@ -1,6 +1,5 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import { Todo } from "../types/Todo";
-import { useLocation } from "react-router-dom";
 
 /* 
 Como o nome sugere, o TodoContext é o contexto que irá armazenar os todos. Ele é criado com createContext e exportado para ser utilizado em outros componentes.
@@ -9,22 +8,20 @@ Entretanto, é importante ressaltar que o uso de contextos deve ser feito com mo
 */
 
 export const TodoContext = createContext({
-    todos: [] as Todo[],
-    setTodos: (todos: Todo[]) => { },
-    addTodo: (todo: Todo) => { },
-    toggleTodo: (id: string) => { },
-    updateTodo: (todo: Todo) => { },
-  toggleAllTodos: () => { },
-  removeTodo: (id: string) => { },
-  filterTodos: [] as Todo[],
-  removeDoneTodos: () => { },
+  todos: [] as Todo[],
+  setTodos: (todos: Todo[]) => {},
+  addTodo: (todo: Todo) => {},
+  toggleTodo: (id: string) => {},
+  updateTodo: (todo: Todo) => {},
+  toggleAllTodos: () => {},
+  removeTodo: (id: string) => {},
+  filterTodos: (todos: Todo[], pathname: string): Todo[] => [],
+  removeDoneTodos: () => {},
   getRemainingTodos: (): number => 0,
-    });
+});
 
 export const TodoProvider = ({ children }: any) => {
   
-  const location = useLocation();
-
   //Puxa os todos da API, e os seta no estado, utilizando o useMemo para garantir que a função seja chamada apenas uma vez
   useMemo(() => {
   const fetchTodos = async () => {
@@ -81,15 +78,18 @@ export const TodoProvider = ({ children }: any) => {
 };
 
   //Filtra os todos usando useLocation, do React Router DOM
-  const filterTodos = todos.filter((todo) => {
-    if (location.pathname === "/active") {
+const filterTodos = (todos: Todo[], pathname: string): Todo[] => {
+  return todos.filter((todo) => {
+    if (pathname === "/active") {
       return !todo.isDone;
-    } else if (location.pathname === "/completed") {
+    } else if (pathname === "/completed") {
       return todo.isDone;
     } else {
-      return todo;
+      return true;
     }
-  })
+  });
+};
+
 
   //Atualiza um todo no array de todos
   const updateTodo = (todo: Todo) => {
