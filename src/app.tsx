@@ -21,16 +21,27 @@ export default function App() {
   function handleDeleteTodo(id: number) {
     setTodos(prevTodos => prevTodos.filter((todo) => todo.id !== id));
   }
+  
 
   function handleClearCompleted() {
     setTodos(prevTodos => prevTodos.filter((todo) => todo.isCompleted === false));
   }
+
+
 
   function handleToggleActive(id: number) {
     console.log(id)
     setTodos(prevTodos =>
       prevTodos.map((todo) =>
         todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+      )
+    );
+  }
+
+  function handleUpdateDescription(id: number, newDescription: string) {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, description: newDescription } : todo
       )
     );
   }
@@ -51,6 +62,7 @@ export default function App() {
             todos={todos} 
             handleToggleActive={handleToggleActive}
             handleClearCompleted={handleClearCompleted}
+            handleUpdateDescription={handleUpdateDescription}
             />
 
 

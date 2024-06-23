@@ -7,9 +7,10 @@ type TodoListProps = {
     handleDeleteTodo: (id: number) => void;
     handleToggleActive: (id: number) => void;
     handleClearCompleted: () => void;
+    handleUpdateDescription: (id: number, newDescription: string) => void
 }
 
-export default function TodoList({ todos, handleDeleteTodo, handleToggleActive, handleClearCompleted }: TodoListProps) {
+export default function TodoList({ todos, handleDeleteTodo, handleToggleActive, handleClearCompleted, handleUpdateDescription }: TodoListProps) {
     const [filter, setFilter] = useState<"All" | "Active" | "Completed">("All");
     const activeTodosCount = todos.filter((todo) => !todo.isCompleted).length;
     const filteredTodos = todos.filter((todo) => {
@@ -31,6 +32,7 @@ export default function TodoList({ todos, handleDeleteTodo, handleToggleActive, 
                             todo={todo}
                             handleDeleteTodo={handleDeleteTodo}
                             handleToggleActive={handleToggleActive}
+                            handleUpdateDescription={handleUpdateDescription}
                         />
                     </li>
                 ))}

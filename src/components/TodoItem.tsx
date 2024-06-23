@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { Todo } from "../types/Todo"
 
 type TodoProps = {
     todo: Todo;
     handleDeleteTodo: (id: number) => void;
     handleToggleActive: (id: number) => void;
+    handleUpdateDescription: (id: number, newDescription: string) => void
 }
 
-export default function TodoItem({ todo, handleDeleteTodo, handleToggleActive }: TodoProps) {
+export default function TodoItem({ todo, handleDeleteTodo, handleToggleActive, handleUpdateDescription }: TodoProps) {
     const [isEditing, setIsEditing] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
-
 
     const handleDoubleClick = () => {
         setIsEditing(true);
@@ -19,9 +19,25 @@ export default function TodoItem({ todo, handleDeleteTodo, handleToggleActive }:
 
     useEffect(() => {
         if (isEditing) {
-          inputRef.current?.focus();
+            inputRef.current?.focus();
         }
-      }, [isEditing]);
+    }, [isEditing]);
+
+    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        const newDescription = inputRef.current!.value;
+        if (newDescription === "") {
+            return
+        }
+        handleUpdateDescription(todo.id, newDescription);
+    }
+
+    function handleKeyDown(event: React.KeyboardEvent) {
+        if (event.key === 'Enter') {
+            setIsEditing(false);
+            handleSubmit(event as any);
+        }
+    }
 
 
     return (
@@ -43,31 +59,29 @@ export default function TodoItem({ todo, handleDeleteTodo, handleToggleActive }:
                             <div className={`border-green-800 border-b-2 border-r-2 h-3 w-2 rotate-45 transform ${todo.isCompleted ? "" : "hidden"}`}></div>
                         </div>
                     </div>
-
-
                     <div className="bg-white w-full pl-4 " >
                         {todo.description}
                     </div>
                     <div id="delete" className="flex justify-center items-center h-full w-11">
                         <p onClick={() => handleDeleteTodo(todo.id)} className="hover:text-gray-500 cursor-pointer active:scale-90">X</p>
                     </div>
-
                 </div>
             }
 
             {isEditing &&
                 <div
-                    className="flex justify-between items-center" onBlur={() => setIsEditing(false)}>
-
+                    className="flex justify-between items-center"
+                    onBlur={() => setIsEditing(false)}
+                    onKeyDown={handleKeyDown}
+                >
                     <input
                         className={`pl-14 flex bg-white h-11 w-full shadow-md ${isEditing ? 'h-12 outline-none ring-1 ring-red-700 ring-opacity-50 z-10 relative' : ''}`}
                         ref={inputRef}
                         defaultValue={todo.description}
-                        ></input>
-
+                    >  
+                    </input>
                 </div>
             }
-
         </div>
 
     )
