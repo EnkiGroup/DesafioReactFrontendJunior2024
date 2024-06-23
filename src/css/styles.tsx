@@ -16,6 +16,21 @@ export const todoapp  = css({
         color: "var(--title-red)",
         textRendering:"optimizeLegibility",
         fontFamily:"inherit"
+    },
+    "&::before":{
+        content: '\'\'',
+        position: 'absolute',
+        margin:"0 auto",
+        left:-20,
+        bottom: 'calc(-11%  - 20px)',
+        zIndex:-10,
+        width:'calc(100% + 40px)',
+        backgroundColor:"var(--efect-gray)",
+        overflow: 'hidden',
+        height: '100%',
+        borderRadius:50,
+        opacity:0.5,
+        paddingBottom:20
     }
 })
 

@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useCallback, useContext, useMemo } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import { Task } from "../../types";
 import { TaskContext } from "../../TaskContext";
 import { useLocation } from "react-router-dom";
@@ -18,20 +18,20 @@ const sanitize = (string: string) => {
         "'": "&#x27;",
         "/": "&#x2F;",
     };
-    const reg = /[&<>"'/]/gi;
+    const reg = /[&<>"'/]/g;
     return string.replace(reg, (match) => map[match]);
 };
 
-const hasValidMin = (value: string, min: number) => {
-    return value.length >= min;
-};
 
 function Item({ task }: Props) {
     const { tasks, setTasks } = useContext(TaskContext);
+    const [isDone, setIsDone] = useState<boolean>(task.isDone || false);
+    const [title, setTitle] = useState<string>(task.title || "");
 
-    const toggleItem = useCallback((checked: boolean) => {
+    const changeTaskStatus = useCallback((checked: boolean) => {
         setTasks(tasks.map(item => item.id === task.id ? { ...task, isDone: checked } : item));
-    }, [tasks, setTasks, task]);
+        setIsDone(checked)
+    }, [tasks, setTasks, setIsDone,task]);
 
     const updateItem = useCallback((title: string) => {
         setTasks(tasks.map(item => item.id === task.id ? { ...task, title } : item));
@@ -81,51 +81,28 @@ function Item({ task }: Props) {
 
     const handleKeyDown = useCallback((e) => {
         if (e.key === "Enter") {
-            const value = e.target.value.trim();
+            let value = e.target.value.trim();
 
-            if (!hasValidMin(value, 2)) return;
-
-            handleUpdate(sanitize(value));
+            if (value.length >= 2) handleUpdate(sanitize(value));
         }
     }, [handleUpdate]);
     return (
         <li  key={task.id} id={`item-${task.id}`} css={listTasksItem(task.isDone)}>
             <div>
-                <input type="checkbox" className="toggle" onKeyDown={handleKeyDown} onChange={e => toggleItem(e.target.checked)} />
+                <input type="checkbox" checked={isDone} className="toggle" onChange={e => changeTaskStatus(e.target.checked)} />
                 <label onDoubleClick={enableWrite}>{task.title}</label>
                 <button onClick={removeItem}></button>
             </div>
             <input
             type='text' 
-            defaultValue={task.title}
+            value={title}
             className="edit"
             name='name'
             onKeyDown={handleKeyDown} 
+            onChange={(e)=>setTitle(e.target.value)}
             onBlur={handleBlur}
             />
         </li>
-        // <li key={task.id} css={listTasksItem(task.isDone)}>
-        //     {isWritable ? (
-        //         // <input
-        //         //     type="text"
-        //         //     autoFocus
-        //         //     defaultValue={task.title}
-        //         //     className="edit"
-        //         //     onBlur={handleBlur}
-        //         //     onKeyDown={handleKeyDown}
-        //         // />
-        //         <>
-        //             <input type="text" id="fname" name="fname" autoFocus={isWritable}/>
-        //             <label htmlFor="fname">First name:</label>
-        //         </>
-        //     ) : (
-        //         <>
-        //             <input type="checkbox" className="toggle" onChange={e => toggleItem(e.target.checked)} />
-        //             <label onDoubleClick={handleDoubleClick}>{task.title}</label>
-        //             <button onClick={removeItem}></button>
-        //         </>
-        //     )}
-        // </li>
     );
 }
 
