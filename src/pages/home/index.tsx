@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import InputForm from "../../components/Input";
 import TodoList from "../../components/TodoList";
 import useHomePage from "../../hooks/useHomePage";
-import { ContainerHomePage, FormContainer } from "./styled";
+import { ContainerHomePage, FormContainer, ListItem } from "./styled";
 
 const Home = () => {
   const {
@@ -29,9 +29,9 @@ const Home = () => {
           value={valueInput}
           handleClickIcon={enableAllTasks}
         />
-        <div>
+        <ListItem taskHeightLimit={tasks?.length >= 8}>
           <TodoList ItemList={tasks} />
-        </div>
+        </ListItem>
         <Filter
           itensList={`${remainingTasks?.length} items left!`}
           handleCompletedClick={clearEnableTasks}
