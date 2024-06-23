@@ -5,11 +5,6 @@ import {inputapp, inputbox,toogle, tooglebox} from "./styles";
 import { TaskContext } from "../../TaskContext";
 import { Task } from "../../types";
 
-
-const hasValidMin = (value: string, min:number) => {
-    return value.length >= min;
-};
-
 function nanoid(size = 5) {
     let urlAlphabet = "useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict";
     let id = "";
@@ -29,7 +24,7 @@ const sanitize = (string:string) => {
         "'": "&#x27;",
         "/": "&#x2F;",
     };
-    const reg = /[&<>"'/]/gi;
+    const reg = /[&<>"'/]/g;
     return string.replace(reg, (match:string ) => map[match]);
   };
 
@@ -45,12 +40,10 @@ export default function Header(){
         (e) => {
             if (e.key === "Enter") {
                 const value = e.target.value.trim();
-    
-                if (!hasValidMin(value, 2))
-                    return;
-    
-                addItem(sanitize(value));
-                e.target.value = "";
+                if (value.length >= 2){
+                    addItem(sanitize(value));
+                    e.target.value = "";
+                }
             }
         },
         [addItem]
