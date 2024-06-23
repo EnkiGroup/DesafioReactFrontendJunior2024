@@ -1,0 +1,49 @@
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  .footer-left {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .footer-links {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .footer-links a {
+    padding: 5px 10px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #111111;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    border-color: #f00;
+  }
+
+  .clear-completed-btn{
+    border: none;
+    background-color: transparent;
+    color: #111111
+  }
+
+  .clear-completed-btn:hover{
+    text-decoration: underline;
+  }
+
+  .footer-container {
+  }
+  
+
+
+  

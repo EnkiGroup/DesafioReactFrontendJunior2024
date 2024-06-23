@@ -1,0 +1,75 @@
+.container-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-color: white;
+    position: relative;
+  }
+  
+  .content-item {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    height: 40px;
+    font-size: 30px;
+  }
+  
+  .input-select {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    border: 1px solid #949494;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .input-select::after {
+    content: '✓';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #333; 
+    opacity: 0;
+  }
+  
+  .input-select:checked::after {
+    opacity: 1;
+  }
+  
+  .todo-title {
+    flex-grow: 1;
+  }
+  
+  .botaoDelete {
+    background-color: transparent;
+    border: none;
+    color: black;
+    cursor: pointer;
+    font-size: 1.5rem;
+    outline: none;
+    opacity: 0;
+    transition: opacity 0.3s; 
+    position: absolute;
+    right: 10px; 
+  }
+  
+  .container-item:hover .botaoDelete {
+    opacity: 1; 
+  }
+  
+  .todo-completed {
+    text-decoration: line-through;
+    color: #ccc; 
+  }
+  

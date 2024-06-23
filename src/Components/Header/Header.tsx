@@ -1,8 +1,8 @@
-import '../style/Header.css'
+import './Header.css'
 
 function Header(){
     return(
-        <header>
+        <header className='header'>
             <h1 className="h1">todos</h1>
         </header>
     )

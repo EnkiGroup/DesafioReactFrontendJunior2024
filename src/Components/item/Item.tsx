@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import InterfaceTodo from "../Models/InterfaceTodo";
+import InterfaceTodo from "../../Interface/InterfaceTodo";
 import axios from "axios";
+import "./Item.css";
 
 interface TaskProps {
   todo: InterfaceTodo;
@@ -13,7 +14,10 @@ const Item: React.FC<TaskProps> = ({ todo, onDelete }) => {
   const handleCheckClicked = async () => {
     try {
       const updatedTodo = { ...upTodo, isDone: !upTodo.isDone };
-      await axios.put(`http://localhost:5000/todos/${updatedTodo.id}`, updatedTodo);
+      await axios.put(
+        `http://localhost:5000/todos/${updatedTodo.id}`,
+        updatedTodo
+      );
       setUpTodo(updatedTodo);
     } catch (error) {
       console.error("Error updating todo:", error);
@@ -30,34 +34,24 @@ const Item: React.FC<TaskProps> = ({ todo, onDelete }) => {
   };
 
   return (
-    <div>
-      <div>
+    <div className="container-item">
+      <div className="content-item">
         <input
+          className="input-select"
           type="checkbox"
-          checked={todo.isDone}
+          checked={upTodo.isDone}
           onChange={handleCheckClicked}
         />
-        <span
-          style={{
-            textDecoration: todo.isDone ? "line-through" : "none",
-          }}
-        >
+        <span className={upTodo.isDone ? "todo-completed todo-title" : "todo-title"}>
           {todo.title}
         </span>
       </div>
       <button
         onClick={handleDeleteClicked}
         data-testid="deleteTodo"
-        style={{
-          fontSize: "1.2rem",
-          width: "2.5rem",
-          cursor: "pointer",
-          color: "#F28CA7",
-          opacity: "0.3",
-          transition: "opacity 0.2s",
-        }}
+        className="botaoDelete"
       >
-        ×
+        x
       </button>
     </div>
   );

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Item from "./Item";
-import TodoInterface from "../Models/InterfaceTodo";
-import Footer from "./Footer";
+import Item from "../item/Item";
+import TodoInterface from "../../Interface/InterfaceTodo";
+import Footer from "../Footer/Footer";
+import "./Tarefa.css";
 
 const fetchTodos = () => {
   return axios.get("http://localhost:5000/todos")
@@ -35,10 +36,23 @@ const Tarefa: React.FC<TodosProps> = (props) => {
 
   const handleDeleteTodo = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:5000/todos${id}`);
+      await axios.delete(`http://localhost:5000/todos/${id}`);
       setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
     } catch (error) {
       console.error("Error deleting todo:", error);
+    }
+  };
+
+  const clearCompleted = async () => {
+    try {
+     
+      const completedTodos = todos.filter(todo => todo.isDone);
+     
+      await Promise.all(completedTodos.map(todo => axios.delete(`http://localhost:5000/todos/${todo.id}`)));
+  
+      setTodos(prevTodos => prevTodos.filter(todo => !todo.isDone));
+    } catch (error) {
+      console.error("Error clearing completed todos:", error);
     }
   };
 
@@ -53,16 +67,16 @@ const Tarefa: React.FC<TodosProps> = (props) => {
   const incompleteTodosCount = todos.filter((todo) => !todo.isDone).length;
 
   if (isLoading)
-    return <div>Loading...</div>;
+    return <div className="load">Loading...</div>;
   if (isError)
-    return <div>Error</div>;
+    return <div className="load">Error</div>;
 
   return (
     <div>
       {filteredTodos.map((todo) => (
         <Item key={todo.id} todo={todo} onDelete={handleDeleteTodo} />
       ))}
-      <Footer contaItem={incompleteTodosCount} />
+      {todos.length > 0 && <Footer contaItem={incompleteTodosCount} clearCompleted={clearCompleted} />}
     </div>
   );
 };

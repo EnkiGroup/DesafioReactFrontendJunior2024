@@ -1,15 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./app.css";
-import Header from "./Components/Header";
-import Input from "./Components/Input";
-import Tarefa from "./Components/Tarefa";
+import Header from "./Components/Header/Header";
+import Input from "./Components/Input/Input";
+import Tarefa from "./Components/Tarefa/Tarefa";
 
 function App() {
   return (
     <BrowserRouter>
-      <div>
-        <div>
-          <Header />
+      <Header />
+      <div className="container">
+        <div className="content">
           <Input />
           <Routes>
             <Route path="/" element={<Tarefa />} />
@@ -17,6 +17,11 @@ function App() {
             <Route path="/completed" element={<Tarefa filter="completed" />} />
           </Routes>
         </div>
+      </div>
+      <div className="rodape">
+     <p>Double-click to edit a todo</p>
+     <p>Created by the TodoMVC Team</p>
+     <p>Part of TodoMVC</p>
       </div>
     </BrowserRouter>
   );
