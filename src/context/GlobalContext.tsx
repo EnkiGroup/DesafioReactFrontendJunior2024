@@ -1,5 +1,6 @@
 import { createContext, useMemo, useState } from "react";
 import { EditingTaskProps, GlobalContextProps, TaskProps } from "../types";
+import toast from "react-hot-toast";
 import { useLocation } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
@@ -53,14 +54,15 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     setIsEditing: React.Dispatch<React.SetStateAction<EditingTaskProps>>,
   ) => {
     if (!task) return;
-    if (value.length > 1) {
-      setTasks((prevTasks) =>
-        prevTasks.map((item) =>
-          item.id === task.id ? { ...item, title: value } : item,
-        ),
-      );
-      setIsEditing((prev) => ({ ...prev, enabledEditing: false }));
+    if (value?.length === 0 || value?.length === 1) {
+      return toast.error("A tarefa deve conter no mínimo 2 caracteres.");
     }
+    setTasks((prevTasks) =>
+      prevTasks.map((item) =>
+        item.id === task.id ? { ...item, title: value } : item,
+      ),
+    );
+    setIsEditing((prev) => ({ ...prev, enabledEditing: false }));
   };
 
   const enableAllTasks = () => {

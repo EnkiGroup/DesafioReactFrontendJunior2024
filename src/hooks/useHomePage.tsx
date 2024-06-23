@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import toast from "react-hot-toast";
 import useGlobalContext from "./useGlobalContext";
 
 const useHomePage = () => {
@@ -8,7 +9,7 @@ const useHomePage = () => {
     tasks,
     incrementTasks,
     enableAllTasks,
-    clearEnableTasks
+    clearEnableTasks,
   } = useGlobalContext();
   const tasksEnable = tasks.length
     ? tasks?.every(({ isDone }) => isDone)
@@ -18,10 +19,12 @@ const useHomePage = () => {
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      if (valueInput.length > 1) {
-        incrementTasks(valueInput);
+      if (valueInput?.length === 0 || valueInput?.length === 1) {
+        return toast.error("A tarefa deve conter no mínimo 2 caracteres.");
       }
+      incrementTasks(valueInput);
     },
+
     [valueInput, incrementTasks],
   );
 
@@ -33,7 +36,7 @@ const useHomePage = () => {
     enableAllTasks,
     tasksEnable,
     remainingTasks,
-    clearEnableTasks
+    clearEnableTasks,
   };
 };
 
