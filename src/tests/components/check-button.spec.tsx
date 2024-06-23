@@ -15,8 +15,8 @@ describe("CheckButton component", () => {
     const checkIconBefore = screen.queryByTestId('check-icon');
     expect(checkIconBefore).not.toBeInTheDocument();
 
-    const span = screen.getByTestId('check-span');
-    expect(span).toHaveStyle('border-color: rgb(156 163 175)');
+    const checkBorder = screen.getByTestId('check-border');
+    expect(checkBorder).toHaveStyle('border-color: rgb(156 163 175)');
 
     const checkbox = screen.getByRole('checkbox');
     fireEvent.click(checkbox);
@@ -26,7 +26,7 @@ describe("CheckButton component", () => {
     const checkIconAfter = screen.getByTestId('check-icon');
     expect(checkIconAfter).toBeInTheDocument();
 
-    expect(span).toHaveStyle('border-color: rgb(22 163 74)');
+    expect(checkBorder).toHaveStyle('border-color: rgb(22 163 74)');
   });
 
   it("should call onCheck prop on click", () => {

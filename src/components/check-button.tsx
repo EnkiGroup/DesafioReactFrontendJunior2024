@@ -16,7 +16,7 @@ export function CheckButton({ isDone, onCheck }: CheckButtonProps) {
       />
       <span
         className="w-8 h-8 border border-gray-400 rounded-full flex items-center justify-center peer-checked:border-green-600 transition-all ease-in-out duration-500 cursor-pointer"
-        data-testid="check-span"
+        data-testid="check-border"
       >
         {isDone && <Check className="text-green-600" data-testid="check-icon" />}
       </span>
