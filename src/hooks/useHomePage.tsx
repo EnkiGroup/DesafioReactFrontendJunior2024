@@ -1,6 +1,7 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import toast from "react-hot-toast";
 import useGlobalContext from "./useGlobalContext";
+import { useNavigate } from "react-router-dom";
 
 const useHomePage = () => {
   const {
@@ -10,11 +11,20 @@ const useHomePage = () => {
     incrementTasks,
     enableAllTasks,
     clearEnableTasks,
+    initialData,
+    pathname,
   } = useGlobalContext();
-  const tasksEnable = tasks.length
-    ? tasks?.every(({ isDone }) => isDone)
-    : false;
-  const remainingTasks = tasks?.filter(({ isDone }) => isDone === false);
+
+  const navigate = useNavigate();
+
+  const tasksEnable = useMemo(
+    () => (tasks?.length ? tasks.every(({ isDone }) => isDone) : false),
+    [tasks],
+  );
+  const remainingTasks = useMemo(
+    () => tasks.filter(({ isDone }) => !isDone),
+    [tasks],
+  );
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -24,9 +34,21 @@ const useHomePage = () => {
       }
       incrementTasks(valueInput);
     },
-
     [valueInput, incrementTasks],
   );
+
+  useEffect(() => {
+    if (pathname === "/") {
+      navigate("all");
+    }
+    initialData();
+  }, []);
+
+  useEffect(() => {
+    if (tasksEnable) {
+      toast.success("Parabéns! Você completou todas as suas tarefas!");
+    }
+  }, [tasksEnable]);
 
   return {
     handleSubmit,

@@ -4,12 +4,14 @@ import toast from "react-hot-toast";
 import { useLocation } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
+import fetchAllAsks from "../utils/fetchAllTasks";
 
 export const GlobalContext = createContext({} as GlobalContextProps);
 
 const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [valueInput, setValueInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { pathname } = useLocation();
 
   const renderContent = useMemo(() => {
@@ -79,6 +81,22 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     setTasks(tasksEnable);
   };
 
+  const initialData = async (): Promise<TaskProps[]> => {
+    try {
+      setIsLoading(true);
+      const data = await fetchAllAsks();
+      setTasks(data);
+      return data;
+    } catch (erro) {
+      toast.error(
+        "Houve um problema ao carregar as tarefas. Por favor, tente novamente mais tarde.",
+      );
+      return [];
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -92,6 +110,9 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
         enableAllTasks,
         editingTask,
         clearEnableTasks,
+        initialData,
+        isLoading,
+        pathname
       }}
     >
       {children}

@@ -24,4 +24,7 @@ export type GlobalContextProps = {
     setIsEditing: React.Dispatch<React.SetStateAction<EditingTaskProps>>,
   ) => void;
   clearEnableTasks: () => void;
+  initialData: () => Promise<TaskProps[]>;
+  isLoading: boolean;
+  pathname: string;
 };
