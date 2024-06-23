@@ -201,6 +201,48 @@ body {
         font-weight: 400;
         color: $color-label;
       }
+
+			button {
+				margin: 0;
+				padding: 0;
+				border: 0;
+				background: none;
+				font-size: 100%;
+				vertical-align: baseline;
+				font-family: inherit;
+				font-weight: inherit;
+				color: inherit;
+				-webkit-appearance: none;
+				appearance: none;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+
+			.delete {
+				display: none;
+				position: absolute;
+				top: 0;
+				right: 10px;
+				bottom: 0;
+				width: 40px;
+				height: 40px;
+				margin: auto 0;
+				font-size: 30px;
+				color: $color-placeholder;
+				transition: color 0.2s ease-out;
+			}
+			
+			.delete:hover,
+			.delete:focus {
+				color: $color-focus;
+			}
+			
+			.delete:after {
+				content: '×';
+				display: block;
+				height: 100%;
+				line-height: 1.1;
+			}
     }
 
     li:last-child {
@@ -211,7 +253,17 @@ body {
       color: $color-label-complete;
       text-decoration: line-through;
     }
+		
+		li:hover .delete {
+			display: block;
+		}
   }
+}
+
+.toggle:focus + label,
+.toggle-all:focus + label {
+	box-shadow: 0 0 2px 2px $color-focus;
+	outline: 0;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
@@ -223,9 +275,4 @@ body {
   .todo-list li .toggle {
     height: 40px;
   }
-}
-
-:focus + label {
-  box-shadow: 0 0 2px 2px $color-focus;
-  outline: 0;
 }

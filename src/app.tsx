@@ -75,6 +75,10 @@ const App = () => {
 
   const showToggleAll = todos.length > 0;
 
+  const handleDelete = (id: string) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
   return (
     <div>
       <section id="root" className="todoapp">
@@ -123,6 +127,8 @@ const App = () => {
                   <label>
                     {todo.title}
                   </label>
+
+                  <button className="delete" onClick={() => handleDelete(todo.id)}></button>
                 </div>
               </li>
             ))}
