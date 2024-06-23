@@ -34,7 +34,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
       isDone: false,
     };
 
-    setTasks((tasks) => [...tasks, newTask]);
+    setTasks((tasks) => [newTask, ...tasks]);
   }
 
   function updateTaskTitle(newTask: { id: string, title: string }) {
