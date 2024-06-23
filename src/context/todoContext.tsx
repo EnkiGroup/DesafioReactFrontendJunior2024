@@ -27,11 +27,6 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     }, [todoFetch, setTodoList])
 
-    useEffect(() => {
-        console.log(todoList)
-    }, [todoList])
-
-
     const addTask = (title: string) => {
         const newTask: Task = { id: nanoid(), title, isDone: false };
         setTodoList(prevList => [...prevList, newTask]);
