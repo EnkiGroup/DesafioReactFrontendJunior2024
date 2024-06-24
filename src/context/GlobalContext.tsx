@@ -145,7 +145,6 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     0,
   );
 
-  console.log(remainingTasks);
   return (
     <GlobalContext.Provider
       value={{
