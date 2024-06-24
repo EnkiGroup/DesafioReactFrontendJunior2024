@@ -5,10 +5,10 @@ export type SetAllCompletedAction = {
 }
 
 export function handleSetAllCompleted(state: TodosState): TodosState {
-  const allCompleted = state.todos.every(todo => todo.isCompleted);
+  const allDone = state.todos.every(todo => todo.isDone);
   const updatedTodos = state.todos.map(todo => ({
     ...todo,
-    isCompleted: !allCompleted
+    isDone: !allDone
   }));
   return { ...state, todos: updatedTodos };
 }

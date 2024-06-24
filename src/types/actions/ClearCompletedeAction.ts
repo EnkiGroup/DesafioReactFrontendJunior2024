@@ -5,6 +5,6 @@ export type ClearCompletedAction = {
 }
 
 export function handleClearCompleted(state: TodosState): TodosState {
-    const clearCompletedTodos = state.todos.filter(todo => todo.isCompleted === false);
+    const clearCompletedTodos = state.todos.filter(todo => todo.isDone === false);
     return { ...state, todos: clearCompletedTodos };
 }

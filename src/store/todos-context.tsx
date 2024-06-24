@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useState } from 'react'
+import { createContext, useContext, useEffect, useReducer } from 'react'
 import { TodosContextProviderProps } from '../types/TodosContextProviderProps';
 import { TodosState } from '../types/TodosState';
 import { TodosContextValue } from '../types/TodosContextValue';
@@ -9,6 +9,8 @@ import { handleClearCompleted } from '../types/actions/ClearCompletedeAction';
 import { handleSetAllCompleted } from '../types/actions/SetAllCompletedAction';
 import { handleToggleActive } from '../types/actions/ToggleActiveAction';
 import { handleUpdateDescription } from '../types/actions/UpdateDescriptionAction';
+import { useTodosFetch } from '../hooks/useTodosFetch'
+import { handleSetInitialTodos } from '../types/actions/SetInitialTodosAction';
 
 const TodosContext = createContext<TodosContextValue | null >({ 
     todos: [], 
@@ -28,13 +30,11 @@ export function useTodosContext() {
     return todosCtx
 }
 
-const initialState: TodosState = {
-    todos: [],
-  };
+
 
 function todosReducer(state: TodosState, action: Action): TodosState {
     if (action.type === 'ADD_TODO') {
-        return handleAddTodo(state, action.description);
+        return handleAddTodo(state, action.title);
     } 
     if (action.type === 'DELETE_TODO') {
         return handleDeleteTodo(state, action.id);
@@ -49,21 +49,34 @@ function todosReducer(state: TodosState, action: Action): TodosState {
         return handleToggleActive(state, action.id)
     }
     if (action.type === 'UPDATE_DESCRIPTION') {
-        return handleUpdateDescription(state, action.id, action.newDescription)
+        return handleUpdateDescription(state, action.id, action.newTitle)
+    }
+    if (action.type === 'SET_INITIAL_TODOS') {
+        return handleSetInitialTodos(state, action.todos)
     }
 
     return state;
 }
 
 export default function TodosContextProvider({ children }: TodosContextProviderProps) {
-    const [todoState, dispatch] = useReducer(todosReducer, initialState)
+    const url: string = "https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos"
+    const [todoState, dispatch] = useReducer(todosReducer, {todos: []})
+    const { data } = useTodosFetch(url)
+
+    useEffect(() => {
+        if (data) {
+            dispatch({ type: 'SET_INITIAL_TODOS', todos: data });
+        }
+    }, [data]);
+
+    console.log(todoState.todos)
 
     const ctx: TodosContextValue = {
         todos: todoState.todos,
-        handleAddTodo(description: string) {
-            dispatch({type: "ADD_TODO", description: description})
+        handleAddTodo(title: string) {
+            dispatch({type: "ADD_TODO", title: title})
         },
-        handleDeleteTodo(id: number) {
+        handleDeleteTodo(id: string) {
             dispatch({type: 'DELETE_TODO', id: id})
         },
         handleClearCompleted() {
@@ -72,13 +85,14 @@ export default function TodosContextProvider({ children }: TodosContextProviderP
         handleSetAllCompleted() {
             dispatch({type: 'SET_ALL_COMPLETED'})
         },
-        handleToggleActive(id: number) {
+        handleToggleActive(id: string) {
             dispatch({type: 'TOGGLE_ACTIVE', id: id})
         },
-        handleUpdateDescription(id: number, newDescription: string) {
-            dispatch({type: 'UPDATE_DESCRIPTION', id: id, newDescription: newDescription})
+        handleUpdateDescription(id: string, newTitle: string) {
+            dispatch({type: 'UPDATE_DESCRIPTION', id: id, newTitle: newTitle})
         }
     }
 
     return <TodosContext.Provider value={ ctx }>{ children }</TodosContext.Provider>
 }
+

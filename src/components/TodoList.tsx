@@ -7,13 +7,13 @@ export default function TodoList() {
     const todosCtx = useTodosContext();
     const location = useLocation();
     const filter = location.pathname.replace("/", "") as "/" | "active" | "completed";
-    const activeTodosCount = todosCtx.todos.filter((todo) => !todo.isCompleted).length;
+    const activeTodosCount = todosCtx.todos.filter((todo) => !todo.isDone).length;
 
     const filteredTodos = todosCtx.todos.filter((todo) => {
         if (filter === "active") {
-            return !todo.isCompleted;
+            return !todo.isDone;
         } else if (filter === "completed") {
-            return todo.isCompleted;
+            return todo.isDone;
         }
         return true;
     });

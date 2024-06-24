@@ -2,8 +2,6 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { useTodosContext } from "../store/todos-context";
 import { TodoProps } from "../types/TodoItemProps";
 
-
-
 export default function TodoItem({ todo }: TodoProps) {
     const todosCtx = useTodosContext();
     const [isEditing, setIsEditing] = useState(false);
@@ -23,11 +21,11 @@ export default function TodoItem({ todo }: TodoProps) {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        const newDescription = inputRef.current!.value;
-        if (newDescription === "") {
+        const newTitle = inputRef.current!.value;
+        if (newTitle === "") {
             return
         }
-        todosCtx.handleUpdateDescription(todo.id, newDescription);
+        todosCtx.handleUpdateDescription(todo.id, newTitle);
     }
 
     function handleKeyDown(event: React.KeyboardEvent) {
@@ -51,15 +49,15 @@ export default function TodoItem({ todo }: TodoProps) {
                         <input
                             type="checkbox"
                             className={`absolute left-2 appearance-none rounded-full h-8 w-8 border 
-                                ${todo.isCompleted ? "border-green" : "border-gray-1"}`}
+                                ${todo.isDone ? "border-green" : "border-gray-1"}`}
                         />
                         <div className="absolute top-[-2px] right-[3px] flex justify-center items-center h-full w-11">
                             <div className={`border-green border-b-2 border-r-2 h-4 w-2 rotate-[35deg] transform 
-                                ${todo.isCompleted ? "" : "hidden"}`}></div>
+                                ${todo.isDone ? "" : "hidden"}`}></div>
                         </div>
                     </div>
                     <div className="bg-white w-full pl-4 text-2xl text-black-2" >
-                        {todo.description}
+                        {todo.title}
                     </div>
 
                     <div
@@ -84,7 +82,7 @@ export default function TodoItem({ todo }: TodoProps) {
                     <input
                         className={`pl-14 flex bg-white h-11 w-full shadow-md ${isEditing ? 'h-12 outline-none ring-1 ring-red-700 ring-opacity-50 z-10 relative' : ''}`}
                         ref={inputRef}
-                        defaultValue={todo.description}
+                        defaultValue={todo.title}
                     >
                     </input>
                 </div>

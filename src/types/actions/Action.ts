@@ -2,6 +2,7 @@ import { AddTodoAction } from "./AddTodoAction";
 import { ClearCompletedAction } from "./ClearCompletedeAction";
 import { DeleteTodoAction } from "./DeleteTodoAction";
 import { SetAllCompletedAction } from "./SetAllCompletedAction";
+import { SetInitialTodosAction } from "./SetInitialTodosAction";
 import { ToggleActiveAction } from "./ToggleActiveAction";
 import { UpdateDescriptionAction } from "./UpdateDescriptionAction";
 
@@ -11,4 +12,5 @@ export type Action =
     DeleteTodoAction | 
     SetAllCompletedAction | 
     ToggleActiveAction | 
-    UpdateDescriptionAction;
+    UpdateDescriptionAction |
+    SetInitialTodosAction;

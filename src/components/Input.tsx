@@ -4,7 +4,7 @@ import { useTodosContext } from "../store/todos-context";
 export default function Input() {
     const todosCtx = useTodosContext();
     const [isFocused, setIsFocused] = useState(false);
-    const description = useRef<HTMLInputElement>(null);
+    const title = useRef<HTMLInputElement>(null);
 
     const handleFocus = () => {
         setIsFocused(true);
@@ -16,12 +16,12 @@ export default function Input() {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        const enteredDescription = description.current!.value;
-        if (enteredDescription === "") {
+        const enteredTitle = title.current!.value;
+        if (enteredTitle === "") {
             return
         }
         event.currentTarget.reset()
-        todosCtx.handleAddTodo(enteredDescription);
+        todosCtx.handleAddTodo(enteredTitle);
     }
 
     function handleKeyDown(event : React.KeyboardEvent) {
@@ -54,7 +54,7 @@ export default function Input() {
                 }
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                ref={description}
+                ref={title}
                 
             />
         </form>

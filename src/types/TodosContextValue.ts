@@ -1,10 +1,10 @@
 import { TodosState } from "./TodosState";
 
 export type TodosContextValue = TodosState & {
-    handleAddTodo: (description: string) => void;
-    handleDeleteTodo: (id: number) => void;
+    handleAddTodo: (title: string) => void;
+    handleDeleteTodo: (id: string) => void;
     handleClearCompleted: () => void;
-    handleToggleActive: (id: number) => void;
-    handleUpdateDescription: (id: number, newDescription: string) => void;
+    handleToggleActive: (id: string) => void;
+    handleUpdateDescription: (id: string, newTitle: string) => void;
     handleSetAllCompleted: () => void
 }
