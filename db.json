@@ -1,0 +1,7 @@
+{
+  "todos": [
+    { "id": "flrGI", "title": "Lavar os pratos", "isDone": false },
+    { "id": "Tw-I9", "title": "Cortar a grama", "isDone": true },
+    { "id": "7f2sf", "title": "Comprar pão", "isDone": false }
+  ]
+}
