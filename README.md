@@ -5,6 +5,9 @@
 Este projeto é uma aplicação de Todo List desenvolvida como parte do desafio para a posição de front-end júnior na enContact. A aplicação permite que o usuário adicione, remova e atualize tarefas, além de filtrar tarefas ativas e completadas.
 
 ## Deploy
+Você pode acessar o resultado final pelo link: 
+<br />
+https://desafioreacttodoencontact-8hdr3f8vt-santiagohenriques-projects.vercel.app/all
 
 ## Tecnologias Utilizadas
 
