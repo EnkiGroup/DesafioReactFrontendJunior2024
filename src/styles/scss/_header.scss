@@ -1,0 +1,53 @@
+#table_header{
+
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    display: flex;
+    position: relative;
+
+    .arrow_down_container{
+
+        align-items: center;
+        background-color: transparent;
+        border: 0;
+        display: flex;
+        position: absolute;
+        width: 5rem;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        bottom: 0;
+
+        &:focus{
+            box-shadow: 0 0 5px 2px $main-orange-color;
+        }
+
+        img{
+            position: absolute;
+            left: 15px;
+            width: 20px;
+        }
+
+    }
+
+    #input_task_container{
+
+        width: 100%;
+
+        #input_task{
+            border: 0;
+            position: relative;
+            font-size: 2.3rem;
+            padding: 1.6rem 0 1.6rem 5.6rem;
+            width: 100%;
+
+            &:focus{
+                box-shadow: 0 0 10px $main-orange-color;
+            }
+
+            &::placeholder{
+                font-style: italic;
+            }
+        }
+    }
+
+}
