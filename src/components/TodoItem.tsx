@@ -32,7 +32,7 @@ export default function TodoItem({ todo, handleDeleteTodo, handleToggleActive, h
         if (newDescription === "") {
             return
         }
-        handleUpdateDescription(todo.id, newDescription);
+        todosCtx.handleUpdateDescription(todo.id, newDescription);
     }
 
     function handleKeyDown(event: React.KeyboardEvent) {
@@ -41,7 +41,6 @@ export default function TodoItem({ todo, handleDeleteTodo, handleToggleActive, h
             handleSubmit(event as any);
         }
     }
-
 
     return (
 
@@ -52,7 +51,7 @@ export default function TodoItem({ todo, handleDeleteTodo, handleToggleActive, h
                     <div
                         id="toggle-active"
                         className="relative flex items-center justify-center h-11 w-14"
-                        onClick={() => handleToggleActive(todo.id)}
+                        onClick={() => todosCtx.handleToggleActive(todo.id)}
                     >
                         <input
                             type="checkbox"

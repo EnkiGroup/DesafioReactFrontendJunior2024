@@ -40,7 +40,7 @@ export default function Input({ handleAddTodo, handleSetAllCompleted }: InputPro
             <div 
                 id="arrow-down" 
                 className="flex justify-center items-center h-full w-11"
-                onClick={() => handleSetAllCompleted()}
+                onClick={() => todosCtx.handleSetAllCompleted()}
                 >
                 <div className=" border-zinc-500 border-b-2 border-r-2 h-2 w-2 rotate-45 transform"></div>
             </div>
