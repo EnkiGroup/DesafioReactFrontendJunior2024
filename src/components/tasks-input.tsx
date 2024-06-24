@@ -30,6 +30,7 @@ export function TasksInput() {
         placeholder="What needs to be done?"
         {...register("title")}
         error={errors.title}
+        data-testid="task-input"
       />
     </form>
   )
