@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { Todo } from "../types/Todo"
+import { useTodosContext } from "../store/todos-context";
 
 type TodoProps = {
     todo: Todo;
@@ -9,6 +10,7 @@ type TodoProps = {
 }
 
 export default function TodoItem({ todo, handleDeleteTodo, handleToggleActive, handleUpdateDescription }: TodoProps) {
+    const todosCtx = useTodosContext();
     const [isEditing, setIsEditing] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -64,7 +66,7 @@ export default function TodoItem({ todo, handleDeleteTodo, handleToggleActive, h
                         {todo.description}
                     </div>
                     <div id="delete" className="flex justify-center items-center h-full w-11">
-                        <p onClick={() => handleDeleteTodo(todo.id)} className="hover:text-gray-500 cursor-pointer active:scale-90">X</p>
+                        <p onClick={() => todosCtx.handleDeleteTodo(todo.id)} className="hover:text-gray-500 cursor-pointer active:scale-90">X</p>
                     </div>
                 </div>
             }

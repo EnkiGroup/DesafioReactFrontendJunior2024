@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Todo } from "../types/Todo"
 import TodoItem from "./TodoItem";
+import { useTodosContext } from "../store/todos-context";
 
 type TodoListProps = {
     todos: Todo[];
@@ -12,9 +13,10 @@ type TodoListProps = {
 }
 
 export default function TodoList({ todos, handleDeleteTodo, handleToggleActive, handleClearCompleted, handleUpdateDescription }: TodoListProps) {
+    const todosCtx = useTodosContext();
     const [filter, setFilter] = useState<"All" | "Active" | "Completed">("All");
-    const activeTodosCount = todos.filter((todo) => !todo.isCompleted).length;
-    const filteredTodos = todos.filter((todo) => {
+    const activeTodosCount = todosCtx.todos.filter((todo) => !todo.isCompleted).length;
+    const filteredTodos = todosCtx.todos.filter((todo) => {
         if (filter === "Active") {
             return !todo.isCompleted;
         } else if (filter === "Completed") {
@@ -40,7 +42,7 @@ export default function TodoList({ todos, handleDeleteTodo, handleToggleActive, 
             </ul>
 
 
-            {todos.length !== 0 &&
+            {todosCtx.todos.length !== 0 &&
                 <div className="px-4 flex justify-between items-center w-full bg-white border h-7 text-xs">
                     <p>{activeTodosCount} Items left</p>
                     <button onClick={() => setFilter("All")}>All</button>

@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useRef, useState } from "react";
-import { InputProps } from "../types/InputProps";
 import { useTodosContext } from "../store/todos-context";
+import { InputProps } from "../types/InputProps";
 
 export default function Input({ handleAddTodo, handleSetAllCompleted }: InputProps) {
     const todosCtx = useTodosContext();
@@ -22,7 +22,7 @@ export default function Input({ handleAddTodo, handleSetAllCompleted }: InputPro
             return
         }
         event.currentTarget.reset()
-        handleAddTodo(enteredDescription);
+        todosCtx.handleAddTodo(enteredDescription);
     }
 
     function handleKeyDown(event : React.KeyboardEvent) {
