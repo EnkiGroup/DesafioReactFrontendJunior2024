@@ -18,7 +18,7 @@ const Item: React.FC<TaskProps> = ({ todo, onDelete, onUpdate }) => {
     try {
       const updatedTodo = { ...upTodo, isDone: !upTodo.isDone };
       await axios.put(
-        `http://localhost:5000/todos/${updatedTodo.id}`,
+        `https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos/${updatedTodo.id}`,
         updatedTodo
       );
       setUpTodo(updatedTodo);
@@ -30,7 +30,7 @@ const Item: React.FC<TaskProps> = ({ todo, onDelete, onUpdate }) => {
 
   const handleDeleteClicked = async () => {
     try {
-      await axios.delete(`http://localhost:5000/todos/${upTodo.id}`);
+      await axios.delete(`https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos/${upTodo.id}`);
       onDelete(upTodo.id);
     } catch (error) {
       console.error("Error deleting todo:", error);
@@ -49,7 +49,7 @@ const Item: React.FC<TaskProps> = ({ todo, onDelete, onUpdate }) => {
     if (e.key === "Enter") {
       try {
         const updatedTodo = { ...upTodo, title: editTitle };
-        await axios.put(`http://localhost:5000/todos/${updatedTodo.id}`, updatedTodo);
+        await axios.put(`https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos/${updatedTodo.id}`, updatedTodo);
         setUpTodo(updatedTodo);
         setIsEditing(false);
         onUpdate(updatedTodo);
@@ -66,12 +66,14 @@ const Item: React.FC<TaskProps> = ({ todo, onDelete, onUpdate }) => {
   return (
     <div className="container-item" onDoubleClick={handleDoubleClick}>
       <div className="content-item">
-        <input
-          className="input-select"
-          type="checkbox"
-          checked={upTodo.isDone}
-          onChange={handleCheckClicked}
-        />
+        <div className="input-select-container">
+          <input
+            className="input-select"
+            type="checkbox"
+            checked={upTodo.isDone}
+            onChange={handleCheckClicked}
+          />
+        </div>
         {isEditing ? (
           <input
             className="edit-input"
@@ -93,7 +95,7 @@ const Item: React.FC<TaskProps> = ({ todo, onDelete, onUpdate }) => {
         data-testid="deleteTodo"
         className="botaoDelete"
       >
-        x
+        ×
       </button>
     </div>
   );

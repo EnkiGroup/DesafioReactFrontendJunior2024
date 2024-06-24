@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 import "./Tarefa.css";
 
 const fetchTodos = () => {
-  return axios.get("http://localhost:5000/todos")
+  return axios.get("https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos")
     .then((res) => res.data);
 };
 
@@ -36,7 +36,7 @@ const Tarefa: React.FC<TodosProps> = (props) => {
 
   const handleDeleteTodo = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:5000/todos/${id}`);
+      await axios.delete(`https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos/${id}`);
       setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
     } catch (error) {
       console.error("Error deleting todo:", error);
@@ -52,7 +52,7 @@ const Tarefa: React.FC<TodosProps> = (props) => {
   const clearCompleted = async () => {
     try {
       const completedTodos = todos.filter(todo => todo.isDone);
-      await Promise.all(completedTodos.map(todo => axios.delete(`http://localhost:5000/todos/${todo.id}`)));
+      await Promise.all(completedTodos.map(todo => axios.delete(`https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos/${todo.id}`)));
       setTodos(prevTodos => prevTodos.filter(todo => !todo.isDone));
     } catch (error) {
       console.error("Error clearing completed todos:", error);

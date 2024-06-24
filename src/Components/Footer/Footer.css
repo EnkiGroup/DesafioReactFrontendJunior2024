@@ -31,6 +31,7 @@
   
   .footer-links a:hover {
     border-color: #f00;
+    border: 1px solid #CE4646ed;
   }
 
   .clear-completed-btn{
