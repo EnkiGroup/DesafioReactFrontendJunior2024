@@ -12,7 +12,7 @@ type TodoListProps = {
 
 }
 
-export default function TodoList({ todos, handleDeleteTodo, handleToggleActive, handleClearCompleted, handleUpdateDescription }: TodoListProps) {
+export default function TodoList() {
     const todosCtx = useTodosContext();
     const [filter, setFilter] = useState<"All" | "Active" | "Completed">("All");
     const activeTodosCount = todosCtx.todos.filter((todo) => !todo.isCompleted).length;
@@ -31,12 +31,7 @@ export default function TodoList({ todos, handleDeleteTodo, handleToggleActive, 
             <ul className="w-full">
                 {filteredTodos.map((todo) => (
                     <li className="bg-white border" key={todo.id}>
-                        <TodoItem
-                            todo={todo}
-                            handleDeleteTodo={handleDeleteTodo}
-                            handleToggleActive={handleToggleActive}
-                            handleUpdateDescription={handleUpdateDescription}
-                        />
+                        <TodoItem todo={todo}/>
                     </li>
                 ))}
             </ul>

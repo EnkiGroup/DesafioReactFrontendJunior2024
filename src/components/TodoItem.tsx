@@ -1,19 +1,13 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { Todo } from "../types/Todo"
 import { useTodosContext } from "../store/todos-context";
+import { TodoProps } from "../types/TodoItemProps";
 
-type TodoProps = {
-    todo: Todo;
-    handleDeleteTodo: (id: number) => void;
-    handleToggleActive: (id: number) => void;
-    handleUpdateDescription: (id: number, newDescription: string) => void
-}
 
-export default function TodoItem({ todo, handleDeleteTodo, handleToggleActive, handleUpdateDescription }: TodoProps) {
+
+export default function TodoItem({ todo } : TodoProps) {
     const todosCtx = useTodosContext();
     const [isEditing, setIsEditing] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
-
 
     const handleDoubleClick = () => {
         setIsEditing(true);
@@ -43,7 +37,6 @@ export default function TodoItem({ todo, handleDeleteTodo, handleToggleActive, h
     }
 
     return (
-
         <div>
             {!isEditing &&
                 <div

@@ -1,8 +1,7 @@
-import { FormEvent, useContext, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { useTodosContext } from "../store/todos-context";
-import { InputProps } from "../types/InputProps";
 
-export default function Input({ handleAddTodo, handleSetAllCompleted }: InputProps) {
+export default function Input() {
     const todosCtx = useTodosContext();
     const [isFocused, setIsFocused] = useState(false);
     const description = useRef<HTMLInputElement>(null);
@@ -33,26 +32,32 @@ export default function Input({ handleAddTodo, handleSetAllCompleted }: InputPro
 
     return (
         <form
-            id="holder"
-            className={`flex bg-white h-11 w-full shadow-md ${isFocused ? 'ring-1 ring-red-700 ring-opacity-50 z-10 relative' : ''}`}
+            className={`flex bg-white-2 h-16 w-full shadow-md 
+                ${isFocused ? 'ring-2 ring-red ring-opacity-50 z-10 relative' : ''}`
+            }
             onKeyDown={handleKeyDown}
         >
             <div 
-                id="arrow-down" 
-                className="flex justify-center items-center h-full w-11"
+                className={`flex justify-center items-center h-full w-11 
+                    ${todosCtx.todos.length === 0 ? 'hidden' : ''}`
+                }
                 onClick={() => todosCtx.handleSetAllCompleted()}
                 >
-                <div className=" border-zinc-500 border-b-2 border-r-2 h-2 w-2 rotate-45 transform"></div>
+                <div className=" border-gray-1 border-b-[3px] border-r-[3px] h-3 w-3 rotate-45 transform"></div>
             </div>
 
             <input
                 type="text"
                 placeholder="What needs to be done?"
-                className="focus:outline-none italic text-base pl-4 w-full"
+                className={`focus:outline-none italic text-2xl text-gray-3 font-thin w-full 
+                    ${todosCtx.todos.length === 0 ? 'pl-[57px]' : ' pl-4'}`
+                }
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 ref={description}
+                
             />
         </form>
+        
     )
 }
