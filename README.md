@@ -9,6 +9,13 @@ Você pode acessar o resultado final pelo link:
 <br />
 https://desafioreacttodoencontact-8hdr3f8vt-santiagohenriques-projects.vercel.app/all
 
+### Desktop 
+<br/>
+<img src="deploy1.png" width="400px" />
+
+### Mobile
+<img src="deploy2.png" width="250px" />
+
 ## Tecnologias Utilizadas
 
 - React
