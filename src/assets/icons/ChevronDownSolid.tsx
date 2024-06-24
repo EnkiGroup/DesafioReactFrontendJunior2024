@@ -16,6 +16,7 @@ const ChevronDownSolid = ({ handleChange }: ChevronDownSolidProps) => {
       strokeLinejoin="round"
       className="chevronDownSolid"
       onClick={handleChange}
+      role="chevronDownSolid"
     >
       <path d="M6 9l6 6 6-6" />
     </svg>

@@ -23,7 +23,7 @@ const Input = ({
   ...props
 }: InputProps) => {
   return (
-    <InputContainer onSubmit={handleSubmit}>
+    <InputContainer onSubmit={handleSubmit} role="form">
       {enabledIcon && <ChevronDownSolid handleChange={handleClickIcon} />}
       <InputForm
         id={id}
