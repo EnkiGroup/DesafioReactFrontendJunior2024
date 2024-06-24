@@ -30,7 +30,7 @@ export default function TodoList() {
         <div>
             <ul className="w-full">
                 {filteredTodos.map((todo) => (
-                    <li className="bg-white border" key={todo.id}>
+                    <li className="bg-white-2 border border-gray-1 border-opacity-20 shadow-lg" key={todo.id}>
                         <TodoItem todo={todo}/>
                     </li>
                 ))}
@@ -38,7 +38,8 @@ export default function TodoList() {
 
 
             {todosCtx.todos.length !== 0 &&
-                <div className="px-4 flex justify-between items-center w-full bg-white border h-7 text-xs">
+                <div className="px-4 flex justify-between items-center w-full bg-white h-10 text-sm
+                border border-gray-1 border-opacity-20 shadow-lg">
                     <p>{activeTodosCount} Items left</p>
                     <button onClick={() => setFilter("All")}>All</button>
                     <button onClick={() => setFilter("Active")}>Active</button>

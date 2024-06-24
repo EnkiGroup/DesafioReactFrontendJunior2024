@@ -32,7 +32,7 @@ export default function Input() {
 
     return (
         <form
-            className={`flex bg-white-2 h-16 w-full shadow-md 
+            className={`flex bg-white-2 h-16 w-full shadow-xl border border-gray-1 border-opacity-20
                 ${isFocused ? 'ring-2 ring-red ring-opacity-50 z-10 relative' : ''}`
             }
             onKeyDown={handleKeyDown}
@@ -49,7 +49,7 @@ export default function Input() {
             <input
                 type="text"
                 placeholder="What needs to be done?"
-                className={`focus:outline-none italic text-2xl text-gray-3 font-thin w-full 
+                className={`focus:outline-none italic placeholder:text-gray-1 text-2xl text-black font-thin w-full 
                     ${todosCtx.todos.length === 0 ? 'pl-[57px]' : ' pl-4'}`
                 }
                 onFocus={handleFocus}

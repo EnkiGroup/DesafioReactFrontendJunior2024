@@ -15,6 +15,7 @@ module.exports = {
       'white-1': '#F5F5F5',
       'white-2': '#FEFEFE',
       'black': '#000000',
+      'black-2': '#484848',
     },
     fontFamily: {
       'sans': ['Helvetica', 'Arial', 'sans-serif'],
