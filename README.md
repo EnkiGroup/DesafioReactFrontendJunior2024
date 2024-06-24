@@ -1,14 +1,19 @@
 # Teste front-end enContact
 
+
 Projeto desenvolvido por [Hiago Oliveira](https://github.com/HiagoSant223).
 
+
 ## Tecnologias
+
 
 - React
 - Typescript
 - CSS
 
+
 ## Funcionalidades
+
 
 - Criar tarefas
 - Editar tarefas
