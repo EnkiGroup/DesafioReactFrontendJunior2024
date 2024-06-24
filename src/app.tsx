@@ -43,7 +43,7 @@ export default function App() {
       </section>
         <div css={text}>
           <p>Efetue um clique duplo para editar uma tarefa</p>
-          <p>feito pelo time TodoMVC</p>
+          <p>feito Vitor De Almeida Dal Belo</p>
           <p>Parte de TodoMVC</p>
           <a target="_blank" href="https://www.linkedin.com/in/vitor-almeida-dal-belo/">Linkedin</a>
           <br/>
