@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Task } from '../types/types';
-import useFetchTodos from '../hooks/useFetchTodos';
+import { fetchTodos } from '../utils/api';
 
 interface TodoContextProps {
     todoList: Task[];
@@ -19,13 +19,18 @@ const TodoContext = createContext<TodoContextProps | undefined>(undefined);
 export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [todoList, setTodoList] = useState<Task[]>([]);
 
-    const { todoFetch } = useFetchTodos()
-
     useEffect(() => {
-        if (todoFetch) {
-        setTodoList(todoFetch);
-        }
-    }, [todoFetch, setTodoList])
+        const fetchInitialTodos = async () => {
+            try {
+                const todos = await fetchTodos();
+                setTodoList(todos);
+            } catch (error) {
+                console.error("Erro ao buscar os todos:", error);
+            }
+        };
+
+        fetchInitialTodos();
+    }, []);
 
     const addTask = (title: string) => {
         const newTask: Task = { id: nanoid(), title, isDone: false };
