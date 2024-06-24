@@ -30,9 +30,10 @@ body {
 #root {
   display: flex;
   justify-content: center;
+  margin: 0 10px;
 }
 
-@media screen and (max-width:1400px){
+@media screen and (max-width:900px){
   html {
   font-size: 88.5%;
 }
