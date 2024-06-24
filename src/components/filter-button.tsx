@@ -12,7 +12,7 @@ export function FilterButton({ route, filterName }: FilterButtonProps) {
   const isChecked = pathname === route;
 
   return (
-    <Link to={route} className="flex items-center">
+    <Link to={route} className="flex items-center" data-testid="navigate-button">
       <input
         type="radio"
         name="filters"
