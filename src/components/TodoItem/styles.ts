@@ -2,6 +2,7 @@ import styled, { keyframes, css } from "styled-components";
 
 type ItemProps = {
   isEditing?: boolean;
+  enableEditing?: boolean;
 };
 
 const animaItem = keyframes`
@@ -24,13 +25,13 @@ const animaSpan = keyframes`
   }
 `;
 
-export const TodoItemContainer = styled.div`
+export const TodoItemContainer = styled.div<ItemProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   padding: 0.938rem;
-  border: 1px solid rgb(227, 227, 227);
+  border: 1px solid ${({enableEditing, theme}) => enableEditing ? theme.colors.red : "rgb(227, 227, 227)" };
   background: ${({ theme }) => theme.colors.white};
   cursor: pointer;
   animation: ${animaItem} 0.2s ease-in-out;
@@ -87,4 +88,5 @@ export const InputEditing = styled.input`
   color: rgb(85, 85, 85);
   border: none;
   outline: none;
+
 `;

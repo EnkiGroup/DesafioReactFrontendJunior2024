@@ -77,7 +77,7 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   ) => {
     if (!task) return;
     if (value?.length === 0 || value?.length === 1) {
-      return toast.error("A tarefa deve conter no mínimo 2 caracteres.");
+      return toast.error("A tarefa deve conter de 2 a 30 caracteres.");
     }
     setTasks((prevTasks) => {
       const newTasks = prevTasks.map((item) =>
@@ -140,6 +140,12 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     toast.dismiss(t.id);
   };
 
+  const remainingTasks = tasks.reduce(
+    (count, task) => (!task.isDone ? count + 1 : count),
+    0,
+  );
+
+  console.log(remainingTasks);
   return (
     <GlobalContext.Provider
       value={{
@@ -159,6 +165,7 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
         savePreference,
         userPrefersSaving,
         setUserPrefersSaving,
+        remainingTasks
       }}
     >
       {children}
