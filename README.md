@@ -1,6 +1,6 @@
 # Solução front-end enContact
 
-Esta minha solução para o desafio proposto [desafio proposto](https://github.com/EnkiGroup/DesafioReactFrontendJunior2024).
+Esta é minha solução para o desafio proposto [desafio proposto](https://github.com/EnkiGroup/DesafioReactFrontendJunior2024).
 Este domento visa facilitar a execução do código.
 
 ## Execução com docker
