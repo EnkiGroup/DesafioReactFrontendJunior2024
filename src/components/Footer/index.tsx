@@ -10,7 +10,7 @@ const Footer = () => {
         target="_blank"
         rel="noreferrer"
       >
-        @Matheus Leite
+        @Matheus Leite 🖤
       </a>
     </FooterConteiner>
   );

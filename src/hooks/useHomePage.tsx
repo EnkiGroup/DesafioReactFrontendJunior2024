@@ -18,6 +18,7 @@ const useHomePage = () => {
     userPrefersSaving,
     setUserPrefersSaving,
     setTasks,
+    isLoading,
   } = useGlobalContext();
 
   const navigate = useNavigate();
@@ -92,6 +93,7 @@ const useHomePage = () => {
     tasksEnable,
     remainingTasks,
     clearEnableTasks,
+    isLoading,
   };
 };
 
