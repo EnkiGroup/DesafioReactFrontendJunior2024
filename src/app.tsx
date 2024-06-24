@@ -2,7 +2,7 @@
 import { useCallback, useContext, useEffect } from "react";
 
 import { API_URL } from "./config";
-import {todoapp} from "./css/styles";
+import {text, todoapp} from "./css/styles";
 import Footer from "./components/Footer";
 import Tasks from "./components/Tasks";
 import Header from "./components/Header";
@@ -41,6 +41,14 @@ export default function App() {
           </>
         }
       </section>
+        <div css={text}>
+          <p>Efetue um clique duplo para editar uma tarefa</p>
+          <p>feito pelo time TodoMVC</p>
+          <p>Parte de TodoMVC</p>
+          <a target="_blank" href="https://www.linkedin.com/in/vitor-almeida-dal-belo/">Linkedin</a>
+          <br/>
+          <a target="_blank" href="https://wa.me/5511971432754">whatsapp</a>
+        </div>
     </div>
   );
 }

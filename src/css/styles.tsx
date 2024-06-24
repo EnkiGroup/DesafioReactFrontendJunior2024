@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 
 
 export const todoapp  = css({
+    textAlign:"center",
     background: "var(--main-white)",
     margin: "130px 0 40px 0",
     position: "relative",
@@ -32,6 +33,13 @@ export const todoapp  = css({
         opacity:0.5,
         paddingBottom:20
     }
+})
+
+export const text = css({
+    textAlign:"center" , 
+    marginTop:120,
+    color: '#4d4d4d',
+    fontSize:11
 })
 
 
