@@ -1,4 +1,4 @@
-# TodoMVC Clone
+# Teste front-end enContact
 
 Projeto desenvolvido por [Hiago Oliveira](https://github.com/HiagoSant223).
 
