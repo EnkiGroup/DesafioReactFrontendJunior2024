@@ -1,10 +1,10 @@
-import { LoadingContainer } from "./styles";
+import { LoadingContainer, AnimationSkeleton } from "./styles";
 const Loading = ({ lines }: { lines: number }) => {
   return (
     <>
-      {[...Array(lines)].map((item) => (
+      {[...Array(lines)]?.map((item) => (
         <LoadingContainer key={item}>
-          <div></div>
+          <AnimationSkeleton role="LoadingAnimation"></AnimationSkeleton>
         </LoadingContainer>
       ))}
     </>

@@ -22,14 +22,13 @@ export const LoadingContainer = styled.div`
   height: 62px;
   background: white;
   border: 1px solid rgb(227, 227, 227);
-
-  div {
-    height: 20px;
-    aspect-ratio: 2.5;
-    --_g: no-repeat radial-gradient(farthest-side, #e2e2e2 90%, #0000);
-    background: var(--_g), var(--_g), var(--_g), var(--_g);
-    background-size: 20% 50%;
-    animation: ${anima} 1s infinite linear alternate;
-  }
 `;
 
+export const AnimationSkeleton = styled.div`
+  height: 20px;
+  aspect-ratio: 2.5;
+  --_g: no-repeat radial-gradient(farthest-side, #e2e2e2 90%, #0000);
+  background: var(--_g), var(--_g), var(--_g), var(--_g);
+  background-size: 20% 50%;
+  animation: ${anima} 1s infinite linear alternate;
+`;
