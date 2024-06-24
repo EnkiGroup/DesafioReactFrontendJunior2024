@@ -11,7 +11,10 @@ export const InputForm = styled.input<InputContainerProps>`
   font-size: ${({ theme }) => theme.fontSize.medium};
   padding: ${({ enabledIcon }) =>
     enabledIcon ? "0.938rem 0.938rem 0.938rem 3.855rem" : "0.938rem"};
-  border: none;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: none;
   outline: none;
   font-style: italic;
   transition: 0.3s;
