@@ -1,50 +1,47 @@
-# Teste front-end enContact
+# Desafio teste front-end enContact (TODO LIST)
 
-Bem-vindo ao teste para desenvolvimento front-end na enContact.
+## Descrição
 
-## O teste
+Este projeto é uma aplicação de Todo List desenvolvida como parte do desafio para a posição de front-end júnior na enContact. A aplicação permite que o usuário adicione, remova e atualize tarefas, além de filtrar tarefas ativas e completadas.
 
-Para testar suas habilidades em TypeScript e folhas de estilos, nos baseamos no projeto [Todo MVC](https://todomvc.com).
+## Deploy
 
-![Todo MVC](data/todos.png "Todo MVC")
+## Tecnologias Utilizadas
 
-Neste teste você poderá mostrar suas habilidades em gerência de estados, listas utilizando `map`, `filter`, `find`, `reduce`, API, css, entre outros.
+- React
+- React Router
+- React Query
+- TypeScript
+- SCSS (Sass)
+- Node (versão 16.20.0)
 
-O foco deste teste é a implementação de uma lista de tarefas, onde você deve listar, criar, mudar o título, mudar o estado para concluído ou não, e remover uma tarefa, além das informações de quantas tarefas ainda estão pendentes, filtrar as ativas, completas, e poder limpar as tarefas completas (removendo da lista).
+## Funcionalidades
+- Adicionar uma nova tarefa
+- Remover uma tarefa existente
+- Atualizar o título de uma tarefa
+- Marcar uma tarefa como concluída ou ativa
+- Limpar todas as tarefas concluídas
+- Alternar entre visualização de todas as tarefas, tarefas ativas e tarefas completadas
+- Marcar todas as tarefas como concluídas de uma vez
 
-## O repositório
+## Testes implementados
+### Testes unitários:
+- api.ts
+- Hooks (useFetchTodos.ts e useTodoList.ts)
+- todoContext.tsx
+- footer.tsx
+- taskInput.tsx
 
-1. Faça o fork do nosso repositório no Github.
-2. Clone do projeto.
-3. Instale as dependências do projeto (utilizando o `yarn` ou `npm install`).
-4. No arquivo `src/app.tsx` você irá encontrar o esqueleto dessa aplicação, este é seu ponto de partida.
-5. Utilize `yarn start` ou `npm start` para inicializar a aplicação.
+## Como executar o programa
+- Baixe ou clone o projeto na sua máquina
+- Vá até o diretório raiz do projeto
 
-## O que fazer?
+Para executar o programa com Docker, certifique-se que está na raiz do projeto e execute os comandos:
+- `docker build -t react-todolist-image . `
+-  `docker run -p 3000:3000 -d react-todolist-image:latest`
 
-1. Recupere as tarefas iniciais via GET da URL [https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos](https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos).
-2. No [projeto Todo MVC](https://todomvc.com) é disponibilizada uma interface estilizada de lista de tarefas. Para testar suas habilidades com estilos, gostaríamos que você repita exatamente o mesmo estilo da imagem abaixo.
-3. Adicione uma tarefa na lista;
-   - Para adicionar, escrever o título da tarefa e pressionar Enter para registrar.
-   - Apresentar a tarefa criada no início da lista.
-   - A tarefa deve ser marcada como "não concluída" ao ser registrada.
-4. Liste as tarefas.
-5. Posso marcar ou desmarcar uma tarefa como concluída.
-6. Ao passar o mouse em cima de uma tarefa podemos ver um ícone de remoção, ao clicar deve-se remover a tarefa.
-7. Ao clicar duas vezes em um item, deve apresentar o modo de edição de uma tarefa.
-8. Ao clicar na seta (ao lado do campo de criação de tarefas no protótipo), posso marcar todas as tarefas como concluídas.
-9. Logo abaixo da lista temos algumas informações no protótipo;
-   - Canto inferior esquerdo: quantidade de **itens restantes** (não marcados como concluído).
-   - Canto inferior direito: botão para limpar (remover) os itens já concluídos com contador.
-   - Filtros "Todos", "Ativos" e "Completos", ao clicar deve filtrar a lista e marcar o botão como ativo. (Obs.: Utilize a URL para os filtros `react-router-dom`).
-     - Todos: Mostra ativos e completos.
-     - Ativos: Mostra apenas os ativos.
-     - Completos: Mostra apenas os completos.
+Caso deseje executar diretamente (não recomendável), certifique-se que o Node está em uma versão compatível (16.20.0) e execute os seguintes comandos na raiz do projeto:
+- `yarn install`
+- `yarn start`
 
-<img src="data/todos.gif" alt="Comportamento da lista de tarefas" width="750">
-
-## Desafio do desafio
-
-Tem um tempinho a mais? Acha que pode fazer mais? Então aqui vai alguns desafios para seu projeto, que serve como um plus no seu teste!
-
-- E se essa aplicação tiver testes?
+Após isso, o programa será executado na <a> localhost:3000 </a> da sua máquina.

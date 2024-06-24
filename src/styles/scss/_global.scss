@@ -24,6 +24,11 @@ body{
     margin-bottom: 4rem;
 }
 
-#loading_warning{
+#loading_warning, #error_warning{
     font-size: 1.8rem;
+    padding: 1rem 0;
+}
+
+#error_warning{
+    color: red;
 }

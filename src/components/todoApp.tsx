@@ -3,10 +3,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import arrowDown from "../assets/images/arrow-down.png";
 import { useTodoContext } from "../context/todoContext";
 import useFetchTodos from "../hooks/useFetchTodos";
+import Footer from "./Footer/footer";
 import TaskInput from "./TaskInput/taskInput";
 import TaskList from "./TaskList/taskList";
 import TaskStatusFilter from "./TaskStatusFilter/taskStatusFilter";
-import Footer from "./Footer/footer";
 
 export default function TodoApp(){
 
@@ -31,10 +31,6 @@ export default function TodoApp(){
         navigate(`/${filter}`);
     }, [filter, navigate]);
 
-    if (error) {
-        console.error('Error fetching todos:', error);
-    }
-
     return(
         <section className="main_container_app">
             <header>
@@ -56,6 +52,9 @@ export default function TodoApp(){
                     <div id="loading_warning" aria-live="assertive" aria-busy="true">Carregando...</div> : 
                     <TaskList todoList={filteredTodoList} />
                 } 
+                {error && <div id="error_warning">Houve um erro ao exibir a lista</div>
+                
+                }
                 {todoList.length > 0 && <TaskStatusFilter filter={filter} setFilter={setFilter} /> } 
             </main>
             <Footer />
