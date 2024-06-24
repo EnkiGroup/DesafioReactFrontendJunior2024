@@ -1,30 +1,22 @@
-import { useEffect, useState } from "react";
-import { Todo } from "../types/Todo"
 import TodoItem from "./TodoItem";
 import { useTodosContext } from "../store/todos-context";
+import { Link, useLocation } from "react-router-dom";
 
-type TodoListProps = {
-    todos: Todo[];
-    handleDeleteTodo: (id: number) => void;
-    handleToggleActive: (id: number) => void;
-    handleClearCompleted: () => void;
-    handleUpdateDescription: (id: number, newDescription: string) => void;
-
-}
 
 export default function TodoList() {
     const todosCtx = useTodosContext();
-    const [filter, setFilter] = useState<"All" | "Active" | "Completed">("All");
+    const location = useLocation();
+    const filter = location.pathname.replace("/", "") as "/" | "active" | "completed";
     const activeTodosCount = todosCtx.todos.filter((todo) => !todo.isCompleted).length;
+
     const filteredTodos = todosCtx.todos.filter((todo) => {
-        if (filter === "Active") {
+        if (filter === "active") {
             return !todo.isCompleted;
-        } else if (filter === "Completed") {
+        } else if (filter === "completed") {
             return todo.isCompleted;
         }
         return true;
     });
-
 
     return (
         <div>
@@ -41,9 +33,9 @@ export default function TodoList() {
                 <div className="px-4 flex justify-between items-center w-full bg-white h-10 text-sm
                 border border-gray-1 border-opacity-20 shadow-lg">
                     <p>{activeTodosCount} Items left</p>
-                    <button onClick={() => setFilter("All")}>All</button>
-                    <button onClick={() => setFilter("Active")}>Active</button>
-                    <button onClick={() => setFilter("Completed")}>Completed</button>
+                    <Link to={"/"}>All</Link>
+                    <Link to={"/active"}>Active</Link>
+                    <Link to={"/completed"}>Completed</Link>
                     <button onClick={() => todosCtx.handleClearCompleted()}>Clear Completed</button>
                 </div>
             }
