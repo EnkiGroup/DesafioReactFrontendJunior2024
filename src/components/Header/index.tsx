@@ -2,12 +2,12 @@ import Title from "../Title";
 
 type HeaderProps = {
   titleText: string;
-}
+};
 
-const Header = ({titleText}: HeaderProps) => {
+const Header = ({ titleText }: HeaderProps) => {
   return (
     <header>
-      <Title text={titleText} />
+      <Title>{titleText}</Title>
     </header>
   );
 };

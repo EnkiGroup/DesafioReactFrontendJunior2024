@@ -1,11 +1,8 @@
 import TitleContainer from "./styled";
 
-type TitleProps = {
-  text: string;
-};
 
-const Title = ({ text }: TitleProps) => {
-  return <TitleContainer>{text}</TitleContainer>;
+const Title = ({ children }: {children: React.ReactNode}) => {
+  return <TitleContainer>{children}</TitleContainer>;
 };
 
 export default Title;
