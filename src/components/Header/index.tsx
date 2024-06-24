@@ -53,9 +53,9 @@ export default function Header(){
         <header>
             <h1>todos</h1>
             <div css={inputbox}>
-                <input placeholder="O que precisa ser feito?" css={inputapp} onKeyDown={handleKeyDown}/>
+                <input data-testid="input-task" placeholder="O que precisa ser feito?" css={inputapp} onKeyDown={handleKeyDown}/>
                 <div css={tooglebox}>
-                    <input type="checkbox" css={toogle(tasks.every((task:Task)=>task.isDone))} checked={tasks.every((task:Task)=>task.isDone)} onChange={toggleAll} />
+                    <input data-testid="arrow-input" type="checkbox" css={toogle(tasks.every((task:Task)=>task.isDone))} checked={tasks.every((task:Task)=>task.isDone)} onChange={toggleAll} />
                     <label></label>
                 </div>
             </div>

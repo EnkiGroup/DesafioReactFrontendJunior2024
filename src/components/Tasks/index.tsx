@@ -87,11 +87,11 @@ function Item({ task }: Props) {
         }
     }, [handleUpdate]);
     return (
-        <li  key={task.id} id={`item-${task.id}`} css={listTasksItem(task.isDone)}>
+        <li  key={task.id} id={`item-${task.id}`} data-testid={`item-${task.id}`}  css={listTasksItem(task.isDone)}>
             <div>
                 <input type="checkbox" checked={isDone} className="toggle" onChange={e => changeTaskStatus(e.target.checked)} />
                 <label onDoubleClick={enableWrite}>{task.title}</label>
-                <button onClick={removeItem}></button>
+                <button data-testid={`button-${task.id}`} onClick={removeItem}></button>
             </div>
             <input
             type='text' 
@@ -121,7 +121,7 @@ export default function Tasks() {
     );
 
     return (
-        <ul css={listTasks}>
+        <ul data-testid="tasklist" css={listTasks}>
             {visibleTodos.map((task: Task) => (
                 <Item key={task.id} task={task} />
             ))}

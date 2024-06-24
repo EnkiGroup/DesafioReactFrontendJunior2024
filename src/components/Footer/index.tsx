@@ -13,12 +13,12 @@ export default function Footer (){
     setTasks(activeTasks)
   },[activeTasks,setTasks])
   return (
-      <footer css={listFootter}>
+    <footer data-testid="footerlist" css={listFootter}>
       <span css={countTasksFooter}>{`${activeTasks.length} ${activeTasks.length>1?"itens ativos!":"item ativo!"}`} </span>
       <ul css={filtersFooter}>
-        <li> <a className={classnames({ selected: route === "/" })} href="#/">Todos</a> </li>
-        <li> <a className={classnames({ selected: route === "/ativos" })} href="#/ativos">Ativos</a></li>
-        <li> <a className={classnames({ selected: route === "/realizados" })} href="#/realizados">Realizados</a></li>
+        <li> <a data-testid="filterAll" className={classnames({ selected: route === "/" })} href="#/">Todos</a> </li>
+        <li> <a data-testid="filterTodo" className={classnames({ selected: route === "/ativos" })} href="#/ativos">Ativos</a></li>
+        <li> <a data-testid="filterDone" className={classnames({ selected: route === "/realizados" })} href="#/realizados">Realizados</a></li>
       </ul>
       <button css={clearCompletedFooter} onClick={removeCompleted}>Remover realizados</button>
     </footer>
