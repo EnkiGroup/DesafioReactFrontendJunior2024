@@ -32,4 +32,5 @@ export type GlobalContextProps = {
   savePreference: (t: Toast, value: string) => void;
   userPrefersSaving: string | null;
   setUserPrefersSaving: React.Dispatch<React.SetStateAction<string | null>>;
+  remainingTasks: number;
 };

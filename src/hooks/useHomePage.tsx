@@ -19,6 +19,7 @@ const useHomePage = () => {
     setUserPrefersSaving,
     setTasks,
     isLoading,
+    remainingTasks
   } = useGlobalContext();
 
   const navigate = useNavigate();
@@ -27,16 +28,16 @@ const useHomePage = () => {
     () => (tasks?.length ? tasks.every(({ isDone }) => isDone) : false),
     [tasks],
   );
-  const remainingTasks = useMemo(
-    () => tasks.filter(({ isDone }) => !isDone),
-    [tasks],
-  );
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      if (valueInput?.length === 0 || valueInput?.length === 1) {
-        return toast.error("A tarefa deve conter no mínimo 2 caracteres.");
+      if (
+        valueInput?.length === 0 ||
+        valueInput?.length === 1 ||
+        valueInput?.length >= 30
+      ) {
+        return toast.error("A tarefa deve conter de 2 a 30 caracteres.");
       }
       if (
         (tasks?.length === 0 || tasks?.length === 3) &&
@@ -55,7 +56,7 @@ const useHomePage = () => {
       incrementTasks(valueInput);
     },
 
-    [valueInput, incrementTasks, savePreference],
+    [valueInput, incrementTasks, savePreference, tasks, userPrefersSaving],
   );
 
   useEffect(() => {

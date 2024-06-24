@@ -38,7 +38,11 @@ const Home = () => {
           </ListItem>
         )}
         <Filter
-          itensList={`${remainingTasks?.length} items left!`}
+          itensList={
+            remainingTasks > 1
+              ? `${remainingTasks} items left!`
+              : `${remainingTasks} item left!`
+          }
           handleCompletedClick={clearEnableTasks}
         />
       </FormContainer>
