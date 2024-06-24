@@ -8,7 +8,7 @@ type CheckboxProps = {
 
 const Checkbox = ({ checked = false, handleClick }: CheckboxProps) => {
   return (
-    <CheckboxContainer checked={checked} onClick={handleClick}>
+    <CheckboxContainer checked={checked} onClick={handleClick} role="checked">
       {checked && <CheckIcon />}
     </CheckboxContainer>
   );

@@ -6,6 +6,7 @@ const CheckIcon = () => {
       viewBox="0 0 10 11"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      role="checkedIcon"
     >
       <path d="M1 6.5L4 9.5L9.5 1" stroke="#69C5B5" />
     </svg>
