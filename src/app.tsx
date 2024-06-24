@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, KeyboardEvent } from "react";
+import { useState, useEffect, useRef, ChangeEvent, KeyboardEvent } from "react";
 import "./styles/main.scss";
 import Footer from "./components/Footer";
 import { v4 as uuidv4 } from "uuid";
@@ -11,6 +11,7 @@ interface Todo {
   editing: boolean; // Propriedade para controlar o modo de edição da tarefa
 }
 
+// Constantes para os filtros de tarefas
 const FILTER_ALL = 'All';
 const FILTER_ACTIVE = 'Active';
 const FILTER_COMPLETED = 'Completed';
@@ -22,6 +23,7 @@ const App = () => {
   // Estado para armazenar o texto da nova tarefa a ser adicionada
   const [todoNew, setTodoNew] = useState<string>("");
 
+  // Estado para armazenar o filtro ativo
   const [activeFilter, setActiveFilter] = useState<string>(FILTER_ALL);
 
   // Busca as tarefas ao inicializar o componente
@@ -52,12 +54,12 @@ const App = () => {
     if (event.key === 'Enter' && todoNew.trim() !== '') {
       const newTodo: Todo = {
         id: uuidv4(),  // Gera um ID único para a nova tarefa
-        title: todoNew,  // Define o título da nova tarefa com o texto atual
+        title: todoNew.trim(),  // Define o título da nova tarefa com o texto atual
         isDone: false,  // Define a nova tarefa como não concluída por padrão
-        editing: false // Define o modo de edição como falso para a nova tarefa
+        editing: false  // Define o modo de edição como falso para a nova tarefa
       };
-      setTodos([...todos, newTodo]); // Adiciona a nova tarefa à lista de tarefas
-      setTodoNew(""); // Limpa o campo de entrada após adicionar a tarefa
+      setTodos([newTodo, ...todos]);  // Adiciona a nova tarefa à lista de tarefas
+      setTodoNew("");  // Limpa o campo de entrada após adicionar a tarefa
     }
   };
 
@@ -156,9 +158,9 @@ const App = () => {
           {todos.length > 0 && (
             <div className="toggle-all-container">
               <input
+                aria-label="Concluir todas as tarefas"
                 className="toggle-all"
                 type="checkbox"
-                data-testid="toggle-all"
                 checked={todos.every(todo => todo.isDone)} // Verifica se todas as tarefas estão concluídas
                 onChange={handleToggleAll} // Alterna o estado de conclusão de todas as tarefas
               />
@@ -169,34 +171,13 @@ const App = () => {
           )}
           <ul className="todo-list">
             {filteredTodos.map(todo => (
-              <li key={todo.id} className={`${todo.isDone ? "completed" : ""} ${todo.editing ? "editing" : ""}`}>
-                <div className="view">
-                  <input
-                    className="toggle"
-                    type="checkbox"
-                    checked={todo.isDone}
-                    onChange={() => handleToggle(todo.id)} // Alterna o estado de conclusão da tarefa
-                  />
-                  <label onDoubleClick={() => handleDoubleClick(todo.id)}>
-                    {todo.title}
-                  </label>
-                  <button className="delete" onClick={() => handleDelete(todo.id)}></button>
-                </div>
-                {todo.editing && ( // Renderiza o campo de edição se o modo de edição estiver ativado
-                  <input
-                    type="text"
-                    className="edit"
-                    value={todo.title}
-                    onChange={(e) => setTodos(todos.map(t => t.id === todo.id ? { ...t, title: e.target.value } : t))}
-                    onBlur={() => handleSaveEdit(todo.id, todo.title)} // Salva as alterações ao perder o foco
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        handleSaveEdit(todo.id, todo.title); // Salva as alterações ao pressionar Enter
-                      }
-                    }}
-                  />
-                )}
-              </li>
+              <TodoItem
+                key={todo.id}
+                todo={todo}
+                todos={todos}
+                setTodos={setTodos}
+                handleSaveEdit={handleSaveEdit}
+              />
             ))}
           </ul>
         </main>
@@ -243,6 +224,65 @@ const App = () => {
       <Footer />
     </div>
   );
+};
+
+interface TodoItemProps {
+  todo: Todo;
+  todos: Todo[];
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  handleSaveEdit: (id: string, newTitle: string) => void;
 }
+
+// Componente TodoItem para representar uma tarefa individual
+const TodoItem: React.FC<TodoItemProps> = ({ todo, todos, setTodos, handleSaveEdit }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Foca no campo de edição quando o modo de edição é ativado
+  useEffect(() => {
+    if (todo.editing && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [todo.editing]);
+
+  return (
+    <li className={`${todo.isDone ? "completed" : ""} ${todo.editing ? "editing" : ""}`}>
+      <div className="view">
+        <input
+          className="toggle"
+          type="checkbox"
+          checked={todo.isDone}
+          onChange={() => {
+            setTodos(todos.map(t => t.id === todo.id ? { ...t, isDone: !t.isDone } : t));
+          }}
+        />
+        <label onDoubleClick={() => {
+          setTodos(todos.map(t => t.id === todo.id ? { ...t, editing: true } : t));
+        }}>
+          {todo.title}
+        </label>
+        <button className="delete" onClick={() => {
+          setTodos(todos.filter(t => t.id !== todo.id));
+        }}></button>
+      </div>
+      {todo.editing && (
+        <input
+          ref={inputRef}
+          type="text"
+          className="edit"
+          value={todo.title}
+          onChange={(e) => setTodos(todos.map(t => t.id === todo.id ? { ...t, title: e.target.value } : t))}
+          onBlur={() => handleSaveEdit(todo.id, todo.title)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSaveEdit(todo.id, todo.title);
+            } else if (e.key === 'Escape') {
+              setTodos(todos.map(t => t.id === todo.id ? { ...t, editing: false } : t));
+            }
+          }}
+        />
+      )}
+    </li>
+  );
+};
 
 export default App;
