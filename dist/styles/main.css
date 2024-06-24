@@ -1,52 +1,6 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-footer {
-  color: #111;
-  padding: 10px 15px;
-  height: 20px;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 400;
-  margin: 45px auto 0;
-  text-shadow: 0 1px 0 hsla(0, 0%, 100%, 0.5);
-  text-align: center;
-}
-footer p {
-  line-height: 1;
-}
-footer a {
-  color: inherit;
-  text-decoration: none;
-}
-footer a:hover {
-  text-decoration: underline;
-}
-
-html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
-}
-
-body {
-  line-height: 1.4em;
-  background: #f5f5f5;
-  color: #111;
-  min-width: 230px;
-  max-width: 550px;
-  margin: 0 auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 300;
-  font-size: 14px;
-}
-
-.hidden {
-  display: none;
-}
-
 /* Estilos específicos do Header */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 .todoapp {
   background: #fff;
   margin: 130px 0 40px 0;
@@ -98,6 +52,7 @@ body {
   border: none;
   background: rgba(0, 0, 0, 0.003);
   box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.003);
+  font-size: 24px;
 }
 .todoapp :focus {
   box-shadow: 0 0 2px 2px #CF7D7D;
@@ -122,7 +77,7 @@ body {
   color: #949494;
 }
 
-/* Estilos específicos da Main section */
+/* Estilos específicos da Main */
 .main {
   position: relative;
   z-index: 2;
@@ -282,13 +237,138 @@ body {
   outline: 0;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  .toggle-all,
-  .todo-list li .toggle {
-    background: none;
+/* Estilos específicos do Footer da Section */
+.footer {
+  padding: 10px 15px;
+  height: 20px;
+  text-align: center;
+  font-size: 15px;
+  border-top: 1px solid #e6e6e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer .todo-count {
+  float: left;
+  text-align: left;
+}
+.footer .todo-count strong {
+  font-weight: 300;
+}
+.footer .filters {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+}
+.footer .filters li {
+  display: inline;
+}
+.footer .filters li a {
+  color: inherit;
+  margin: 3px;
+  padding: 3px 7px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+.footer .filters li a:hover {
+  border-color: #CF7D7D;
+}
+.footer .filters li a.selected {
+  border-color: #b83f45;
+}
+.footer .clear-button {
+  background-color: transparent;
+  border: none;
+}
+.footer .clear-button,
+.footer html .clear-button:active {
+  float: right;
+  position: relative;
+  line-height: 19px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.footer .clear-button:hover {
+  text-decoration: underline;
+}
+
+.footer:before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 50px;
+  overflow: hidden;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 8px 0 -3px #f5f5f5, 0 9px 1px -3px rgba(0, 0, 0, 0.2), 0 16px 0 -6px #f5f5f5, 0 17px 2px -6px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+  color: #111;
+  padding: 10px 15px;
+  height: 20px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  margin: 45px auto 0;
+  text-shadow: 0 1px 0 hsla(0, 0%, 100%, 0.5);
+  text-align: center;
+}
+footer p {
+  line-height: 1;
+}
+footer a {
+  color: inherit;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  line-height: 1.4em;
+  background: #f5f5f5;
+  color: #111;
+  min-width: 230px;
+  max-width: 550px;
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 430px) {
+  .main, .footer {
+    padding: 0 10px;
   }
-  .todo-list li .toggle {
-    height: 40px;
+  .new-todo {
+    width: calc(100% - 20px);
+  }
+  .todo-count {
+    float: none;
+    text-align: center;
+  }
+  .filters {
+    float: none;
+    text-align: center;
   }
 }
 
