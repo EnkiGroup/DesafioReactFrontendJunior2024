@@ -12,12 +12,21 @@ Afim de evitar problemas de incompatibilidade com a versão do node , do sistema
 ```bash
 docker compose -f "docker-compose.yml" up -d --build
 ```
+## OU
+
+### Execute o docker-compose em modo iterartivo para ver o resultado dos testes
+
+```bash
+docker compose -f "docker-compose.yml" up --build
+```
 
 ### Interromper containers criados pelo docker-compose
 
 ```bash
 docker compose --file 'docker-compose.yml' down
 ```
+
+ao executar o docker-compose a aplicação estara rodando em localhost:3000
 
 ## Execução sem docker
 
@@ -29,11 +38,12 @@ Recomendo utilizar a versão 16.20.2 do node para evitar problemas de incompatib
 npm install
 ```
 
-### Compila a aplicação React para produção
+### Execute os testes
 
 ```bash
-npm npm run build
+npm run test
 ```
+
 
 ### Comando para iniciar a aplicação
 

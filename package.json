@@ -23,7 +23,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll",
+    "test-runonce":"react-scripts test --watchAll=false",
+    "start-tests": "concurrently  \"npm run test-runonce\" \"npm run start\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -45,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "nock": "^13.1.1"
   }
 }
