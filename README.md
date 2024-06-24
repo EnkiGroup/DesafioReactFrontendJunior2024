@@ -12,7 +12,7 @@ Afim de evitar problemas de incompatibilidade com a versão do node , do sistema
 ```bash
 docker compose -f "docker-compose.yml" up -d --build
 ```
-## OU
+### OU
 
 ### Execute o docker-compose em modo iterartivo para ver o resultado dos testes
 
