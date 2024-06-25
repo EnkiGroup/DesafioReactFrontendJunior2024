@@ -8,16 +8,16 @@ const ButtonContainer = styled(NavLink)`
   background: none;
   border: 1px solid ${({ theme }) => theme.colors.white};
   text-decoration: none;
-  border-radius: 2px;
+  border-radius: 3px;
   transition: all ease-in 0.2s;
 
   &:hover {
-    border: 1px solid ${({ theme }) => theme.colors.red};
+    border: 1px solid ${({ theme }) => theme.colors.borderButton};
     cursor: pointer;
   }
 
   &.active {
-    border: 1px solid ${({ theme }) => theme.colors.red};
+    border: 1px solid ${({ theme }) => theme.colors.borderButton};
   }
 `;
 

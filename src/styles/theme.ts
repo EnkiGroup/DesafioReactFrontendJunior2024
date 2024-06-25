@@ -6,6 +6,7 @@ export const theme = {
     black: "#111827",
     blueIcon: "#2196f3",
     borderColor: "#e3e3e3",
+    borderButton: "#EEDADB",
     TaskCompleted: "#69C5B5",
     gray_1: "#e2e2e2",
     gray_2: "#E5E5E5",
