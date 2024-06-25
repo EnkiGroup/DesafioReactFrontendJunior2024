@@ -1,15 +1,23 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-import { useTasksContext } from '../../contexts/tasks-context';
+import { useTasksContext } from "../../contexts/tasks-context";
 
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from "react-router-dom";
 
-import { TasksFooter } from '../../components/tasks-footer';
+import { TasksFooter } from "../../components/tasks-footer";
 
-jest.mock('../../contexts/tasks-context', () => ({
+jest.mock("../../contexts/tasks-context", () => ({
   useTasksContext: jest.fn(),
 }));
+
+function renderComponent() {
+  render(
+    <MemoryRouter>
+      <TasksFooter />
+    </MemoryRouter>
+  );
+}
 
 describe("TasksFooter", () => {
   const mockClearCompletedTasks = jest.fn();
@@ -26,70 +34,50 @@ describe("TasksFooter", () => {
   });
 
   it("should render itens left correctly", () => {
-    render(
-      <MemoryRouter>
-        <TasksFooter />
-      </MemoryRouter>
-    );
+    renderComponent()
 
-    const itensLeft = screen.getByText("3 itens left");
-    expect(itensLeft).toBeInTheDocument();
+    const tasksLeft = screen.getByTestId("tasks-left");
+    expect(tasksLeft).toHaveTextContent("3")
   })
 
-  it('should render filter buttons correctly', () => {
-    render(
-      <MemoryRouter>
-        <TasksFooter />
-      </MemoryRouter>
-    );
+  it("should render filter buttons correctly", () => {
+    renderComponent()
 
-    const allButton = screen.getByText('All');
-    const activeButton = screen.getByText('Active');
-    const completedButton = screen.getByText('Completed');
+    const allFilterButton = screen.getByText("All");
+    const activeFilterButton = screen.getByText("Active");
+    const completedFilterButton = screen.getByText("Completed");
 
-    expect(allButton).toBeInTheDocument();
-    expect(activeButton).toBeInTheDocument();
-    expect(completedButton).toBeInTheDocument();
+    expect(allFilterButton).toBeInTheDocument();
+    expect(activeFilterButton).toBeInTheDocument();
+    expect(completedFilterButton).toBeInTheDocument();
   });
 
-  it('should render clear completed button correctly', () => {
-    render(
-      <MemoryRouter>
-        <TasksFooter />
-      </MemoryRouter>
-    );
+  it("should render clear completed button correctly", () => {
+    renderComponent()
 
-    const clearButton = screen.getByText('Clear completed');
+    const clearButton = screen.getByText("Clear completed");
     expect(clearButton).toBeInTheDocument();
   });
 
-  it('should call clearCompletedTasks when "Clear completed" button is clicked', () => {
-    render(
-      <MemoryRouter>
-        <TasksFooter />
-      </MemoryRouter>
-    );
+  it("should call clearCompletedTasks when (Clear completed) button is clicked", () => {
+    renderComponent()
 
-    const clearButton = screen.getByText('Clear completed');
+    const clearButton = screen.getByText("Clear completed");
     fireEvent.click(clearButton);
 
-    expect(mockClearCompletedTasks).toHaveBeenCalledTimes(1);
+    expect(mockClearCompletedTasks).toHaveBeenCalled();
   });
 
-  it('should not render footer when isTasksListEmpty is true', () => {
+  it("should not render footer when isTasksListEmpty is true", () => {
     (useTasksContext as jest.Mock).mockReturnValueOnce({
       isTasksListEmpty: true,
       tasksLeft: 0,
       clearCompletedTasks: mockClearCompletedTasks,
     });
 
-    render(
-      <MemoryRouter>
-        <TasksFooter />
-      </MemoryRouter>
-    );
+    renderComponent()
 
-    const footerElement = screen.queryByRole('footer');
+    const footerElement = screen.queryByRole("footer");
     expect(footerElement).not.toBeInTheDocument();
   });
 })

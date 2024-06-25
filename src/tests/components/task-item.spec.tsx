@@ -1,37 +1,42 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import { TaskItem } from '../../components/task-item';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { TasksProvider } from '../../contexts/tasks-context';
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { TasksProvider } from "../../contexts/tasks-context";
+
+import { TaskItem } from "../../components/task-item";
 
 const queryClient = new QueryClient()
 
-function TestEnvironment() {
+function renderComponent() {
   const task = {
     "id": "flrGI",
     "title": "Lavar os pratos",
     "isDone": false
   }
 
-  return (
+  render(
     <QueryClientProvider client={queryClient}>
       <TasksProvider>
-      <TaskItem task={task} />
+        <TaskItem task={task} />
       </TasksProvider>
     </QueryClientProvider>
   )
 }
 
 describe("TaskItem", () => {
-  it("should initially render ReadableTaskItem component by default", () => {
-    render(<TestEnvironment />)
+  it("should start on readable mode", () => {
+    renderComponent()
 
     const readableTaskItem = screen.getByText("Lavar os pratos")
     expect(readableTaskItem).toBeInTheDocument()
+
+    const editableTaskItem = screen.queryByTestId("editable-task-input");
+    expect(editableTaskItem).not.toBeInTheDocument()
   })
 
-  it("should render EditableTaskItem component on double click", () => {
-    render(<TestEnvironment />)
+  it("should switch to editable mode on double click", () => {
+    renderComponent()
 
     const readableTaskItemBefore = screen.getByText("Lavar os pratos")
     expect(readableTaskItemBefore).toBeInTheDocument()

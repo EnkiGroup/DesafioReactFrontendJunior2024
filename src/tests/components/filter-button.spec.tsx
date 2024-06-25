@@ -1,58 +1,66 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from "react-router-dom";
 
-import { FilterButton } from '../../components/filter-button';
+import { FilterButton } from "../../components/filter-button";
 
-describe('FilterButton', () => {
-  test('renders filter button with correct text', () => {
+describe("FilterButton", () => {
+  it("should render filterButton with correct text", () => {
+    const currentRoute = "/"
+    const filterButtonRoute = "/"
     render(
-      <MemoryRouter initialEntries={['/home']}>
-        <FilterButton route="/home" filterName="Home" />
+      <MemoryRouter initialEntries={[currentRoute]}>
+        <FilterButton route={filterButtonRoute} filterName="All" />
       </MemoryRouter>
     );
 
-    const filterButton = screen.getByText('Home');
+    const filterButton = screen.getByText("All");
     expect(filterButton).toBeInTheDocument();
   });
 
-  test('selects filter on route match', () => {
+  it("should render with correct styles when route match", () => {
+    const currentRoute = "/active"
+    const filterButtonRoute = "/active"
     render(
-      <MemoryRouter initialEntries={['/active']}>
-        <FilterButton route="/active" filterName="Active" />
+      <MemoryRouter initialEntries={[currentRoute]}>
+        <FilterButton route={filterButtonRoute} filterName="Active" />
       </MemoryRouter>
     );
 
-    const filterInput = screen.getByRole('radio');
+    const filterInput = screen.getByRole("radio");
     expect(filterInput).toBeChecked();
 
-    const filterLabel = screen.getByText('Active');
+    const filterLabel = screen.getByText("Active");
     expect(filterLabel).toHaveStyle({ "borderColor": "rgb(254 202 202)" })
   });
 
-  test('deselects filter on route mismatch', () => {
+  it("should render with correct styles when route mismatch", () => {
+    const currentRoute = "/"
+    const filterButtonRoute = "/completed"
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <FilterButton route="/completed" filterName="Completed" />
+      <MemoryRouter initialEntries={[currentRoute]}>
+        <FilterButton route={filterButtonRoute} filterName="Completed" />
       </MemoryRouter>
     );
 
-    const filterInput = screen.getByRole('radio');
+    const filterInput = screen.getByRole("radio");
     expect(filterInput).not.toBeChecked();
 
-    const filterLabel = screen.getByText('Completed');
+    const filterLabel = screen.getByText("Completed");
     expect(filterLabel).toHaveStyle({ "borderColor": "" })
   });
 
-  test('changes route on filter button click', () => {
+  it("should switch route when filterButton is clicked", () => {
+    const currentRoute = "/"
+    const filterButtonRoute = "/completed"
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <FilterButton route="/completed" filterName="Completed" />
+      <MemoryRouter initialEntries={[currentRoute]}>
+        <FilterButton route={filterButtonRoute} filterName="Completed" />
       </MemoryRouter>
     );
 
-    const filterInput = screen.getByRole('radio');
+    const filterInput = screen.getByRole("radio");
     expect(filterInput).not.toBeChecked();
 
     const navigateButton = screen.getByTestId("navigate-button")

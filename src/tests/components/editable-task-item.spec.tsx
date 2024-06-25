@@ -1,29 +1,34 @@
-import { act } from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { act } from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-import { useTasksContext } from '../../contexts/tasks-context';
+import { useTasksContext } from "../../contexts/tasks-context";
 
-import { EditableTaskItem } from '../../components/editable-task-item';
+import { EditableTaskItem } from "../../components/editable-task-item";
 
-jest.mock('../../contexts/tasks-context', () => ({
+jest.mock("../../contexts/tasks-context", () => ({
   useTasksContext: jest.fn(),
 }));
 
-const mockUpdateTaskTitle = jest.fn();
-(useTasksContext as jest.Mock).mockReturnValue({
-  updateTaskTitle: mockUpdateTaskTitle,
-});
+describe("EditableTaskItem", () => {
+  const task = {
+    "id": "flrGI",
+    "title": "Lavar os pratos",
+    "isDone": false
+  }
+  const mockExitEditableMode = jest.fn();
+  const mockUpdateTaskTitle = jest.fn();
+  const mockContextValue = {
+    updateTaskTitle: mockUpdateTaskTitle,
+  };
+  
+  beforeEach(() => {
+    jest.clearAllMocks();
 
-const task = {
-  "id": "flrGI",
-  "title": "Lavar os pratos",
-  "isDone": false
-}
+    (useTasksContext as jest.Mock).mockReturnValue(mockContextValue);
+  });
 
-describe("ReadableTaskItem", () => {
   it("should render input with the task title", () => {    
-    const mockExitEditableMode = jest.fn();
     render(<EditableTaskItem task={task} exitEditableMode={mockExitEditableMode} />);
 
     const input = screen.getByTestId("editable-task-input")
@@ -32,7 +37,6 @@ describe("ReadableTaskItem", () => {
   })
 
   it("should render input on focus", () => {    
-    const mockExitEditableMode = jest.fn();
     render(<EditableTaskItem task={task} exitEditableMode={mockExitEditableMode} />);
 
     const input = screen.getByTestId("editable-task-input")
@@ -41,7 +45,6 @@ describe("ReadableTaskItem", () => {
   })
 
   it("should call exitEditableMode on blur", () => {   
-    const mockExitEditableMode = jest.fn(); 
     render(<EditableTaskItem task={task} exitEditableMode={mockExitEditableMode} />);
 
     const input = screen.getByTestId("editable-task-input")
@@ -51,7 +54,6 @@ describe("ReadableTaskItem", () => {
   })
 
   it("should call updateTaskTitle and exitEditableMode on form submission", async () => {
-    const mockExitEditableMode = jest.fn();
     render(<EditableTaskItem task={task} exitEditableMode={mockExitEditableMode} />);
 
     const input = screen.getByTestId("editable-task-input");
@@ -61,7 +63,10 @@ describe("ReadableTaskItem", () => {
       fireEvent.submit(input);
     });
 
-    expect(mockUpdateTaskTitle).toHaveBeenCalledWith({ id: task.id, title: "Lavar a louça" });
+    expect(mockUpdateTaskTitle).toHaveBeenCalledWith({
+      id: task.id,
+      title: "Lavar a louça"
+    });
     expect(mockExitEditableMode).toHaveBeenCalled()
   });
 })

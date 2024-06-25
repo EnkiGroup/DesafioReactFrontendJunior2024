@@ -1,12 +1,12 @@
-import { act } from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { act } from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-import { useTasksContext } from '../../contexts/tasks-context';
+import { useTasksContext } from "../../contexts/tasks-context";
 
-import { TasksInput } from '../../components/tasks-input';
+import { TasksInput } from "../../components/tasks-input";
 
-jest.mock('../../contexts/tasks-context', () => ({
+jest.mock("../../contexts/tasks-context", () => ({
   useTasksContext: jest.fn(),
 }));
 

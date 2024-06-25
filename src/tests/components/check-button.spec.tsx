@@ -1,41 +1,30 @@
-import { fireEvent, render, screen } from "@testing-library/react"
+import { render, screen, fireEvent } from "@testing-library/react"
 import "@testing-library/jest-dom"
 
 import { CheckButton } from "../../components/check-button"
 
-describe("CheckButton component", () => {
-  it("should render check icon and change border color correctly", () => {
-    let isDone = false;
-    const onCheckMock = () => {
-      isDone = !isDone;
-    };
+describe("CheckButton", () => {
+  let isDone = false;
+  const onCheckMock = jest.fn(() => isDone = !isDone);
 
+  it("should render check icon and border color correctly when checkButton is clicked", () => {
     const { rerender } = render(<CheckButton isDone={isDone} onCheck={onCheckMock} />);
 
-    const checkIconBefore = screen.queryByTestId('check-icon');
+    const checkIconBefore = screen.queryByTestId("check-icon");
     expect(checkIconBefore).not.toBeInTheDocument();
 
-    const checkBorder = screen.getByTestId('check-border');
-    expect(checkBorder).toHaveStyle('border-color: rgb(156 163 175)');
+    const checkBorderBefore = screen.getByTestId("check-border");
+    expect(checkBorderBefore).toHaveStyle("border-color: rgb(156 163 175)");
 
-    const checkbox = screen.getByRole('checkbox');
-    fireEvent.click(checkbox);
+    const checkButton = screen.getByRole("checkbox");
+    fireEvent.click(checkButton);
 
     rerender(<CheckButton isDone={isDone} onCheck={onCheckMock} />);
 
-    const checkIconAfter = screen.getByTestId('check-icon');
+    const checkIconAfter = screen.getByTestId("check-icon");
     expect(checkIconAfter).toBeInTheDocument();
 
-    expect(checkBorder).toHaveStyle('border-color: rgb(22 163 74)');
+    const checkBorderAfter = screen.getByTestId("check-border");
+    expect(checkBorderAfter).toHaveStyle("border-color: rgb(22 163 74)");
   });
-
-  it("should call onCheck prop on click", () => {
-    const onCheckMock = jest.fn();
-    render(<CheckButton isDone={false} onCheck={onCheckMock} />);
-
-    const checkbox = screen.getByRole('checkbox');
-    fireEvent.click(checkbox);
-
-    expect(onCheckMock).toHaveBeenCalled();
-  })
 })
