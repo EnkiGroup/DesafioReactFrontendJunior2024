@@ -1,16 +1,16 @@
-import { createRoot } from 'react-dom/client'
-import { StrictMode } from 'react'
+import { createRoot } from "react-dom/client"
+import { StrictMode } from "react"
 
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { TasksProvider } from './contexts/tasks-context.tsx'
+import { TasksProvider } from "./contexts/tasks-context.tsx"
 
-import { App } from './App.tsx'
+import { App } from "./App.tsx"
 import { AllTasks } from "./routes/all-tasks";
 import { ActiveTasks } from "./routes/active-tasks";
 import { CompletedTasks } from "./routes/completed-tasks";
 
-import "./index.css"
+import "./styles.css"
 
 const queryClient = new QueryClient()
 
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
   },
 ])
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <TasksProvider>
