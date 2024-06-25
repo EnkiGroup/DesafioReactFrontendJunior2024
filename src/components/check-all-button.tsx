@@ -11,6 +11,7 @@ export function CheckAllButton({ allComplete, onClick }: CheckAllButtonProps) {
       type="button"
       className="w-14 flex items-center justify-center pr-1"
       onClick={onClick}
+      data-testid="check-all-button"
     >
       <ChevronDown
         size={28}
