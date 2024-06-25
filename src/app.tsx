@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
+
 import "./styles/main.scss";
+
 import { v4 as uuidv4 } from "uuid";
+
 import TodoList from "./components/TodoList";
 import TodoInput from "./components/TodoInput";
 import TodoFooter from "./components/TodoFooter";
 import Footer from "./components/Footer";
 
-// Interface que define a estrutura de cada tarefa (Todo)
+// Interface que define a estrutura de cada tarefa (Todo).
 export interface Todo {
   id: string;
   title: string;
@@ -15,10 +18,14 @@ export interface Todo {
   editing: boolean;
 }
 
+// Componente principal da aplicação.
 const App = () => {
+  // Estado para armazenar a lista de todos os todos.
   const [todos, setTodos] = useState<Todo[]>([]);
+  // Estado para armazenar o texto do novo todo sendo digitado.
   const [todoNew, setTodoNew] = useState<string>("");
 
+  // Efeito para carregar os 'todos' a partir de uma API.
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,23 +43,26 @@ const App = () => {
     fetchData();
   }, []);
 
+  // Função para atualizar o estado do texto do novo todo conforme o usuário digita.
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTodoNew(event.target.value);
   };
 
+  // Função para adicionar um novo 'todo' quando o usuário pressiona Enter.
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && todoNew.trim() !== '') {
       const newTodo: Todo = {
-        id: uuidv4(),
+        id: uuidv4(), // Gera um ID único para o novo todo
         title: todoNew.trim(),
         isDone: false,
         editing: false
       };
-      setTodos([newTodo, ...todos]);
-      setTodoNew("");
+      setTodos([newTodo, ...todos]); // Adiciona o novo 'todo' à lista de todos
+      setTodoNew(""); // Limpa o estado do texto do novo 'todo'
     }
   };
 
+  // Função para marcar todos os 'todos' como concluídos ou não concluídos.
   const handleToggleAll = () => {
     const allCompleted = todos.every(todo => todo.isDone);
     const updatedTodos = todos.map(todo => ({
@@ -62,6 +72,7 @@ const App = () => {
     setTodos(updatedTodos);
   };
 
+  // Função para salvar as alterações feitas em um 'todo' em modo de edição.
   const handleSaveEdit = (id: string, newTitle: string) => {
     const updatedTodos = todos.map(todo => {
       if (todo.id === id) {
@@ -72,10 +83,12 @@ const App = () => {
     setTodos(updatedTodos);
   };
 
+  // Função para limpar todos os 'todos' marcados como concluídos.
   const handleClearCompleted = () => {
     setTodos(todos.filter(todo => !todo.isDone));
   };
 
+  // Componente para filtrar a lista de 'todos' com base na rota atual.
   const FilteredTodoList = () => {
     const location = useLocation();
     let filteredTodos = todos;
@@ -94,6 +107,7 @@ const App = () => {
     );
   };
 
+  // Contagem de quantos 'todos' ainda estão ativos (não concluídos).
   const numberChange = todos.filter(todo => !todo.isDone).length;
 
   return (
@@ -109,6 +123,7 @@ const App = () => {
         </header>
 
         <main className="main">
+          {/* Renderiza o controle para marcar todos como concluídos se houver algum 'todo' */}
           {todos.length > 0 && (
             <div className="toggle-all-container">
               <input
@@ -123,6 +138,8 @@ const App = () => {
               </label>
             </div>
           )}
+
+          {/* Definição das rotas para filtrar os 'todos' */}
           <Routes>
             <Route path="/" element={<FilteredTodoList />} />
             <Route path="/active" element={<FilteredTodoList />} />
@@ -130,6 +147,7 @@ const App = () => {
           </Routes>
         </main>
 
+        {/* Renderiza o rodapé com contagem de 'todos' ativos e opção para limpar 'todos' concluídos */}
         {todos.length > 0 && (
           <TodoFooter
             numberChange={numberChange}
@@ -138,6 +156,7 @@ const App = () => {
         )}
       </section>
 
+      {/* Renderiza o rodapé padrão da aplicação */}
       <Footer />
     </div>
   );
