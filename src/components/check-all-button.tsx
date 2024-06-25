@@ -4,7 +4,7 @@ interface CheckAllButtonProps {
   allComplete: boolean
   onClick: () => void
 }
-//TODO: Estava invertendo responsabilidade
+
 export function CheckAllButton({ allComplete, onClick }: CheckAllButtonProps) {
   return (
     <button

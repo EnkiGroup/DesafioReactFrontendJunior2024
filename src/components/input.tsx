@@ -3,11 +3,9 @@ import { FieldError } from "react-hook-form";
 
 import { TriangleAlert } from "lucide-react";
 
-interface Props {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error: FieldError | undefined
 }
-
-type InputProps = InputHTMLAttributes<HTMLInputElement> & Props
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ type = "text", error, ...props }, ref) => {
