@@ -42,7 +42,7 @@ const Home = () => {
         {isLoading ? (
           <Loading lines={3} />
         ) : (
-          <ListItem taskHeightLimit={tasks?.length >= 8}>
+          <ListItem>
             <TodoList ItemList={tasks} />
           </ListItem>
         )}
@@ -60,7 +60,10 @@ const Home = () => {
         <AnimaChecked>
           {" "}
           <Lottie
-            options={animationDefaultValues(TodoCheckedAnimation, "lottie-svg-class")}
+            options={animationDefaultValues(
+              TodoCheckedAnimation,
+              "lottie-svg-class",
+            )}
             width={100}
             height={100}
           />
