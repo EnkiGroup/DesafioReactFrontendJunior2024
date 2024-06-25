@@ -10,7 +10,6 @@ export default function App() {
   return (
     <TodosContextProvider>
       <BrowserRouter>
-
         <div className="bg-white-1 h-full min-h-screen">
           <Header />
           <main className="h-auto relative w-full">
@@ -28,17 +27,8 @@ export default function App() {
               </div>
             </div>
           </main>
-
           <Footer />
-
         </div>
-
-
-
-
-
-
-
       </BrowserRouter>
     </TodosContextProvider>
   );

@@ -1,12 +1,6 @@
 import { useState, useEffect } from "react"
-import { TodosState } from "../types/TodosState";
 import { Todo } from "../types/Todo";
-
-type FetchResult<T> = {
-  data: Todo[] | null;
-  isPending: boolean;
-  error: string | null;
-};
+import { FetchResult } from "../types/FetchResult";
 
 export const useTodosFetch = (url: string): FetchResult<Todo[]> => {
   const [data, setData] = useState<Todo[] | null>(null)

@@ -30,8 +30,6 @@ export function useTodosContext() {
     return todosCtx
 }
 
-
-
 function todosReducer(state: TodosState, action: Action): TodosState {
     if (action.type === 'ADD_TODO') {
         return handleAddTodo(state, action.title);
@@ -61,10 +59,10 @@ function todosReducer(state: TodosState, action: Action): TodosState {
 export default function TodosContextProvider({ children }: TodosContextProviderProps) {
     const url: string = "https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos"
     const [todoState, dispatch] = useReducer(todosReducer, {todos: []})
-    const { data } = useTodosFetch(url)
+    const { data, isPending, error } = useTodosFetch(url)
 
     useEffect(() => {
-        if (data) {
+        if (data && !isPending && !error) {
             dispatch({ type: 'SET_INITIAL_TODOS', todos: data });
         }
     }, [data]);

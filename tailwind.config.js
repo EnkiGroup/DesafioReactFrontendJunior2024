@@ -20,10 +20,7 @@ module.exports = {
     fontFamily: {
       'sans': ['Helvetica', 'Arial', 'sans-serif'],
     },
-
-    extend: {
-      
-    },
+    extend: {},
   },
   plugins: [],
 }
