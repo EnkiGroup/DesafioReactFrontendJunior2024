@@ -56,7 +56,9 @@ export default function TodoItem({ todo }: TodoProps) {
                                 ${todo.isDone ? "" : "hidden"}`}></div>
                         </div>
                     </div>
-                    <div className="bg-white w-full pl-4 text-2xl text-black-2" >
+                    <div className={`bg-white w-full pl-4 text-2xl text-black-2 
+                                ${todo.isDone ? "line-through text-gray-1" : ""}`}
+                    >
                         {todo.title}
                     </div>
 
@@ -80,7 +82,7 @@ export default function TodoItem({ todo }: TodoProps) {
                     onKeyDown={handleKeyDown}
                 >
                     <input
-                        className={`pl-14 flex bg-white h-11 w-full shadow-md ${isEditing ? 'h-12 outline-none ring-1 ring-red-700 ring-opacity-50 z-10 relative' : ''}`}
+                        className={`text-2xl text-black pl-16 flex bg-white h-16 w-full shadow-md ${isEditing ? 'outline-none ring-2 ring-red ring-opacity-50 z-10 relative' : ''}`}
                         ref={inputRef}
                         defaultValue={todo.title}
                     >
