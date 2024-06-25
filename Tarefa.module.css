@@ -1,0 +1,74 @@
+.tarefa {
+  padding: 15px 5px;
+  border: 1px solid #e7e7e7;
+  font-size: 1.5rem;
+  max-width: 550px;
+  margin: 0 auto;
+}
+.completa span {
+  color: #949494;
+  text-decoration: line-through;
+}
+.container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 100%;
+}
+
+.check {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  display: inline-block;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  border: 1px solid #e7e7e7;
+  border-radius: 50%;
+  position: relative;
+}
+
+.completa ~ .checkmark {
+  border: 1px solid #a2d3c9;
+}
+
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 9px;
+  top: 2px;
+  width: 10px;
+  height: 18px;
+  border: solid #a2d3c9;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.completa .checkmark::after {
+  display: block;
+}
+
+.tarefaContent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tarefaDelete {
+  background-color: inherit;
+  border: none;
+  color: #949494;
+  display: none;
+  margin-right: 5px;
+}
+
+.tarefa:hover .tarefaDelete {
+  display: block;
+}

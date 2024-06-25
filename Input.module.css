@@ -1,0 +1,27 @@
+.inputContainer {
+  max-width: 550px;
+  margin: 0 auto;
+  display: flex;
+  border: 1px solid #e7e7e7;
+}
+
+.input {
+  padding: 15px 5px;
+  border: none;
+  font-size: 1.5rem;
+  width: 100%;
+}
+.input:focus {
+  outline: none;
+}
+
+.toggleAll::before {
+  color: #949494;
+  content: "❯";
+  display: inline-block;
+  font-size: 22px;
+  padding: 10px 16px;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  cursor: pointer;
+}
