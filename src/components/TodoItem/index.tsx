@@ -4,6 +4,7 @@ import useGlobalContext from "../../hooks/useGlobalContext";
 import { TaskProps } from "../../types";
 import Checkbox from "../Checkbox";
 import { TodoItemContainer, Item, InputEditing } from "./styles";
+import { handleEditAction } from "../../utils/validationInputForm";
 import toast from "react-hot-toast";
 
 type TodoItemProps = {
@@ -16,7 +17,7 @@ const TodoItem = ({ task }: TodoItemProps) => {
   const [isEditing, setIsEditing] = useState({
     title: task?.title,
     enabledEditing: false,
-    oldTextValue: task?.title
+    oldTextValue: task?.title,
   });
 
   const handleChangeEditing = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,30 +26,12 @@ const TodoItem = ({ task }: TodoItemProps) => {
   };
 
   const handleOnBlurEditing = () => {
-    if (
-      isEditing.title.length === 1 ||
-      isEditing.title.length === 0 ||
-      isEditing.title.length >= 30
-    ) {
-      setIsEditing((prev) => ({ ...prev, enabledEditing: false }));
-      setIsEditing((prev) => ({ ...prev, title: isEditing.oldTextValue }));
-      return toast.error("A tarefa deve conter de 2 a 30 caracteres.");
-    }
-    editingTask(task, isEditing?.title, setIsEditing);
+    handleEditAction(task, isEditing, setIsEditing, editingTask);
   };
 
   const handleOnKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      if (
-        isEditing.title.length === 1 ||
-        isEditing.title.length === 0 ||
-        isEditing.title.length >= 30
-      ) {
-        setIsEditing((prev) => ({ ...prev, title: isEditing.oldTextValue }));
-        setIsEditing((prev) => ({ ...prev, enabledEditing: false }));
-        return toast.error("A tarefa deve conter de 2 a 30 caracteres.");
-      }
-      editingTask(task, isEditing?.title, setIsEditing);
+      handleEditAction(task, isEditing, setIsEditing, editingTask);
     }
   };
 
