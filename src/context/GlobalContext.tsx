@@ -147,16 +147,20 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     0,
   );
 
-  useEffect(() => {
-    if (userPrefersSaving === "sim") {
+  const userPrefersSavingReset = () =>
+    userPrefersSaving === "sim" &&
+    setTimeout(() => {
       toast(() => (
         <Toast
           toastMessage="Para desativar o salvamento automatico pressione SHIFT + L"
           icon={<Questionmark />}
         />
       ));
-    }
-    const handleKeyDown = (e) => {
+    }, 2000);
+
+  useEffect(() => {
+    userPrefersSavingReset();
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.shiftKey && e.key === "L" && userPrefersSaving) {
         localStorage.clear();
         setUserPrefersSaving(null);
