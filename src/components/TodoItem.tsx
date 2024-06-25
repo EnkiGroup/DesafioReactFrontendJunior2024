@@ -68,7 +68,7 @@ export default function TodoItem({ todo }: TodoProps) {
 
                     >
                         <p onClick={() => todosCtx.handleDeleteTodo(todo.id)}
-                            className={`hover:text-red cursor-pointer active:scale-90 text-lg text-bold
+                            className={`text-black-2 hover:text-red cursor-pointer active:scale-90 text-lg text-bold
                             ${isDeleteVisible ? 'block' : 'hidden'}`}
                         >X</p>
                     </div>
