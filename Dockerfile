@@ -1,19 +1,14 @@
-# Etapa 1: Build da aplicação
-FROM node:14 AS build
+FROM node:16.20.0-alpine3.14
 
-# Define o diretório de trabalho
 WORKDIR /app
 
-# Copia package.json e yarn.lock
-COPY package.json yarn.lock ./
-
-# Instala as dependências
-RUN yarn install
-
-# Copia o restante do código da aplicação
 COPY . .
 
-RUN yarn start
+
+RUN yarn install
+
+RUN yarn run build
 
 EXPOSE 3000
 
+CMD ["yarn","start"]
