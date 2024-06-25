@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import "./styles/main.scss";
-import Footer from "./components/Footer";
-import TodoInput from "./components/TodoInput";
-import TodoList from "./components/TodoList";
-import TodoFooter from "./components/TodoFooter";
 import { v4 as uuidv4 } from "uuid";
+import TodoList from "./components/TodoList";
+import TodoInput from "./components/TodoInput";
+import TodoFooter from "./components/TodoFooter";
+import Footer from "./components/Footer";
 
 // Interface que define a estrutura de cada tarefa (Todo)
 export interface Todo {
