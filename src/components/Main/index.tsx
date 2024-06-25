@@ -1,15 +1,17 @@
-import Footer from '../Footer'
-import Header from '../Header'
+import { useSelector } from 'react-redux'
+
 import Todo from '../Todo'
 
 import { MainContain } from './style'
 
+import { RootReducer } from '../../store'
+
 const Main = () => {
+  const { listTodo } = useSelector((s: RootReducer) => s.reducers)
+
   return (
     <MainContain>
-      <Header />
-      <Todo />
-      <Footer />
+      <Todo listTodo={listTodo} />
     </MainContain>
   )
 }

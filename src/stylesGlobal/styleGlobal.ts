@@ -10,6 +10,11 @@ export const StyleGlobal = createGlobalStyle`
   body {
     background-color: #f5f5f5;
     z-index: 2;
+    font-family: sans-serif;
+  }
+
+  iframe {
+    display: none;
   }
 
   .container {

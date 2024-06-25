@@ -1,11 +1,29 @@
+import { useDispatch, useSelector } from 'react-redux'
+
 import { InputCheck, LabelCheck, Toggle } from './style'
 
+import { RootReducer } from '../../../store'
+import { allCompleted } from '../../../store/reducer/reducerStates'
+
 const ToggleButton = () => {
+  const { listTodo } = useSelector((s: RootReducer) => s.reducers)
+
+  const dispatch = useDispatch()
+
   return (
-    <Toggle>
-      <InputCheck type="checkbox" name="toogle-all" />
-      <LabelCheck htmlFor="toogle-all">Toggle All Input</LabelCheck>
-    </Toggle>
+    <>
+      {listTodo.length > 0 && (
+        <Toggle>
+          <InputCheck type="checkbox" name="toogle-all" />
+          <LabelCheck
+            onClick={() => dispatch(allCompleted())}
+            htmlFor="toogle-all"
+          >
+            Toggle All Input
+          </LabelCheck>
+        </Toggle>
+      )}
+    </>
   )
 }
 

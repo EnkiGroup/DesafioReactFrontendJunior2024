@@ -5,12 +5,18 @@ import FooterList from '../Ui/FooterList'
 
 import { TodoCotain } from './style'
 
-const Todo = () => {
+import { Todo as TodoList } from '../../store/reducer/reducerStates'
+
+type Props = {
+  listTodo: TodoList[]
+}
+
+const Todo = ({ listTodo }: Props) => {
   return (
     <TodoCotain>
       <Input />
       <ToggleButton />
-      <ListTodo />
+      <ListTodo listTodo={listTodo} />
       <FooterList />
     </TodoCotain>
   )
