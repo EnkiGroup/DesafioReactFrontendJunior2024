@@ -142,7 +142,7 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     toast.dismiss(t.id);
   };
 
-  const remainingTasks = tasks.reduce(
+  const remainingTasks = tasks?.reduce(
     (count, task) => (!task.isDone ? count + 1 : count),
     0,
   );
