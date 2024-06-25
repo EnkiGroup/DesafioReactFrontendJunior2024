@@ -36,7 +36,7 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
       isDone: false,
     };
     setTasks((prevTasks) => {
-      const newTasks = [...prevTasks, taskObj];
+      const newTasks = [taskObj, ...prevTasks];
       if (userPrefersSaving === "sim") {
         localStorage.setItem("tasks", JSON.stringify(newTasks));
       }
@@ -164,7 +164,7 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
         savePreference,
         userPrefersSaving,
         setUserPrefersSaving,
-        remainingTasks
+        remainingTasks,
       }}
     >
       {children}
