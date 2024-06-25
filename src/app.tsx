@@ -22,7 +22,7 @@ export default function App() {
         ) : (
           <>
             <Home />
-            <Toaster position="top-right" reverseOrder={false} />
+            <Toaster position="top-center" reverseOrder={false} />
           </>
         )}
       </GlobalProvider>

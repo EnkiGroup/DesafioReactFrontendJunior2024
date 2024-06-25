@@ -81,7 +81,7 @@ const useHomePage = () => {
 
   useEffect(() => {
     if (tasksEnable) {
-      toast.success("Parabéns! Você completou todas as suas tarefas!");
+      toast.success("Parabéns, Você completou todas as suas tarefas!");
     }
   }, [tasksEnable]);
 
