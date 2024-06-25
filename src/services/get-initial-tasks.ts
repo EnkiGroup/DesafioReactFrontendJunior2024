@@ -14,6 +14,11 @@ export async function getInitialTasks(setData: (data: Task[]) => void) {
 
     return data;
   } catch (error) {
-    console.log(error);
+    alert("Failed to fetch todo's. Please try again later.");
+
+    const fallbackData: Task[] = [];
+    setData(fallbackData);
+
+    return fallbackData;
   }
 }
