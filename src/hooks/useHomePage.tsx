@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import useGlobalContext from "./useGlobalContext";
 import Questionmark from "../assets/icons/Questionmark";
@@ -24,6 +24,7 @@ const useHomePage = () => {
   } = useGlobalContext();
 
   const navigate = useNavigate();
+  const [animationCount, setAnimationCount] = useState(0);
 
   const tasksEnable = useMemo(
     () => (tasks?.length ? tasks.every(({ isDone }) => isDone) : false),
@@ -94,8 +95,9 @@ const useHomePage = () => {
   }, []);
 
   useEffect(() => {
-    if (tasksEnable && remainingTasks === 0) {
+    if (tasksEnable && remainingTasks === 0 && animationCount === 0) {
       toast.success("Parabéns, Você completou todas as suas tarefas!");
+      setAnimationCount((prev) => prev + 1);
     }
   }, [tasksEnable, remainingTasks]);
 
