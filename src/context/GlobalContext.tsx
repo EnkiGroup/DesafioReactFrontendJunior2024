@@ -142,10 +142,9 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     toast.dismiss(t.id);
   };
 
-  const remainingTasks = tasks?.reduce(
-    (count, task) => (!task.isDone ? count + 1 : count),
-    0,
-  );
+  const remainingTasks = Array.isArray(tasks)
+  ? tasks.reduce((count, task) => (!task.isDone ? count + 1 : count), 0)
+  : 0;
 
   const userPrefersSavingReset = () =>
     userPrefersSaving === "sim" &&
