@@ -30,7 +30,7 @@ body {
 #root {
   display: flex;
   justify-content: center;
-  margin: 0 10px;
+  margin: 0 20px;
 }
 
 @media screen and (max-width:900px){
