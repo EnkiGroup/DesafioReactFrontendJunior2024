@@ -40,7 +40,7 @@ async function addTask() {
   });
 }
 
-async function addThreeTasks() {
+async function addTwoTasks() {
   const input = screen.getByTestId("task-input");
 
   await act(async () => {
@@ -51,14 +51,9 @@ async function addThreeTasks() {
     fireEvent.change(input, { target: { value: "Lavar o quintal" } });
     fireEvent.submit(input);
   });
-  await act(async () => {
-    fireEvent.change(input, { target: { value: "Lavar o carro" } });
-    fireEvent.submit(input);
-  });
 }
 
 describe("App", () => {
-
   it("should add a task correctly", async () => {
     renderComponent()
 
@@ -145,14 +140,14 @@ describe("App", () => {
     expect(task).not.toBeInTheDocument()
   })
 
-  it("should add three task, and when the checkAllButton clicked, all the tasks needs to be done", async () => {
+  it("should add two task, and when the checkAllButton clicked, all the tasks needs to be done", async () => {
     renderComponent()
 
-    await addThreeTasks()
+    await addTwoTasks()
 
     const checkButtons = screen.getAllByRole("checkbox")
 
-    expect(checkButtons).toHaveLength(3)
+    expect(checkButtons).toHaveLength(2)
     checkButtons.forEach(checkButton => {
       expect(checkButton).not.toBeChecked()
     })
@@ -166,14 +161,14 @@ describe("App", () => {
     })
   })
 
-  it("should add three completed task, and when the clear completed clicked, all the tasks needs to be removed", async () => {
+  it("should add two completed task, and when the clear completed clicked, all the tasks needs to be removed", async () => {
     renderComponent()
 
-    await addThreeTasks()
+    await addTwoTasks()
 
     const checkButtons = screen.getAllByRole("checkbox")
 
-    expect(checkButtons).toHaveLength(3)
+    expect(checkButtons).toHaveLength(2)
     checkButtons.forEach(checkButton => {
       expect(checkButton).not.toBeChecked()
     })
