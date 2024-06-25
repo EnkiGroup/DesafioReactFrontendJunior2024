@@ -25,7 +25,7 @@ export function ReadableTaskItem({ task }: ReadableTaskItemProps) {
     <>
       <CheckButton isDone={task.isDone} onCheck={handleCheck} />
       <p
-        className={`w-full px-2 py-4 pr-9 text-2xl max-sm:text-xl break-all ${task.isDone ? "text-gray-400 line-through" : "text-[#484848]"}`}
+        className={`w-full px-2 py-4 pr-9 text-2xl max-sm:text-xl break-all ${task.isDone ? "text-gray-400 line-through" : "text-[#484848]"} transition-all duration-700`}
         data-testid="task"
       >
         {task.title}
