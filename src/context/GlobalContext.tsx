@@ -1,10 +1,12 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { EditingTaskProps, GlobalContextProps, TaskProps } from "../types";
-import toast, { Toast } from "react-hot-toast";
+import toast, { Toast as ToastProps } from "react-hot-toast";
 import { useLocation } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
 import fetchAllAsks from "../utils/fetchAllTasks";
+import Questionmark from "../assets/icons/Questionmark";
+import Toast from "../components/Toast";
 
 export const GlobalContext = createContext({} as GlobalContextProps);
 
@@ -134,7 +136,7 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const savePreference = (t: Toast, value: string) => {
+  const savePreference = (t: ToastProps, value: string) => {
     localStorage.setItem("userPrefersSaving", value);
     setUserPrefersSaving(value);
     toast.dismiss(t.id);
@@ -144,6 +146,28 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     (count, task) => (!task.isDone ? count + 1 : count),
     0,
   );
+
+  useEffect(() => {
+    if (userPrefersSaving === "sim") {
+      toast(() => (
+        <Toast
+          toastMessage="Para desativar o salvamento automatico pressione SHIFT + L"
+          icon={<Questionmark />}
+        />
+      ));
+    }
+    const handleKeyDown = (e) => {
+      if (e.shiftKey && e.key === "L" && userPrefersSaving) {
+        localStorage.clear();
+        setUserPrefersSaving(null);
+        toast.success(`Salvamento automatico desativado com sucesso!`);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [userPrefersSaving, setUserPrefersSaving]);
 
   return (
     <GlobalContext.Provider
