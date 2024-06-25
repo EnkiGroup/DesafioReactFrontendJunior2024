@@ -1,16 +1,46 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./app";
-import reportWebVitals from "./reportWebVitals";
+import { createRoot } from "react-dom/client"
+import { StrictMode } from "react"
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { TasksProvider } from "./contexts/tasks-context.tsx"
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+import { App } from "./App.tsx"
+import { AllTasks } from "./routes/all-tasks";
+import { ActiveTasks } from "./routes/active-tasks";
+import { CompletedTasks } from "./routes/completed-tasks";
+
+import "./styles.css"
+
+const queryClient = new QueryClient()
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <AllTasks />
+      },
+      {
+        path: "/active",
+        element: <ActiveTasks />
+      },
+      {
+        path: "/completed",
+        element: <CompletedTasks />
+      }
+    ]
+  },
+])
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <TasksProvider>
+        <RouterProvider router={router} />
+      </TasksProvider>
+    </QueryClientProvider>
+  </StrictMode>,
+)
