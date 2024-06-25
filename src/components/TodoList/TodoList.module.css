@@ -1,0 +1,127 @@
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  max-width: 550px;
+  background: #fff;
+}
+
+.listItem {
+  position: relative;
+  display: flex;
+  font-size: 24px;
+  border-bottom: 1px solid #ededed;
+  width: 100%;
+}
+
+.listItem:last-child {
+  border-bottom: none;
+}
+
+.listItemEditing {
+  border-bottom: none;
+  padding: 0;
+}
+
+.listItemEditing .edit {
+  display: block;
+  width: calc(100% - 43px);
+  padding: 12px 16px;
+  margin: 0 0 0 43px;
+}
+
+.listItemEditing .view {
+  display: none;
+}
+
+.toggle {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
+  height: 65px;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.toggle::after {
+  content: "✓";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #c8c8c8;
+  border-radius: 50%;
+  font-size: 22px;
+  color: transparent;
+  transition: all 0.15s ease-in-out;
+  margin: 10px 0;
+}
+
+.toggle:checked::after {
+  color: green;
+  border-color: green;
+}
+
+.editableDiv {
+  width: 100%;
+  white-space: pre-line;
+  word-break: break-word;
+  padding: 15px 60px 15px 15px;
+  display: block;
+  line-height: 1.2;
+  transition: color 0.4s;
+}
+
+.editableDivInput {
+  all: unset;
+  margin: 0;
+  color: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1.4em;
+  border-radius: 6px;
+  border: 1px solid #999;
+  width: 100%;
+  height: 100%;
+}
+
+.destroy {
+  all: unset;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  margin: auto 0;
+  font-size: 30px;
+  color: transparent;
+  margin-bottom: 11px;
+  transition: color 0.2s ease-out;
+  cursor: pointer;
+}
+
+.listItem:hover .destroy {
+  color: #cc9a9a;
+}
+
+.destroy:hover {
+  color: #af5b5e;
+}
+
+.destroy::after {
+  content: "×";
+}
+
+.edit {
+  display: none;
+}
+
+.listItemEditing:last-child {
+  margin-bottom: -1px;
+}

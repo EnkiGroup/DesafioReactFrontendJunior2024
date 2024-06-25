@@ -1,0 +1,74 @@
+.footer {
+  border-top: 1px solid #e6e6e6;
+  font-size: 15px;
+  height: fit-content;
+  padding: 10px 15px;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.footer:before {
+  bottom: 0;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 8px 0 -3px #f6f6f6, 0 9px 1px -3px rgba(0, 0, 0, .2), 0 16px 0 -6px #f6f6f6, 0 17px 2px -6px rgba(0, 0, 0, .2);
+  content: "";
+  height: 50px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: auto;
+  pointer-events: none;
+}
+
+.todoCount {
+  float: left;
+  text-align: left;
+}
+
+.todoCount strong {
+  font-weight: 300;
+}
+
+.filters {
+  list-style: none;
+  display: flex;
+  gap: 4px;
+  height: fit-content;
+}
+
+.filtersItem {
+  width: fit-content;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 3px 7px;
+}
+
+.filtersItem a {
+  color: inherit;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.filtersItemSelected {
+  border-color: rgba(175, 47, 47, 0.2);
+}
+
+.filtersItem:hover {
+  border-color: rgba(175, 47, 47, 0.1);
+}
+
+.clearCompleted {
+  all: unset;
+  float: right;
+  position: relative;
+  line-height: 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.clearCompleted:hover {
+  text-decoration: underline;
+}

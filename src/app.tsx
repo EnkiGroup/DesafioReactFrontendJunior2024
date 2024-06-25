@@ -1,9 +1,14 @@
 import React from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
+import "./styles/global.css";
+import { routes } from "./routes";
 
-export default function App() {
-  return (
-    <section>
-      <h1>Todos</h1>
-    </section>
-  );
-}
+const App = () => {
+  return <RouterProvider router={routes} />;
+};
+
+export default App;
