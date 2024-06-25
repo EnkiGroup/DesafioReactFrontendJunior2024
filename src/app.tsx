@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route,Routes } from "react-router-dom";
 import { Header } from "./components/header/header";
 import Todo from "./components/Todo/todo";
-import { Footer } from "./components/footer/foooter";
+import { Footer } from "./components/footer/footer";
 
 
 export default function App() {

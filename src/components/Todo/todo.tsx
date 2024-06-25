@@ -13,6 +13,7 @@ interface TodoProps {
   filter: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 const Todo: React.FC<TodoProps> = ({ filter }) => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodo, setNewTodo] = useState<string>('');
