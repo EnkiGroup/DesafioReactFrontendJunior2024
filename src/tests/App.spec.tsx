@@ -1,15 +1,15 @@
-import { act } from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { act } from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-import { TasksProvider } from '../contexts/tasks-context';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { TasksProvider } from "../contexts/tasks-context";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { App } from '../App';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { AllTasks } from '../routes/all-tasks';
-import { ActiveTasks } from '../routes/active-tasks';
-import { CompletedTasks } from '../routes/completed-tasks';
+import { App } from "../App";
+import { AllTasks } from "../routes/all-tasks";
+import { ActiveTasks } from "../routes/active-tasks";
+import { CompletedTasks } from "../routes/completed-tasks";
 
 const queryClient = new QueryClient()
 
@@ -17,7 +17,7 @@ function renderComponent() {
   render(
     <QueryClientProvider client={queryClient}>
       <TasksProvider>
-        <MemoryRouter initialEntries={['/']}>
+        <MemoryRouter initialEntries={["/"]}>
           <Routes>
             <Route path="/" element={<App />}>
               <Route index element={<AllTasks />} />
@@ -268,12 +268,12 @@ describe("App", () => {
 
     await addTask()
 
-    const tasksLeft = screen.getByTestId('tasks-left');
-    expect(tasksLeft).toHaveTextContent('1');
+    const tasksLeft = screen.getByTestId("tasks-left");
+    expect(tasksLeft).toHaveTextContent("1");
 
     const checkButton = screen.getByRole("checkbox")
     fireEvent.click(checkButton)
 
-    expect(tasksLeft).toHaveTextContent('0');
+    expect(tasksLeft).toHaveTextContent("0");
   })
 })
