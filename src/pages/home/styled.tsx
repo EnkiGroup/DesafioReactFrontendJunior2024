@@ -6,6 +6,7 @@ export type FormContainerProps = {
 };
 
 export const ContainerHomePage = styled.main`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -23,7 +24,7 @@ export const FormContainer = styled.section<FormContainerProps>`
     }
   }
   box-shadow: -1px 28px 0px 17px rgba(236, 236, 236, 0.75),
-    1px 30px 0px -9px #C8C8C8;
+    1px 30px 0px -9px #c8c8c8;
 `;
 
 export const ListItem = styled.ul<FormContainerProps>`
@@ -39,4 +40,12 @@ export const ListItem = styled.ul<FormContainerProps>`
         background-color: ${({ theme }) => theme.colors.red};
       }
     `}
+`;
+
+export const AnimaChecked = styled.div`
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: 50px;
+  right: -50px;
 `;
