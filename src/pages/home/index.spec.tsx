@@ -1,7 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react";
 import Home from ".";
 import useHomePage from "../../hooks/useHomePage";
-import { renderWithTheme } from "../../utils/renderWithTheme";
+import { renderWithTheme } from "../../helper/renderWithTheme";
 import GlobalProvider from "../../context/GlobalContext";
 import { BrowserRouter } from "react-router-dom";
 

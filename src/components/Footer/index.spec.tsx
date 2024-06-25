@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { renderWithTheme } from "../../utils/renderWithTheme";
+import { renderWithTheme } from "../../helper/renderWithTheme";
 import Footer from ".";
 
 describe("Footer component", () => {

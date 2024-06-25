@@ -1,5 +1,5 @@
 import { screen, fireEvent } from "@testing-library/react";
-import { renderWithTheme } from "../../utils/renderWithTheme";
+import { renderWithTheme } from "../../helper/renderWithTheme";
 import Input from ".";
 
 const mockHandleSubmit = jest.fn();
@@ -117,7 +117,7 @@ describe("Input component", () => {
         value="input"
         setValue={mockSetValue}
         handleSubmit={mockHandleSubmit}
-        handleClickIcon={mockHandleClickIcon} 
+        handleClickIcon={mockHandleClickIcon}
         enabledIcon={true}
       />,
     );

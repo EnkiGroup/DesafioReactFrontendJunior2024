@@ -1,5 +1,5 @@
 import { screen, fireEvent } from "@testing-library/react";
-import { renderWithTheme } from "../../utils/renderWithTheme";
+import { renderWithTheme } from "../../helper/renderWithTheme";
 import Checkbox from ".";
 
 describe("Checkbox component", () => {

@@ -1,5 +1,5 @@
 import { screen, fireEvent } from "@testing-library/react";
-import { renderWithTheme } from "../../utils/renderWithTheme";
+import { renderWithTheme } from "../../helper/renderWithTheme";
 import { BrowserRouter } from "react-router-dom";
 
 import Filter from ".";
@@ -31,11 +31,11 @@ describe("Filter component", () => {
     expect(item).toBeInTheDocument();
   });
 
-  it("Should call onClick prop on click", () => { 
+  it("Should call onClick prop on click", () => {
     const onClick = jest.fn();
     renderWithTheme(
       <BrowserRouter>
-        <Filter handleCompletedClick={onClick}/> 
+        <Filter handleCompletedClick={onClick} />
       </BrowserRouter>,
     );
 
