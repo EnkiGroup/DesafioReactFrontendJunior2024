@@ -60,7 +60,7 @@ const Home = () => {
         <AnimaChecked>
           {" "}
           <Lottie
-            options={animationDefaultValues(TodoCheckedAnimation)}
+            options={animationDefaultValues(TodoCheckedAnimation, "lottie-svg-class")}
             width={100}
             height={100}
           />
