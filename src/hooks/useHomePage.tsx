@@ -25,11 +25,15 @@ const useHomePage = () => {
 
   const navigate = useNavigate();
   const [animationCount, setAnimationCount] = useState(0);
+  const [startAnimation, setStartAnimation] = useState(false);
 
   const tasksEnable = useMemo(
     () => (tasks?.length ? tasks.every(({ isDone }) => isDone) : false),
     [tasks],
   );
+
+  const stopAnimation =
+    tasksEnable && remainingTasks === 0 && animationCount === 0;
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -95,9 +99,10 @@ const useHomePage = () => {
   }, []);
 
   useEffect(() => {
-    if (tasksEnable && remainingTasks === 0 && animationCount === 0) {
+    if (stopAnimation) {
       toast.success("Parabéns, Você completou todas as suas tarefas!");
       setAnimationCount((prev) => prev + 1);
+      setStartAnimation(true);
     }
   }, [tasksEnable, remainingTasks]);
 
@@ -111,6 +116,7 @@ const useHomePage = () => {
     remainingTasks,
     clearEnableTasks,
     isLoading,
+    startAnimation,
   };
 };
 
