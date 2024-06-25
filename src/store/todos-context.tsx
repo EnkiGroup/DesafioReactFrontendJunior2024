@@ -69,8 +69,6 @@ export default function TodosContextProvider({ children }: TodosContextProviderP
         }
     }, [data]);
 
-    console.log(todoState.todos)
-
     const ctx: TodosContextValue = {
         todos: todoState.todos,
         handleAddTodo(title: string) {
