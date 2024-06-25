@@ -1,0 +1,148 @@
+/* App.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.todo-app {
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(14, 0, 0, 0.925);
+    width: 400px;
+    border-radius: 5px;
+}
+
+h1 {
+    text-align: center;
+    color: red;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.toggle-all {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.toggle-all .arrow {
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+input[type="text"] {
+    width: calc(100% - 40px); /* Leva em conta o tamanho do botão */
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s;
+}
+
+li:hover {
+    background-color: #f9f9f9;
+}
+
+li.editing {
+    background: #f9f9f9;
+}
+
+li.editing input[type="text"] {
+    width: calc(100% - 20px); /* Leva em conta o padding */
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+li span {
+    flex: 1;
+}
+
+li.completed span {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+li input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+li button {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #d9534f;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+footer button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+footer button.active {
+    background-color: #f0f0f0;
+}
+
+footer button:hover {
+    background-color: #e0e0e0;
+}
+
+p.no-tasks {
+    text-align: center;
+    color: #999;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .todo-app {
+        width: 90%;
+    }
+}
+
+/*.todo-app ul li span {
+    color: red;
+}*/
