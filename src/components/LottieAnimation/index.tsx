@@ -24,7 +24,7 @@ const LottieAnimation = ({ onComplete }: LottieAnimationProps) => {
   }, [onComplete]);
 
   return (
-    <AnimaContainer>
+    <AnimaContainer role="animaLottie">
       <Lottie options={defaultOptions} height={500} width={500} />
     </AnimaContainer>
   );
