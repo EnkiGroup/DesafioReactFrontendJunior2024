@@ -28,25 +28,44 @@ export default function TodoList() {
             </ul>
 
             {todosCtx.todos.length !== 0 &&
-                <div className="px-4 flex justify-between items-center w-full bg-white h-10 text-sm
-                border-2 border-gray-1 border-opacity-20 shadow-lg">
-                    <p>{activeTodosCount} {activeTodosCount === 1 || activeTodosCount === 0 ? "Item" : "Items"}</p>
-                    <div className="px-6 w-1/2 flex justify-between">
-                        <Link 
-                            className={`p-1 ${filter === '' ? 'ring-1 ring-red ring-opacity-60 rounded-md shadow-sm' : 'hover:ring-1 ring-gray-1 rounded-md ring-opacity-60 '}`} 
-                            to={"/"}>All
-                        </Link>
-                        <Link 
-                            className={`p-1  ${filter === 'active' ? 'ring-1 ring-red ring-opacity-60 rounded-md shadow-sm' : 'hover:ring-1 ring-gray-1 rounded-md ring-opacity-60 '}`} 
-                            to={"/active"}>Active
-                        </Link>
-                        <Link 
-                            className={`p-1  ${filter === 'completed' ? 'ring-1 ring-red ring-opacity-60 rounded-md shadow-sm' : 'hover:ring-1 ring-gray-1 rounded-md ring-opacity-60 '}`} 
-                            to={"/completed"}>Completed
-                        </Link>
+
+                <div>
+                    <div className="px-4 flex justify-between items-center w-full bg-white h-10 text-sm
+                        border-2 border-gray-1 border-opacity-20 shadow-lg">
+                        <p>{activeTodosCount} {activeTodosCount === 1 || activeTodosCount === 0 ? "Item" : "Items"}</p>
+                        <div className="px-6 w-1/2 flex justify-between">
+                            <Link
+                                className={`p-1 ${filter === '' ?
+                                    'ring-1 ring-red ring-opacity-60 rounded-md shadow-sm' :
+                                    'hover:ring-1 ring-gray-1 rounded-md ring-opacity-60 '}`
+                                }
+                                to={"/"}>All
+                            </Link>
+                            <Link
+                                className={`p-1  ${filter === 'active' ?
+                                    'ring-1 ring-red ring-opacity-60 rounded-md shadow-sm' :
+                                    'hover:ring-1 ring-gray-1 rounded-md ring-opacity-60 '}`
+                                }
+                                to={"/active"}>Active
+                            </Link>
+                            <Link
+                                className={`p-1  ${filter === 'completed' ?
+                                    'ring-1 ring-red ring-opacity-60 rounded-md shadow-sm' :
+                                    'hover:ring-1 ring-gray-1 rounded-md ring-opacity-60 '}`
+                                }
+                                to={"/completed"}>Completed
+                            </Link>
+                        </div>
+                        <button className="hover:underline" onClick={() => todosCtx.handleClearCompleted()}>Clear Completed</button>
                     </div>
-                    <button className="hover:underline" onClick={() => todosCtx.handleClearCompleted()}>Clear Completed</button>
+                    <div className="flex flex-col items-center allign-top">
+                        <div className="bg-white border-b-[1px] border-gray-2  h-[2px] w-[98%] shadow-sm"></div>
+                        <div className="bg-white border-b-[1px] border-gray-2  h-[2px] w-[97%] shadow-sm"></div>
+                        <div className="bg-white border-b-[1px] border-gray-2 h-[2px] w-[96%] shadow-sm"></div>
+                    </div>
                 </div>
+
+
             }
 
         </div>
