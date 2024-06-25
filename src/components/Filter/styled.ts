@@ -18,6 +18,11 @@ export const FilterContainer = styled.div`
       cursor: pointer;
     }
   }
+
+  @media screen and (max-width: 375px){
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 export const FilterButtonContainer = styled.div`
