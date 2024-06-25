@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo } from "react";
 import toast from "react-hot-toast";
 import useGlobalContext from "./useGlobalContext";
+import Questionmark from "../assets/icons/Questionmark";
 import { useNavigate } from "react-router-dom";
 import Toast from "../components/Toast";
 
@@ -50,6 +51,7 @@ const useHomePage = () => {
               <button onClick={() => savePreference(t, "sim")}>Sim</button>,
               <button onClick={() => savePreference(t, "nao")}>Não</button>,
             ]}
+            icon={<Questionmark />}
           />
         ));
       }
