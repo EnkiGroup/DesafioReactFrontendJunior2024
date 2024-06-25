@@ -5,7 +5,10 @@ import InputForm from "../../components/Input";
 import Loading from "../../components/Loading";
 import TodoList from "../../components/TodoList";
 import useHomePage from "../../hooks/useHomePage";
-import { ContainerHomePage, FormContainer, ListItem } from "./styled";
+import { ContainerHomePage, FormContainer, ListItem, AnimaChecked } from "./styled";
+import TodoCheckedAnimation from "../../assets/animation/TodoCheckedAnimation.json";
+import Lottie from "react-lottie";
+import {animationDefaultValues} from "../../utils/animationDefaultValues"
 
 const Home = () => {
   const {
@@ -47,6 +50,9 @@ const Home = () => {
         />
       </FormContainer>
       <Footer />
+      <AnimaChecked>
+        <Lottie options={animationDefaultValues(TodoCheckedAnimation)} width={100} height={100} />
+      </AnimaChecked>
     </ContainerHomePage>
   );
 };
