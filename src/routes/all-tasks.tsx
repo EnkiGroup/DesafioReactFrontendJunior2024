@@ -7,7 +7,7 @@ export function AllTasks() {
 
   return (
     <ul className="flex flex-col z-0 overflow-auto max-h-[50vh]">
-      {tasks?.map((task) => (<TaskItem key={task.id} task={task} />))}
+      {tasks?.map(task => <TaskItem key={task.id} task={task} />)}
     </ul>
   )
 }
