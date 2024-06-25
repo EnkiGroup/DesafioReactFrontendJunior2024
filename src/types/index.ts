@@ -9,6 +9,7 @@ export type TaskProps = {
 export type EditingTaskProps = {
   title: string;
   enabledEditing: boolean;
+  oldTextValue: string;
 };
 
 export type GlobalContextProps = {
