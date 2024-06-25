@@ -268,13 +268,12 @@ describe("App", () => {
 
     await addTask()
 
-    const itensLeftBefore = screen.getByText("1 itens left")
-    expect(itensLeftBefore).toBeInTheDocument()
+    const tasksLeft = screen.getByTestId('tasks-left');
+    expect(tasksLeft).toHaveTextContent('1');
 
     const checkButton = screen.getByRole("checkbox")
     fireEvent.click(checkButton)
 
-    const itensLeftAfter = screen.getByText("0 itens left")
-    expect(itensLeftAfter).toBeInTheDocument()
+    expect(tasksLeft).toHaveTextContent('0');
   })
 })

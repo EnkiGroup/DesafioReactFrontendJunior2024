@@ -10,7 +10,7 @@ export function TasksFooter() {
     <>
       {!isTasksListEmpty && (
         <footer className="flex justify-between px-4 py-2 bg-white border-t border-gray-200 sheets-effect">
-          <span>{tasksLeft} itens left</span>
+          <span data-testid="tasks-left">{tasksLeft} itens left</span>
           <nav>
             <ul className="flex gap-4">
               <li>
