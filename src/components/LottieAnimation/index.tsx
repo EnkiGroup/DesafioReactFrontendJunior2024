@@ -18,7 +18,7 @@ const LottieAnimation = ({ onComplete }: LottieAnimationProps) => {
 
   return (
     <AnimaContainer role="animaLottie">
-      <Lottie options={animationDefaultValues(todoMV2animation)} height={500} width={500} />
+      <Lottie options={animationDefaultValues(todoMV2animation, "lottie-svg-class-bg")} height={500} width={500} />
     </AnimaContainer>
   );
 };
