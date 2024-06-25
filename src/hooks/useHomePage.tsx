@@ -28,7 +28,7 @@ const useHomePage = () => {
   const [startAnimation, setStartAnimation] = useState(false);
 
   const tasksEnable = useMemo(
-    () => (tasks?.length ? tasks.every(({ isDone }) => isDone) : false),
+    () => (Array.isArray(tasks) && tasks.length ? tasks.every(({ isDone }) => isDone) : false),
     [tasks],
   );
 
