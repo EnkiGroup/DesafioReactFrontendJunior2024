@@ -1,0 +1,51 @@
+@import "utils";
+@import "todo-header";
+@import "todo-main";
+@import "todo-footer";
+
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font-family;
+}
+
+body {
+  line-height: 1.4em;
+  background: $color-background-dark;
+  color: $color-text;
+  min-width: 230px;
+  max-width: 550px;
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 430px) {
+  .main, .footer {
+    padding: 0 10px;
+  }
+  
+  .new-todo {
+    width: calc(100% - 20px);
+  }
+  
+  .todo-count {
+    float: none;
+    text-align: center;
+  }
+  
+  .filters {
+    float: none;
+    text-align: center;
+  }
+}
