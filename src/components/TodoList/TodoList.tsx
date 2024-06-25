@@ -15,12 +15,7 @@ export const TodoList = ({
 }: TodoListProps) => (
   <ul className={styles.list}>
     {todos.map((todo) => (
-      <li
-        key={todo.id}
-        className={`${styles.listItem} ${
-          todo.isDone ? styles.lineThrough : ""
-        }`}
-      >
+      <li key={todo.id} className={`${styles.listItem}`}>
         <input
           type="checkbox"
           className={styles.toggle}
