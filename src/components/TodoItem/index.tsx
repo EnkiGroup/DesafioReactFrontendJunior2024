@@ -33,6 +33,7 @@ const TodoItem = ({ task }: TodoItemProps) => {
       }
       enableEditing={isEditing.enabledEditing}
       isEditing={isEditing.enabledEditing}
+      role="todoItem"
     >
       <Item isEditing={task?.isDone}>
         {!isEditing?.enabledEditing && (
@@ -51,6 +52,7 @@ const TodoItem = ({ task }: TodoItemProps) => {
               e.key === "Enter" &&
               editingTask(task, isEditing?.title, setIsEditing)
             }
+            role="inputEditing"
             autoFocus
           />
         ) : (

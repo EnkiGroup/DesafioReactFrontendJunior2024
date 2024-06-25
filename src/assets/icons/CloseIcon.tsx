@@ -15,6 +15,7 @@ const CloseIcon = ({ handleClick }: CloseIcon) => {
       strokeLinecap="round"
       strokeLinejoin="round"
       className="closeIcon"
+      role="closeIcon"
       onClick={handleClick}
     >
       <path d="M18 6L6 18M6 6l12 12" />
