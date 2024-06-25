@@ -19,7 +19,7 @@ const useHomePage = () => {
     setUserPrefersSaving,
     setTasks,
     isLoading,
-    remainingTasks
+    remainingTasks,
   } = useGlobalContext();
 
   const navigate = useNavigate();
@@ -80,10 +80,10 @@ const useHomePage = () => {
   }, []);
 
   useEffect(() => {
-    if (tasksEnable) {
+    if (tasksEnable && remainingTasks === 0) {
       toast.success("Parabéns, Você completou todas as suas tarefas!");
     }
-  }, [tasksEnable]);
+  }, [tasksEnable, remainingTasks]);
 
   return {
     handleSubmit,
