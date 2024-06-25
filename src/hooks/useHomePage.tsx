@@ -33,6 +33,7 @@ const useHomePage = () => {
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+
       if (
         valueInput?.length === 0 ||
         valueInput?.length === 1 ||
@@ -40,6 +41,7 @@ const useHomePage = () => {
       ) {
         return toast.error("A tarefa deve conter de 2 a 30 caracteres.");
       }
+
       if (
         (tasks?.length === 0 || tasks?.length === 3) &&
         userPrefersSaving === null
@@ -48,8 +50,12 @@ const useHomePage = () => {
           <Toast
             toastMessage="Gostaria de salvar as tarefas?"
             toastButtons={[
-              <button onClick={() => savePreference(t, "sim")}>Sim</button>,
-              <button onClick={() => savePreference(t, "nao")}>Não</button>,
+              <button key="sim" onClick={() => savePreference(t, "sim")}>
+                Sim
+              </button>,
+              <button key="nao" onClick={() => savePreference(t, "nao")}>
+                Não
+              </button>,
             ]}
             icon={<Questionmark />}
           />
@@ -57,28 +63,34 @@ const useHomePage = () => {
       }
       incrementTasks(valueInput);
     },
-
     [valueInput, incrementTasks, savePreference, tasks, userPrefersSaving],
   );
 
-  useEffect(() => {
+  const initializeData = async () => {
     if (pathname === "/") {
       navigate("all");
     }
-    const savedTasks = localStorage.getItem("tasks");
-    const userPrefersSaving = localStorage.getItem("userPrefersSaving");
 
-    if (userPrefersSaving) {
-      setUserPrefersSaving(userPrefersSaving);
+    const [savedTasks, savedUserPrefersSaving] = [
+      localStorage.getItem("tasks"),
+      localStorage.getItem("userPrefersSaving"),
+    ];
+
+    if (savedUserPrefersSaving) {
+      setUserPrefersSaving(savedUserPrefersSaving);
     }
 
     if (savedTasks) {
       setTasks(JSON.parse(savedTasks));
     }
 
-    if (!savedTasks || (userPrefersSaving && userPrefersSaving === "nao")) {
-      initialData();
+    if (!savedTasks || savedUserPrefersSaving === "nao") {
+      await initialData();
     }
+  };
+
+  useEffect(() => {
+    initializeData();
   }, []);
 
   useEffect(() => {
