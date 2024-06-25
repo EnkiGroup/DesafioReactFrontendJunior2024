@@ -7,7 +7,7 @@ import { Input } from "./input"
 
 export function TasksInput() {
 
-  const { addTask, tasks, tasksLeft, toggleAllTasksCheck } = useTasksContext()
+  const { addTask, isTasksListEmpty, tasksLeft, toggleAllTasksCheck } = useTasksContext()
 
   const { register, handleSubmit, reset, errors } = useInputValidation()
 
@@ -16,10 +16,8 @@ export function TasksInput() {
 
     reset();
   };
-
-  const areThereTasks = tasks.length > 0
-  const areThereTasksTodo = tasksLeft == 0
-  const areAllTasksDone = areThereTasks && areThereTasksTodo
+  
+  const areAllTasksDone = !isTasksListEmpty && tasksLeft == 0
 
   return (
     <form
