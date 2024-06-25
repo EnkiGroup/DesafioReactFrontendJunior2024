@@ -5,15 +5,19 @@ import { CheckAllButton } from "../../components/check-all-button";
 
 import { Task } from "../../types";
 
-function renderComponent(tasks: Task[]) {
+function renderComponent(tasks: Task[] = []) {
 
   const tasksLeft = tasks.filter(task => task.isDone === false).length
 
+  const areThereTasks = tasks.length > 0
+  const areThereTasksTodo = tasksLeft == 0
+  const areAllTasksDone = areThereTasks && areThereTasksTodo
+  
   const onClickMock = jest.fn();
 
   render(
     <CheckAllButton
-      isActiveStyle={Boolean(tasks.length != 0 && tasksLeft == 0)}
+      isActiveStyle={areAllTasksDone}
       onClick={onClickMock}
     />
   );
@@ -46,8 +50,6 @@ describe("CheckAllButton", () => {
     }
   ]
 
-  const tasksEmpty: Task[] = []
-
   const onClickMock = jest.fn();
 
   beforeEach(() => {
@@ -71,7 +73,7 @@ describe("CheckAllButton", () => {
   });
 
   it("should render chevron icon with correct color when there are no tasks", () => {
-    renderComponent(tasksEmpty)
+    renderComponent()
 
     const chevronIcon = screen.getByTestId("chevron-icon");
 

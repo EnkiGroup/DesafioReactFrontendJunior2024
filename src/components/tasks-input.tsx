@@ -17,13 +17,17 @@ export function TasksInput() {
     reset();
   };
 
+  const areThereTasks = tasks.length > 0
+  const areThereTasksTodo = tasksLeft == 0
+  const areAllTasksDone = areThereTasks && areThereTasksTodo
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex bg-[#FEFEFE]"
     >
       <CheckAllButton
-        isActiveStyle={Boolean(tasks.length != 0 && tasksLeft == 0)}
+        isActiveStyle={areAllTasksDone}
         onClick={toggleAllTasksCheck}
       />
       <Input
