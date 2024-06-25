@@ -1,0 +1,40 @@
+.todoapp {
+  background: #fff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2), 0 25px 50px 0 rgba(0, 0, 0, .1);
+  margin: 130px 0 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.main {
+  border-top: 1px solid #e6e6e6;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+.title {
+  font-size: 5rem;
+  color: rgb(184, 63, 69);
+  font-weight: 400;
+  width: 100dvw;
+  text-align: center;
+  margin: 1.75rem 0;
+  position: absolute;
+  top: -100px;
+}
+
+.selectAll {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #fff;
+  max-width: 550px;
+  transform: rotate(90deg);
+}

@@ -1,0 +1,10 @@
+:root {
+  --color-primary: #b83f45;
+  --color-secondary: #e6e6e6;
+  --color-background: #fff;
+  --color-text: #111;
+  --font-family: "Inter", sans-serif;
+  --font-size-base: 14px;
+  --font-size-large: 24px;
+  --font-size-title: 5rem;
+}

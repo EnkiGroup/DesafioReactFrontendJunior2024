@@ -1,10 +1,12 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import styles from "./EditableDiv.module.css";
 
 interface EditableDivProps {
   defaultText?: string;
+  completed?: boolean;
 }
 
-export const EditableDiv = ({ defaultText }: EditableDivProps) => {
+export const EditableDiv = ({ defaultText, completed }: EditableDivProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(
     defaultText || "Clique duas vezes para editar"
@@ -32,8 +34,12 @@ export const EditableDiv = ({ defaultText }: EditableDivProps) => {
     setText(event.target.value);
   };
 
+  useEffect(() => {
+    setText(defaultText || "Clique duas vezes para editar");
+  }, [defaultText]);
+
   return (
-    <div className="editable-div" onDoubleClick={handleDoubleClick}>
+    <div className={styles.editableDiv} onDoubleClick={handleDoubleClick}>
       {isEditing ? (
         <input
           type="text"
@@ -42,9 +48,12 @@ export const EditableDiv = ({ defaultText }: EditableDivProps) => {
           onBlur={handleBlur}
           onKeyDown={handleEnter}
           autoFocus
+          className={styles.editableDivInput}
         />
       ) : (
-        <label>{text}</label>
+        <label className={`${completed ? styles.lineThrough : ""}`}>
+          {text}
+        </label>
       )}
     </div>
   );
