@@ -1,7 +1,7 @@
 import { ToastContainer, ButtonContainer } from "./styled";
 
 type ToasProps = {
-  toastMessage: string;
+  toastMessage?: string;
   toastButtons: JSX.Element[];
 };
 const Toast = ({ toastMessage, toastButtons }: ToasProps) => {
