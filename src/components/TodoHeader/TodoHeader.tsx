@@ -25,6 +25,7 @@ export const TodoHeader = ({
               className={styles.toggleAll}
               onChange={onToggleAll}
               checked={allCompleted}
+              aria-label="toggle all"
             />
             <label htmlFor="toggle-all" className={styles.toggleAllLabel} />
           </>

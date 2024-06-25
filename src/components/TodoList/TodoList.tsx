@@ -18,7 +18,7 @@ export const TodoList = ({
       <li
         key={todo.id}
         className={`${styles.listItem} ${
-          todo.isDone ? styles.listItemCompleted : ""
+          todo.isDone ? styles.lineThrough : ""
         }`}
       >
         <input
@@ -31,6 +31,7 @@ export const TodoList = ({
         <button
           className={styles.destroy}
           onClick={() => onRemoveTodo(todo.id)}
+          data-testid={`remove-button-${todo.id}`}
         />
       </li>
     ))}
