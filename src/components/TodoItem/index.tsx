@@ -16,14 +16,40 @@ const TodoItem = ({ task }: TodoItemProps) => {
   const [isEditing, setIsEditing] = useState({
     title: task?.title,
     enabledEditing: false,
+    oldTextValue: task?.title
   });
 
   const handleChangeEditing = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    if (value.length >= 30) {
+    setIsEditing((prev) => ({ ...prev, title: value }));
+  };
+
+  const handleOnBlurEditing = () => {
+    if (
+      isEditing.title.length === 1 ||
+      isEditing.title.length === 0 ||
+      isEditing.title.length >= 30
+    ) {
+      setIsEditing((prev) => ({ ...prev, enabledEditing: false }));
+      setIsEditing((prev) => ({ ...prev, title: isEditing.oldTextValue }));
       return toast.error("A tarefa deve conter de 2 a 30 caracteres.");
     }
-    setIsEditing((prev) => ({ ...prev, title: value }));
+    editingTask(task, isEditing?.title, setIsEditing);
+  };
+
+  const handleOnKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      if (
+        isEditing.title.length === 1 ||
+        isEditing.title.length === 0 ||
+        isEditing.title.length >= 30
+      ) {
+        setIsEditing((prev) => ({ ...prev, title: isEditing.oldTextValue }));
+        setIsEditing((prev) => ({ ...prev, enabledEditing: false }));
+        return toast.error("A tarefa deve conter de 2 a 30 caracteres.");
+      }
+      editingTask(task, isEditing?.title, setIsEditing);
+    }
   };
 
   return (
@@ -47,11 +73,8 @@ const TodoItem = ({ task }: TodoItemProps) => {
             type="text"
             value={isEditing?.title}
             onChange={handleChangeEditing}
-            onBlur={() => editingTask(task, isEditing?.title, setIsEditing)}
-            onKeyPress={(e) =>
-              e.key === "Enter" &&
-              editingTask(task, isEditing?.title, setIsEditing)
-            }
+            onBlur={handleOnBlurEditing}
+            onKeyPress={handleOnKeyPress}
             role="inputEditing"
             autoFocus
           />
