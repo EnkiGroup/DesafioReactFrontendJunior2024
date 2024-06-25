@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import './App.css'; // Importe o arquivo CSS para estilização
 
@@ -147,3 +148,14 @@ const App: React.FC = () => {
 };
 
 export default App;
+=======
+import React from "react";
+
+export default function App() {
+  return (
+    <section>
+      <h1>Todos</h1>
+    </section>
+  );
+}
+>>>>>>> 8df937a1d3eef72fb55df424a29ba083ffe604df
