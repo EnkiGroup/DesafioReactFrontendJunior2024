@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, ChangeEvent, KeyboardEvent } from "react";
+import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
 import "./styles/main.scss";
 import Footer from "./components/Footer";
 import { v4 as uuidv4 } from "uuid";
@@ -8,25 +9,16 @@ interface Todo {
   id: string;
   title: string;
   isDone: boolean;
-  editing: boolean; // Propriedade para controlar o modo de edição da tarefa
+  editing: boolean;
 }
-
-// Constantes para os filtros de tarefas
-const FILTER_ALL = 'All';
-const FILTER_ACTIVE = 'Active';
-const FILTER_COMPLETED = 'Completed';
 
 const App = () => {
   // Estado para armazenar a lista de tarefas
   const [todos, setTodos] = useState<Todo[]>([]);
-
-  // Estado para armazenar o texto da nova tarefa a ser adicionada
+  // Estado para armazenar o valor do input de nova tarefa
   const [todoNew, setTodoNew] = useState<string>("");
 
-  // Estado para armazenar o filtro ativo
-  const [activeFilter, setActiveFilter] = useState<string>(FILTER_ALL);
-
-  // Busca as tarefas ao inicializar o componente
+  // useEffect para buscar as tarefas iniciais da API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,7 +27,7 @@ const App = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        setTodos(data); // Define as tarefas recuperadas do servidor no estado
+        setTodos(data); // Atualiza o estado com as tarefas recebidas
       } catch (err) {
         console.error('Failed to fetch todos:', err);
       }
@@ -44,95 +36,77 @@ const App = () => {
     fetchData();
   }, []);
 
-  // Atualiza o texto da nova tarefa conforme o usuário digita
+  // Manipulador para atualização do valor do input
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTodoNew(event.target.value);
   };
 
-  // Adiciona uma nova tarefa ao pressionar Enter
+  // Manipulador para adicionar nova tarefa ao pressionar Enter
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && todoNew.trim() !== '') {
       const newTodo: Todo = {
-        id: uuidv4(),  // Gera um ID único para a nova tarefa
-        title: todoNew.trim(),  // Define o título da nova tarefa com o texto atual
-        isDone: false,  // Define a nova tarefa como não concluída por padrão
-        editing: false  // Define o modo de edição como falso para a nova tarefa
+        id: uuidv4(), // Gera um id único para a nova tarefa
+        title: todoNew.trim(),
+        isDone: false,
+        editing: false
       };
-      setTodos([newTodo, ...todos]);  // Adiciona a nova tarefa à lista de tarefas
-      setTodoNew("");  // Limpa o campo de entrada após adicionar a tarefa
+      setTodos([newTodo, ...todos]); // Adiciona a nova tarefa à lista de tarefas
+      setTodoNew(""); // Limpa o input
     }
   };
 
-  // Alterna o estado de conclusão de uma tarefa específica
-  const handleToggle = (id: string) => {
-    const updatedTodos = todos.map(todo => {
-      if (todo.id === id) {
-        return { ...todo, isDone: !todo.isDone }; // Alterna o estado de conclusão da tarefa clicada
-      }
-      return todo;
-    });
-    setTodos(updatedTodos); // Atualiza a lista de tarefas com as alterações
-  };
-
-  // Alterna o estado de conclusão de todas as tarefas
+  // Manipulador para marcar/desmarcar todas as tarefas como concluídas
   const handleToggleAll = () => {
-    const allCompleted = todos.every(todo => todo.isDone); // Verifica se todas as tarefas estão concluídas
+    const allCompleted = todos.every(todo => todo.isDone);
     const updatedTodos = todos.map(todo => ({
       ...todo,
-      isDone: !allCompleted // Alterna o estado de conclusão de todas as tarefas
+      isDone: !allCompleted
     }));
-    setTodos(updatedTodos); // Atualiza a lista de tarefas com as alterações
+    setTodos(updatedTodos);
   };
 
-  // Remove uma tarefa da lista ao clicar no botão de delete
-  const handleDelete = (id: string) => {
-    setTodos(todos.filter(todo => todo.id !== id)); // Filtra a tarefa com base no ID para removê-la da lista
-  };
-
-  // Ativa o modo de edição ao clicar duas vezes em uma tarefa
-  const handleDoubleClick = (id: string) => {
-    const updatedTodos = todos.map(todo => {
-      if (todo.id === id) {
-        return { ...todo, editing: true }; // Ativa o modo de edição para a tarefa clicada
-      }
-      return todo;
-    });
-    setTodos(updatedTodos); // Atualiza a lista de tarefas com as alterações
-  };
-
-  // Salva as alterações feitas durante a edição de uma tarefa
+  // Manipulador para salvar a edição de uma tarefa
   const handleSaveEdit = (id: string, newTitle: string) => {
     const updatedTodos = todos.map(todo => {
       if (todo.id === id) {
-        return { ...todo, title: newTitle, editing: false }; // Salva o novo título e desativa o modo de edição
+        return { ...todo, title: newTitle, editing: false };
       }
       return todo;
     });
-    setTodos(updatedTodos); // Atualiza a lista de tarefas com as alterações
+    setTodos(updatedTodos);
   };
 
-  // Contagem de tarefas não concluídas
+  // Número de tarefas não concluídas
   const numberChange = todos.filter(todo => !todo.isDone).length;
 
-
-  // Manipula o clique nos filtros
-  const handleFilterClick = (filter: string) => {
-    setActiveFilter(filter);
-  };
-
-  // Filtra as tarefas com base no filtro ativo
-  const filteredTodos = todos.filter(todo => {
-    if (activeFilter === FILTER_ACTIVE) {
-      return !todo.isDone;
-    } else if (activeFilter === FILTER_COMPLETED) {
-      return todo.isDone;
-    }
-    return true;
-  });
-
-  // Limpa todas as tarefas concluídas
+  // Manipulador para limpar todas as tarefas concluídas
   const handleClearCompleted = () => {
     setTodos(todos.filter(todo => !todo.isDone));
+  };
+
+  // Componente para renderizar a lista de tarefas filtradas
+  const FilteredTodoList = () => {
+    const location = useLocation();
+    let filteredTodos = todos;
+    if (location.pathname === '/active') {
+      filteredTodos = todos.filter(todo => !todo.isDone);
+    } else if (location.pathname === '/completed') {
+      filteredTodos = todos.filter(todo => todo.isDone);
+    }
+
+    return (
+      <ul className="todo-list">
+        {filteredTodos.map(todo => (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            todos={todos}
+            setTodos={setTodos}
+            handleSaveEdit={handleSaveEdit}
+          />
+        ))}
+      </ul>
+    );
   };
 
   return (
@@ -161,25 +135,19 @@ const App = () => {
                 aria-label="Concluir todas as tarefas"
                 className="toggle-all"
                 type="checkbox"
-                checked={todos.every(todo => todo.isDone)} // Verifica se todas as tarefas estão concluídas
-                onChange={handleToggleAll} // Alterna o estado de conclusão de todas as tarefas
+                checked={todos.every(todo => todo.isDone)}
+                onChange={handleToggleAll}
               />
               <label className="toggle-all-label" htmlFor="toggle-all">
                 Toggle all
               </label>
             </div>
           )}
-          <ul className="todo-list">
-            {filteredTodos.map(todo => (
-              <TodoItem
-                key={todo.id}
-                todo={todo}
-                todos={todos}
-                setTodos={setTodos}
-                handleSaveEdit={handleSaveEdit}
-              />
-            ))}
-          </ul>
+          <Routes>
+            <Route path="/" element={<FilteredTodoList />} />
+            <Route path="/active" element={<FilteredTodoList />} />
+            <Route path="/completed" element={<FilteredTodoList />} />
+          </Routes>
         </main>
 
         {todos.length > 0 && (
@@ -187,31 +155,19 @@ const App = () => {
             <span className="todo-count">{numberChange} item{numberChange !== 1 ? 's' : ''} left!</span>
             <ul className="filters" data-testid="footer-navigation">
               <li>
-                <a
-                  className={activeFilter === FILTER_ALL ? "selected" : ""}
-                  href="#/"
-                  onClick={() => handleFilterClick(FILTER_ALL)}
-                >
+                <NavLink className={({ isActive }) => isActive ? "selected" : ""} to="/">
                   All
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a
-                  className={activeFilter === FILTER_ACTIVE ? "selected" : ""}
-                  href="#/active"
-                  onClick={() => handleFilterClick(FILTER_ACTIVE)}
-                >
+                <NavLink className={({ isActive }) => isActive ? "selected" : ""} to="/active">
                   Active
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a
-                  className={activeFilter === FILTER_COMPLETED ? "selected" : ""}
-                  href="#/completed"
-                  onClick={() => handleFilterClick(FILTER_COMPLETED)}
-                >
+                <NavLink className={({ isActive }) => isActive ? "selected" : ""} to="/completed">
                   Completed
-                </a>
+                </NavLink>
               </li>
             </ul>
             <button className="clear-button" onClick={handleClearCompleted}>
@@ -226,6 +182,7 @@ const App = () => {
   );
 };
 
+// Props para o componente TodoItem
 interface TodoItemProps {
   todo: Todo;
   todos: Todo[];
@@ -233,11 +190,10 @@ interface TodoItemProps {
   handleSaveEdit: (id: string, newTitle: string) => void;
 }
 
-// Componente TodoItem para representar uma tarefa individual
+// Componente para renderizar cada tarefa individual
 const TodoItem: React.FC<TodoItemProps> = ({ todo, todos, setTodos, handleSaveEdit }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Foca no campo de edição quando o modo de edição é ativado
   useEffect(() => {
     if (todo.editing && inputRef.current) {
       inputRef.current.focus();
