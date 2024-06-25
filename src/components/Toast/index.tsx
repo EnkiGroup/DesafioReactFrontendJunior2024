@@ -1,15 +1,17 @@
-import { ToastContainer, ButtonContainer } from "./styled";
+import { ToastContainer, ButtonContainer, MessageContainer } from "./styled";
 
 type ToasProps = {
   toastMessage?: string;
-  toastButtons: JSX.Element[];
+  toastButtons?: JSX.Element[];
+  icon?: JSX.Element;
 };
-const Toast = ({ toastMessage, toastButtons }: ToasProps) => {
+const Toast = ({ toastMessage, toastButtons, icon }: ToasProps) => {
   return (
     <ToastContainer>
-      {toastMessage && <p>{toastMessage}</p>}
+      {icon && icon}
       <ButtonContainer>
-        {toastButtons?.map((item) => item)}
+        {toastMessage && <p>{toastMessage}</p>}
+        <MessageContainer>{toastButtons?.map((item) => item)}</MessageContainer>
       </ButtonContainer>
     </ToastContainer>
   );
