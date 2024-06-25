@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { v4 as uuid } from "uuid"
 
-import { getInitialTasks } from '../services/get-initial-tasks';
+import { getInitialTasks } from '../services/https/get-initial-tasks';
 
 import { Task } from '../types';
 

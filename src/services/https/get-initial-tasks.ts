@@ -1,12 +1,10 @@
-import axios from "axios";
+import { api } from "../api";
 
-import { Task } from "../types";
+import { Task } from "../../types";
 
 export async function getInitialTasks(setData: (data: Task[]) => void) {
   try {
-    const response = await axios.get(
-      "https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos"
-    );
+    const response = await api.get("/todos");
 
     const data: Task[] = response.data;
 
