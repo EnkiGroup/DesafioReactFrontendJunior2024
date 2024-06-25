@@ -13,7 +13,7 @@ function renderComponent(tasks: Task[]) {
 
   render(
     <CheckAllButton
-      allComplete={Boolean(tasks.length != 0 && tasksLeft == 0)}
+      isActiveStyle={Boolean(tasks.length != 0 && tasksLeft == 0)}
       onClick={onClickMock}
     />
   );
@@ -79,7 +79,7 @@ describe("CheckAllButton", () => {
   });
 
   it("should call onClick prop on click", () => {
-    render(<CheckAllButton allComplete={false} onClick={onClickMock} />);
+    render(<CheckAllButton isActiveStyle={false} onClick={onClickMock} />);
 
     const button = screen.getByRole("button");
     fireEvent.click(button);

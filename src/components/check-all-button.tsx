@@ -1,11 +1,11 @@
 import { ChevronDown } from "lucide-react"
 
 interface CheckAllButtonProps {
-  allComplete: boolean
+  isActiveStyle: boolean
   onClick: () => void
 }
 
-export function CheckAllButton({ allComplete, onClick }: CheckAllButtonProps) {
+export function CheckAllButton({ isActiveStyle, onClick }: CheckAllButtonProps) {
   return (
     <button
       type="button"
@@ -15,7 +15,7 @@ export function CheckAllButton({ allComplete, onClick }: CheckAllButtonProps) {
     >
       <ChevronDown
         size={28}
-        className={allComplete ? "text-[#333]" : "text-[#AAA]"}
+        className={isActiveStyle ? "text-[#333]" : "text-[#AAA]"}
         data-testid="chevron-icon"
       />
     </button>

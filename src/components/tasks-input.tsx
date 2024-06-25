@@ -23,7 +23,7 @@ export function TasksInput() {
       className="flex bg-[#FEFEFE]"
     >
       <CheckAllButton
-        allComplete={Boolean(tasks.length != 0 && tasksLeft == 0)}
+        isActiveStyle={Boolean(tasks.length != 0 && tasksLeft == 0)}
         onClick={toggleAllTasksCheck}
       />
       <Input
