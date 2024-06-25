@@ -90,11 +90,6 @@
   height: 100%;
 }
 
-.lineThrough {
-  text-decoration: line-through;
-  color: #d9d9d9;
-}
-
 .destroy {
   all: unset;
   position: absolute;
