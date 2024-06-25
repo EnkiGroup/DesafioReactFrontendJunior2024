@@ -11,12 +11,12 @@ interface EditableTaskItemProps {
 
 export function EditableTaskItem({ task: { id, title }, exitEditableMode }: EditableTaskItemProps) {
 
-  const { updateTaskTitle } = useTasksContext()
+  const { updateTask } = useTasksContext()
 
   const { register, handleSubmit, errors } = useInputValidation(title)
 
   function onSubmit({ title }: { title: string }) {
-    updateTaskTitle({ id, title })
+    updateTask({ id, title })
 
     exitEditableMode()
   }

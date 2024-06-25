@@ -17,9 +17,9 @@ describe("EditableTaskItem", () => {
     "isDone": false
   }
   const mockExitEditableMode = jest.fn();
-  const mockUpdateTaskTitle = jest.fn();
+  const mockUpdateTask = jest.fn();
   const mockContextValue = {
-    updateTaskTitle: mockUpdateTaskTitle,
+    updateTask: mockUpdateTask,
   };
   
   beforeEach(() => {
@@ -53,7 +53,7 @@ describe("EditableTaskItem", () => {
     expect(mockExitEditableMode).toHaveBeenCalled()
   })
 
-  it("should call updateTaskTitle and exitEditableMode on form submission", async () => {
+  it("should call updateTask and exitEditableMode on form submission", async () => {
     render(<EditableTaskItem task={task} exitEditableMode={mockExitEditableMode} />);
 
     const input = screen.getByTestId("editable-task-input");
@@ -63,7 +63,7 @@ describe("EditableTaskItem", () => {
       fireEvent.submit(input);
     });
 
-    expect(mockUpdateTaskTitle).toHaveBeenCalledWith({
+    expect(mockUpdateTask).toHaveBeenCalledWith({
       id: task.id,
       title: "Lavar a louça"
     });

@@ -11,7 +11,7 @@ interface TasksContextType {
   tasks: Task[]
   tasksLeft: number
   addTask: (title: string) => void;
-  updateTaskTitle: (newTask: { id: string, title: string }) => void;
+  updateTask: (newTask: { id: string, title: string }) => void;
   removeTask: (id: string) => void;
   toggleTaskCheck: (id: string) => void;
   toggleAllTasksCheck: () => void;
@@ -37,7 +37,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     setTasks((tasks) => [newTask, ...tasks]);
   }
 
-  function updateTaskTitle(newTask: { id: string, title: string }) {
+  function updateTask(newTask: { id: string, title: string }) {
     const newTasks = tasks.map(task => {
       return task.id === newTask.id ? { ...task, title: newTask.title } : task
     })
@@ -96,7 +96,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
       tasks,
       tasksLeft,
       addTask,
-      updateTaskTitle,
+      updateTask,
       removeTask,
       toggleTaskCheck,
       toggleAllTasksCheck,
