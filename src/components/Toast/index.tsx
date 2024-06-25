@@ -11,7 +11,9 @@ const Toast = ({ toastMessage, toastButtons, icon }: ToasProps) => {
       {icon && icon}
       <ButtonContainer>
         {toastMessage && <p>{toastMessage}</p>}
-        <MessageContainer>{toastButtons?.map((item) => item)}</MessageContainer>
+        <MessageContainer>
+          {Array.isArray(toastButtons) && toastButtons?.map((item) => item)}
+        </MessageContainer>
       </ButtonContainer>
     </ToastContainer>
   );
