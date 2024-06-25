@@ -16,7 +16,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           type={type}
           ref={ref}
-          className="w-full px-2 py-4 text-2xl placeholder:italic placeholder:font-normal"
+          className="w-full px-2 py-4 text-2xl max-sm:text-xl placeholder:italic placeholder:font-normal"
           {...props}
         />
         {error?.message && (

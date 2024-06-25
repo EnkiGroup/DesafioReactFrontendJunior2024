@@ -9,8 +9,8 @@ export function App() {
       <header className="flex items-center justify-center p-6">
         <h1 className="text-7xl text-red-700">todos</h1>
       </header>
-      <main className="w-min flex justify-center circles-effect">
-        <section className="w-[550px] h-min bg-white custom-shadow ">
+      <main className="w-min max-sm:w-full flex justify-center sm:circles-effect">
+        <section className="w-[550px] h-min max-sm:w-full max-sm:mx-4 bg-white custom-shadow ">
           <TasksInput />
           <Outlet />
           <TasksFooter />
