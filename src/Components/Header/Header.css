@@ -1,0 +1,18 @@
+.header{
+    background-color: #F5F5F5;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.h1{
+    color: #b83f45;
+    font-size: 80px;
+    font-weight: 200;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    -webkit-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    text-rendering: optimizeLegibility;
+    top: -140px;
+    width: 100%;
+}
