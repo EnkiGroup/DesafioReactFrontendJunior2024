@@ -103,3 +103,8 @@ Para adicionar um pouco mais de complexidade no projeto, adicionei uma validaç�
 Na minha opinião, uma aplicação de qualidade deve ser lembrada até nos mínimos detalhes. Acredito que é isso que faz um produto ser diferencial. Pensando nisso, criei uma animação de entrada no site usando a logo e também uma após a conclusão das tarefas. As animação foram criadas usando o LootieFiles, que da a possibilidade de exportar as animações em formato json. E para aplicar as animações, utilizei a biblioteca "react-lottie".
 
 ![App Screenshot](public/img/Captura%20de%20tela%202024-06-25%20222228.png)
+
+## 🎨 Estilização
+
+No contexto deste desafio técnico, optei por empregar o styled-components para a estilização do projeto. Essa decisão foi guiada pela minha intenção de não apenas demonstrar proficiência em CSS, mas também pela vantagem de adotar uma abordagem modular e eficiente no desenvolvimento.
+
