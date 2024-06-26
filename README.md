@@ -1,50 +1,112 @@
-# Teste front-end enContact
+# TodoMCV
 
-Bem-vindo ao teste para desenvolvimento front-end na enContact.
+![App Screenshot](public/img/screen-capture-ezgif.com-video-to-gif-converter.gif)
 
-## O teste
+#### Acesse o projeto aqui -> [TodoMVC](https://desafio-react-frontend-junior2024-nu.vercel.app/all) 
 
-Para testar suas habilidades em TypeScript e folhas de estilos, nos baseamos no projeto [Todo MVC](https://todomvc.com).
+<br>
 
-![Todo MVC](data/todos.png "Todo MVC")
+# 📋 Sobre
 
-Neste teste você poderá mostrar suas habilidades em gerência de estados, listas utilizando `map`, `filter`, `find`, `reduce`, API, css, entre outros.
+O projeto em questão envolve o desenvolvimento de uma aplicação de um todo-list para gerenciar tarefas de forma eficiente e organizada.
 
-O foco deste teste é a implementação de uma lista de tarefas, onde você deve listar, criar, mudar o título, mudar o estado para concluído ou não, e remover uma tarefa, além das informações de quantas tarefas ainda estão pendentes, filtrar as ativas, completas, e poder limpar as tarefas completas (removendo da lista).
+<br>
 
-## O repositório
+# 🛠 Tecnologias Usadas
 
-1. Faça o fork do nosso repositório no Github.
-2. Clone do projeto.
-3. Instale as dependências do projeto (utilizando o `yarn` ou `npm install`).
-4. No arquivo `src/app.tsx` você irá encontrar o esqueleto dessa aplicação, este é seu ponto de partida.
-5. Utilize `yarn start` ou `npm start` para inicializar a aplicação.
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/) [![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/pt/) [![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/pt-BR/) ![Testing-Library](https://img.shields.io/badge/-TestingLibrary-%23E33332?style=for-the-badge&logo=testing-library&logoColor=white)
+![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
-## O que fazer?
+<br>
 
-1. Recupere as tarefas iniciais via GET da URL [https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos](https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos).
-2. No [projeto Todo MVC](https://todomvc.com) é disponibilizada uma interface estilizada de lista de tarefas. Para testar suas habilidades com estilos, gostaríamos que você repita exatamente o mesmo estilo da imagem abaixo.
-3. Adicione uma tarefa na lista;
-   - Para adicionar, escrever o título da tarefa e pressionar Enter para registrar.
-   - Apresentar a tarefa criada no início da lista.
-   - A tarefa deve ser marcada como "não concluída" ao ser registrada.
-4. Liste as tarefas.
-5. Posso marcar ou desmarcar uma tarefa como concluída.
-6. Ao passar o mouse em cima de uma tarefa podemos ver um ícone de remoção, ao clicar deve-se remover a tarefa.
-7. Ao clicar duas vezes em um item, deve apresentar o modo de edição de uma tarefa.
-8. Ao clicar na seta (ao lado do campo de criação de tarefas no protótipo), posso marcar todas as tarefas como concluídas.
-9. Logo abaixo da lista temos algumas informações no protótipo;
-   - Canto inferior esquerdo: quantidade de **itens restantes** (não marcados como concluído).
-   - Canto inferior direito: botão para limpar (remover) os itens já concluídos com contador.
-   - Filtros "Todos", "Ativos" e "Completos", ao clicar deve filtrar a lista e marcar o botão como ativo. (Obs.: Utilize a URL para os filtros `react-router-dom`).
-     - Todos: Mostra ativos e completos.
-     - Ativos: Mostra apenas os ativos.
-     - Completos: Mostra apenas os completos.
+# 🔮 Funcionalidades:
 
-<img src="data/todos.gif" alt="Comportamento da lista de tarefas" width="750">
+✅ Requisição de API
 
-## Desafio do desafio
+✅ Adição, edição e remoção de tarefas
 
-Tem um tempinho a mais? Acha que pode fazer mais? Então aqui vai alguns desafios para seu projeto, que serve como um plus no seu teste!
+✅ Salvamento no LocalStorage
 
-- E se essa aplicação tiver testes?
+✅ Listagem de tarefas
+
+✅ Design e Usabilidade
+
+✅ Responsividade
+
+✅ Filtragem de tarefas por "Todos", "Ativos" e "Completos"
+
+✅ Tratamento de erros
+
+✅ Animação
+
+<br>
+
+<br>
+
+# 🔧 Entendendo decisões arquiteturais e a estrutura do projeto
+
+### Setup de ambiente:
+
+- [Node](https://nodejs.org/en)
+
+### Como rodar na minha máquina?
+
+- Clone o projeto `git clone https://github.com/matheusleite01/DesafioReactFrontendJunior2024.git`
+- Rode `npm install`
+- Rode `npm start`
+- Pronto 🎉
+
+### Estrutura do projeto
+
+- `./App`: É o componente responsavel por renderizar a aplicação
+- `./src/assets`: Contém os arquivos de icones e animação usada no projeto
+- `./src/components`: São todos os pedaços primordiais de interface como componentes
+- `./src/helper`: Pasta para funções utilitárias ou auxiliares
+- `./src/hooks`: Pasta para armazenar custom hooks e boa parte de toda a logica do componente, seguindo o princípio da responsabilidade única do SOLID
+- `./src/pages`: Pasta responsavel por armazenar as paginas da aplicação
+- `./src/style`: Estilos globais do projeto e variaveis de estilos
+- `./src/type`: Responsavel por armazenar a tipagem dos componentes e funções
+
+### Como me localizar no projeto?
+
+- Todos os `componentes` que representam a página home estão em `./src/components`
+  - Uma vez dentro de uma página você pode ir navegando pelos componentes para ir se encontrando e fazer a alteração que deseja
+
+# 📝 Salvamento de tarefa no LocalStorage
+
+Normalmente, em uma aplicação real, todas as tarefas registradas pelo usuário viriam de uma API. Pensando nisso, para adicionar um desafio extra ao projeto, optei por incluir a opção de salvar as tarefas utilizando o localStorage.
+
+### Como funciona ?
+
+Assim que o usuário registrar uma nova tarefa, uma notificação aparecerá perguntando se ele deseja salvar suas tarefas. Se escolher sim, todas as tarefas serão armazenadas no localStorage daqui em diante. Ao recarregar a página, as tarefas salvas serão exibidas. É importante notar que, se a opção de salvar estiver ativada, a função 'initialData', responsável por obter as tarefas da API, não será executada para não sobrepor as tasks salvas.
+
+![App Screenshot](public/img/notification.png)
+
+### Como limpar o localStorage?
+
+Pensando na possibilidade de desabilitar esse salvamento, adicionei uma opção para o usuário. Se ele pressionar 'SHIFT + L', o salvamento automático será desativado. Na próxima vez que a página for renderizada, as requisições para a API serão retomadas normalmente.
+
+![App Screenshot](<public/img/img1%20(1).png>)
+![App Screenshot](public/img/img2.png)
+
+### Demonstração
+
+[screen-capture (1).webm](https://github.com/matheusleite01/DesafioReactFrontendJunior2024/assets/94021070/5b6b2196-543c-40ca-865a-8bdec8331455)
+
+
+## 📕 Validação nos input
+
+Para adicionar um pouco mais de complexidade no projeto, adicionei uma validação que limita o texto das tarefas de 2 a 30 caracteres. Isso se aplica tanto à criação quanto à edição das tasks.
+
+![App Screenshot](public/img/img3.png)
+
+## 🖌️ Animação
+
+Na minha opinião, uma aplicação de qualidade deve ser lembrada até nos mínimos detalhes. Acredito que é isso que faz um produto ser diferencial. Pensando nisso, criei uma animação de entrada no site usando a logo e também uma após a conclusão das tarefas. As animação foram criadas usando o LootieFiles, que da a possibilidade de exportar as animações em formato json. E para aplicar as animações, utilizei a biblioteca "react-lottie".
+
+![App Screenshot](public/img/Captura%20de%20tela%202024-06-25%20222228.png)
+
+## 🎨 Estilização
+
+No contexto deste desafio técnico, optei por empregar o styled-components para a estilização do projeto. Essa decisão foi guiada pela minha intenção de não apenas demonstrar proficiência em CSS, mas também pela vantagem de adotar uma abordagem modular e eficiente no desenvolvimento.
+
