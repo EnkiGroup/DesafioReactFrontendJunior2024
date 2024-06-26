@@ -19,9 +19,7 @@ export const fetchTodoData = createAsyncThunk<TodoItem[]>(
   async () => {
     if (URL_API === undefined) throw new Error('URL API not found');
 
-    const response = await fetch(
-      'https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos'
-    );
+    const response = await fetch(URL_API);
 
     if (!response.ok) {
       throw new Error('Failed to fetch todos');
