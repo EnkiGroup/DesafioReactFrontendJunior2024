@@ -94,7 +94,7 @@ Pensando na possibilidade de desabilitar esse salvamento, adicionei uma opção 
 
 ## 📕 Validação nos input
 
-Para melhorar o tratamento de erros no projeto, adicionei uma validação que limita o texto das tarefas de 2 a 30 caracteres. Isso se aplica tanto à criação quanto à edição das tasks.
+Para adicionar um pouco mais de complexidade no projeto, adicionei uma validação que limita o texto das tarefas de 2 a 30 caracteres. Isso se aplica tanto à criação quanto à edição das tasks.
 
 ![App Screenshot](public/img/img3.png)
 
