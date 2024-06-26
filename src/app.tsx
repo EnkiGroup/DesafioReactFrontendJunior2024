@@ -1,6 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from './redux/store';
-import { MdKeyboardArrowDown, MdOutlineCheck, MdClose } from 'react-icons/md';
+import {
+  MdKeyboardArrowDown,
+  MdOutlineCheck,
+  MdClose,
+  MdKeyboardArrowRight,
+} from 'react-icons/md';
 import { KeyboardEvent, useState } from 'react';
 import {
   addTodo,
@@ -29,14 +34,18 @@ export default function App() {
   );
   const dispatch = useDispatch<AppDispatch>();
 
+  const handleSubmitTodo = () => {
+    if (newTodo.trim() === '' || newTodo === '') {
+      setNewTodo('');
+      return;
+    }
+    dispatch(addTodo(newTodo));
+    setNewTodo('');
+  };
+
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      if (newTodo.trim() === '' || newTodo === '') {
-        setNewTodo('');
-        return;
-      }
-      dispatch(addTodo(newTodo));
-      setNewTodo('');
+      handleSubmitTodo();
     }
   };
 
@@ -82,6 +91,11 @@ export default function App() {
             className='italic text-2xl font-thin w-full text-[#747474] p-1 outline-none'
             onKeyDown={handleKeyDown}
           />
+          {isMobile && (
+            <button onClick={handleSubmitTodo}>
+              <MdKeyboardArrowRight className='text-2xl text-[#747474] w-8' />
+            </button>
+          )}
         </div>
         {todosList.length > 0 && (
           <>
@@ -187,6 +201,11 @@ export default function App() {
             </div>
           </>
         )}
+        <div className='mt-5'>
+          <p className='text-slate-500 text-center'>
+            Double click on todo to edit
+          </p>
+        </div>
       </section>
     </main>
   );
