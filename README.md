@@ -89,6 +89,8 @@ Pensando na possibilidade de desabilitar esse salvamento, adicionei uma opção 
 
 ### Demonstração
 
+[screen-capture (1).webm](https://github.com/matheusleite01/DesafioReactFrontendJunior2024/assets/94021070/5b6b2196-543c-40ca-865a-8bdec8331455)
+
 
 ## 📕 Validação nos input
 
