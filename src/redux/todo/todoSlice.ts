@@ -3,8 +3,6 @@ import { TodoItem, TodoProps } from '../../types/todoItems';
 
 const URL_API = process.env.REACT_APP_URL_API;
 
-console.log(URL_API);
-
 const initialState: TodoProps = {
   todo: [],
   activeTodo: [],
@@ -23,11 +21,14 @@ export const fetchTodoData = createAsyncThunk<TodoItem[]>(
 
     const response = await fetch(URL_API);
 
+    console.log(response);
+
     if (!response.ok) {
       throw new Error('Failed to fetch todos');
     }
 
     const data: TodoItem[] = await response.json();
+    console.log(data);
     return data;
   }
 );
