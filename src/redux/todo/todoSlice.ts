@@ -22,12 +22,14 @@ export const fetchTodoData = createAsyncThunk<TodoItem[]>(
     const response = await fetch(URL_API);
 
     console.log(response);
+    console.log(response.status);
+    console.log(response.statusText);
 
     if (!response.ok) {
       throw new Error('Failed to fetch todos');
     }
 
-    const data: TodoItem[] = await response.json();
+    const data = await response.json();
     console.log(data);
     return data;
   }
