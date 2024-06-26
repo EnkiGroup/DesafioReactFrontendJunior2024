@@ -1,5 +1,9 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TodoItem, TodoProps } from '../../types/todoItems';
+
+const URL_API = process.env.REACT_APP_URL_API;
+
+console.log(URL_API);
 
 const initialState: TodoProps = {
   todo: [],
@@ -12,6 +16,22 @@ const updateTodoLists = (state: TodoProps) => {
   state.completedTodo = state.todo.filter((item) => item.isDone);
 };
 
+export const fetchTodoData = createAsyncThunk<TodoItem[]>(
+  'todo/fetchTodoData',
+  async () => {
+    if (URL_API === undefined) throw new Error('URL API not found');
+
+    const response = await fetch(URL_API);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch todos');
+    }
+
+    const data: TodoItem[] = await response.json();
+    return data;
+  }
+);
+
 export const todoSlice = createSlice({
   name: 'todo',
   initialState,
@@ -19,7 +39,7 @@ export const todoSlice = createSlice({
     addTodo: (state, action: PayloadAction<string>) => {
       const newTodo: TodoItem = {
         id: state.todo.length + 1,
-        text: action.payload,
+        title: action.payload,
         isDone: false,
       };
       state.todo = [newTodo, ...state.todo];
@@ -50,17 +70,23 @@ export const todoSlice = createSlice({
       state.todo = state.todo.filter((item) => item.isDone === false);
       updateTodoLists(state);
     },
-    editTodo: (state, action: PayloadAction<{ id: number; text: string }>) => {
-      const { id, text } = action.payload;
+    editTodo: (state, action: PayloadAction<{ id: number; title: string }>) => {
+      const { id, title } = action.payload;
       const todo = state.todo.map((item) => {
         if (item.id === id) {
-          return { ...item, text };
+          return { ...item, title };
         }
         return item;
       });
       state.todo = todo;
       updateTodoLists(state);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchTodoData.fulfilled, (state, action) => {
+      state.todo = action.payload;
+      updateTodoLists(state);
+    });
   },
 });
 

@@ -6,7 +6,7 @@ import {
   MdClose,
   MdKeyboardArrowRight,
 } from 'react-icons/md';
-import { KeyboardEvent, useState } from 'react';
+import { KeyboardEvent, useEffect, useState } from 'react';
 import {
   addTodo,
   toggleIsDoneTodo,
@@ -14,6 +14,7 @@ import {
   toggleAllTodos,
   clearAllTodos,
   editTodo,
+  fetchTodoData,
 } from './redux/todo/todoSlice';
 import { isMobile } from 'react-device-detect';
 
@@ -33,6 +34,10 @@ export default function App() {
     (state: RootState) => state.todoList.completedTodo
   );
   const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchTodoData());
+  }, [dispatch]);
 
   const handleSubmitTodo = () => {
     if (newTodo.trim() === '' || newTodo === '') {
@@ -65,14 +70,14 @@ export default function App() {
     id: number
   ) => {
     if (event.key === 'Enter') {
-      dispatch(editTodo({ id, text: editingText }));
+      dispatch(editTodo({ id, title: editingText }));
       setEditingTodoId(null);
     }
   };
 
-  const handleDoubleClick = (id: number, text: string) => {
+  const handleDoubleClick = (id: number, title: string) => {
     setEditingTodoId(id);
-    setEditingText(text);
+    setEditingText(title);
   };
 
   return (
@@ -107,7 +112,7 @@ export default function App() {
                       key={todo.id}
                       className='group transition-all flex items-center justify-between text-2xl text-slate-600'
                       onDoubleClick={() =>
-                        handleDoubleClick(todo.id, todo.text)
+                        handleDoubleClick(todo.id, todo.title)
                       }
                     >
                       <div className='flex items-center justify-center gap-3 '>
@@ -127,7 +132,7 @@ export default function App() {
                             onKeyDown={(e) => handleEditKeyDown(e, todo.id)}
                             onBlur={() => {
                               dispatch(
-                                editTodo({ id: todo.id, text: editingText })
+                                editTodo({ id: todo.id, title: editingText })
                               );
                               setEditingTodoId(null);
                             }}
@@ -142,7 +147,7 @@ export default function App() {
                                 : 'text-slate-500'
                             }`}
                           >
-                            {todo.text}
+                            {todo.title}
                           </p>
                         )}
                       </div>
