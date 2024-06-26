@@ -1,9 +1,5 @@
-import React from "react";
+import { Home } from './pages/home';
 
 export default function App() {
-  return (
-    <section>
-      <h1>Todos</h1>
-    </section>
-  );
+  return <Home />;
 }
