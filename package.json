@@ -49,5 +49,9 @@
   "devDependencies": {
     "concurrently": "^8.2.2",
     "nock": "^13.1.1"
+  },
+  "engines": {
+    "node": "16.x"
   }
+
 }
