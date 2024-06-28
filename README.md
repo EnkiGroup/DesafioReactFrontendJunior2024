@@ -1,50 +1,52 @@
-# Teste front-end enContact
+# Solução front-end enContact
 
-Bem-vindo ao teste para desenvolvimento front-end na enContact.
+Esta é minha solução para o desafio proposto [desafio proposto](https://github.com/EnkiGroup/DesafioReactFrontendJunior2024).
+Este domento visa facilitar a execução do código.
 
-## O teste
+## Execução com docker
 
-Para testar suas habilidades em TypeScript e folhas de estilos, nos baseamos no projeto [Todo MVC](https://todomvc.com).
+Afim de evitar problemas de incompatibilidade com a versão do node , do sistema operacional ou qualquer outra particularidade do ambiente , recomendo que execute a aplicação com o docker , para isso é necessário [ter o docker instalado em sua máquina](https://www.docker.com/products/docker-desktop/) e utilizar os seguites comandos :
 
-![Todo MVC](data/todos.png "Todo MVC")
+### Executar docker-compose
 
-Neste teste você poderá mostrar suas habilidades em gerência de estados, listas utilizando `map`, `filter`, `find`, `reduce`, API, css, entre outros.
+```bash
+docker compose -f "docker-compose.yml" up -d --build
+```
+### OU
 
-O foco deste teste é a implementação de uma lista de tarefas, onde você deve listar, criar, mudar o título, mudar o estado para concluído ou não, e remover uma tarefa, além das informações de quantas tarefas ainda estão pendentes, filtrar as ativas, completas, e poder limpar as tarefas completas (removendo da lista).
+### Execute o docker-compose em modo iterartivo para ver o resultado dos testes
 
-## O repositório
+```bash
+docker compose -f "docker-compose.yml" up --build
+```
 
-1. Faça o fork do nosso repositório no Github.
-2. Clone do projeto.
-3. Instale as dependências do projeto (utilizando o `yarn` ou `npm install`).
-4. No arquivo `src/app.tsx` você irá encontrar o esqueleto dessa aplicação, este é seu ponto de partida.
-5. Utilize `yarn start` ou `npm start` para inicializar a aplicação.
+### Interromper containers criados pelo docker-compose
 
-## O que fazer?
+```bash
+docker compose --file 'docker-compose.yml' down
+```
 
-1. Recupere as tarefas iniciais via GET da URL [https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos](https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos).
-2. No [projeto Todo MVC](https://todomvc.com) é disponibilizada uma interface estilizada de lista de tarefas. Para testar suas habilidades com estilos, gostaríamos que você repita exatamente o mesmo estilo da imagem abaixo.
-3. Adicione uma tarefa na lista;
-   - Para adicionar, escrever o título da tarefa e pressionar Enter para registrar.
-   - Apresentar a tarefa criada no início da lista.
-   - A tarefa deve ser marcada como "não concluída" ao ser registrada.
-4. Liste as tarefas.
-5. Posso marcar ou desmarcar uma tarefa como concluída.
-6. Ao passar o mouse em cima de uma tarefa podemos ver um ícone de remoção, ao clicar deve-se remover a tarefa.
-7. Ao clicar duas vezes em um item, deve apresentar o modo de edição de uma tarefa.
-8. Ao clicar na seta (ao lado do campo de criação de tarefas no protótipo), posso marcar todas as tarefas como concluídas.
-9. Logo abaixo da lista temos algumas informações no protótipo;
-   - Canto inferior esquerdo: quantidade de **itens restantes** (não marcados como concluído).
-   - Canto inferior direito: botão para limpar (remover) os itens já concluídos com contador.
-   - Filtros "Todos", "Ativos" e "Completos", ao clicar deve filtrar a lista e marcar o botão como ativo. (Obs.: Utilize a URL para os filtros `react-router-dom`).
-     - Todos: Mostra ativos e completos.
-     - Ativos: Mostra apenas os ativos.
-     - Completos: Mostra apenas os completos.
+ao executar o docker-compose a aplicação estara rodando em localhost:3000
 
-<img src="data/todos.gif" alt="Comportamento da lista de tarefas" width="750">
+## Execução sem docker
 
-## Desafio do desafio
+Recomendo utilizar a versão 16.20.2 do node para evitar problemas de incompatibilidade
 
-Tem um tempinho a mais? Acha que pode fazer mais? Então aqui vai alguns desafios para seu projeto, que serve como um plus no seu teste!
+### Instala as dependências do projeto
 
-- E se essa aplicação tiver testes?
+```bash
+npm install
+```
+
+### Execute os testes
+
+```bash
+npm run test
+```
+
+
+### Comando para iniciar a aplicação
+
+```bash
+npm npm start
+```

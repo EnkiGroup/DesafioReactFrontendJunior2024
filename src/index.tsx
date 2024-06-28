@@ -2,10 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app";
 import reportWebVitals from "./reportWebVitals";
+import { TaskProvider } from "./TaskContext";
+import { HashRouter, Route, Routes } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <HashRouter>
+      <Routes>
+        <Route path="*" element={
+          <TaskProvider>
+            <App />
+          </TaskProvider>
+        } />
+      </Routes>
+    </HashRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
